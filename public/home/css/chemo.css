@@ -1,0 +1,44 @@
+/* CSS Document */
+
+body { background: #FFFFFF}
+#itemContainer { width: 1110px; margin-top: 30px}
+.recommend_article_list {
+    float: left;
+    width: 232px;
+    height: 332px;
+    padding: 10px;
+    margin: 0 21px 12px 0;
+    overflow: hidden;
+    box-shadow: 0 1px 2px 0 rgba(210, 210, 210, 0.50);
+    background: #FFF;
+    border-color: #EAEAEA #D9D9D9 #D8D8D8;
+    border-style: solid;
+    border-width: 1px;
+}
+.recommend_article_list:hover { box-shadow: 0 3px 8px 0 rgba(200, 200, 200, 0.80)}
+.img_box { width: 232px; height: 260px; overflow: hidden}
+.recommend_article_list_content { height: auto; padding: 0; margin: 8px 0; text-align: left; font-size: 12px; overflow: hidden}
+.recommend_article_list_content h3 { height: 42px; line-height: 21px; overflow: hidden}
+.recommend_article_list_content h3 a { color: #888888}
+.recommend_article_list_content h3 a:hover { color: #333333}
+.recommend_article_list_info { padding: 2px 0 0 0; color: #888888; font-size: 10px}
+.recommend_article_list_info a { color: #888888}
+.recommend_article_list_info a.icon16link { color: #999999}
+.recommend_article_list_info .s_view { display: inline-block; width: 20px; height: 15px; background: url(../images/view.png) no-repeat 0 6px}
+
+.pg { float: none; width: 100%; margin-top: 20px; margin-bottom: 20px; text-align: center}
+.pg a, .pg strong, .pgb a, .pg label { float: none; display: inline-block; border: 1px solid #DDDDDD; border-radius: 0}
+.pg label { display: none}
+
+.pg strong { color: #FFFFFF; font-weight: 400; border: 1px solid #4ecdc4; background: #4ecdc4}
+.pg a:hover { color: #FFFFFF; border: 1px solid #4ecdc4; background: #4ecdc4}
+
+.pg a.nxt { padding: 0 10px !important}
+.pg a.nxt:hover { border: 1px solid #4ecdc4; background: none}
+
+.pg a.prev {
+    width: 43px;
+	padding: 0 10px;
+    background: url(../images/page1_2.png) no-repeat center center;
+}
+.pg a.prev:hover { background: url(../images/page1_2.png) no-repeat center center !important}
