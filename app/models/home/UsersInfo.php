@@ -9,4 +9,5 @@ class UsersInfo extends Model
     protected $table = "users_info";
 
     protected $primaryKey = 'id';
+
 }

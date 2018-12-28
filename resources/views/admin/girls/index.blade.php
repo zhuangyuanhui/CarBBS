@@ -56,7 +56,7 @@
                                 @endforeach
                         </table>                     
                         <div class="pages_pages">
-                            {{$data->links()}}
+                            {{$data->appends('params')->links()}}
                         </div>
                        
                       </div class="dataTables_info" id="DataTables_Table_1_info">
