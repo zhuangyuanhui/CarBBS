@@ -10,7 +10,7 @@
                               {{ csrf_field() }}
                               {{ method_field('PUT') }}
                     		<div class="mws-form-inline">
-                    			<div class="mws-form-row">
+                    			<div class="mws-form-row" style="width:960px">
                     				<label class="mws-form-label">类别</label>
                     				<div class="mws-form-item">
                     					<select class="large" name="cates">

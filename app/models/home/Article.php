@@ -14,4 +14,15 @@ class Article extends Model
 
    	// 设置模型时间字段验证
 	public $timestamps = true;
+    
+    //获取文章作者
+	public function getName()
+	{
+		return $this->belongsTo('App\models\home\Users','users_id');
+	}
+    //获取文章类型
+	public function getCate()
+	{
+        return $this->belongsTo('App\models\admin\Cates','cates_id');
+	}
 }

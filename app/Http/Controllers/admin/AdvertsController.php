@@ -49,7 +49,7 @@ class AdvertsController extends Controller
             'aurl.required'=>'跳转地址不得为空'
         ]);
 
-
+        
         $adverts = new Advert;
         $data = $request->except('_token');
          //广告图片上传

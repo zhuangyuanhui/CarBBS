@@ -151,43 +151,43 @@
             
             <!-- 左侧导航栏开始 -->
             <div id="mws-navigation">
-                <ul>                                   
+                <ul>                 
 <!-- -----------------------------------------zhuangyuanhui -----------------------当前行数155------------------------------ -->
+                    <li>
+                        <a href="/admin/husers"><i class="icon-user"></i>前台用户管理</a>
+                        <ul>
+                            <li><a href="/admin/husers">前台用户列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/girls"><i class="icon-bus"></i>车模管理</a>
+                        <ul>
+                            <li><a href="/admin/girls/create">车模添加</a></li>
+                            <li><a href="/admin/girls">车模列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/label"><i class="icon-cloud"></i>云标签管理</a>
+                        <ul>
+                            <li><a href="/admin/label/create">云标签添加</a></li>
+                            <li><a href="/admin/label">云标签列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/reports"><i class="icon-exclamation-sign"></i>用户举报管理</a>
+                        <ul>
+                            <li><a href="/admin/reports">用户举报管理列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/comment"><i class="icon-edit"></i>评论管理</a>
+                        <ul>
+                            <li><a href="/admin/comment">评论管理列表</a></li>
+                        </ul>
+                    </li>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                  
 
 
 
@@ -213,7 +213,7 @@
                         </ul>
                     </li>               
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>新闻管理</a>
+                        <a href="/admin/#"><i class="icon-globe"></i>新闻管理</a>
                         <ul>
                             <li><a href="/admin/news/create">新闻添加</a></li>
                             <li><a href="/admin/news">新闻列表</a></li>
@@ -227,7 +227,7 @@
                         </ul>
                     </li>      
                     <li>
-                        <a href="/admin/#"><i class="icon-monitor"></i>文章举报管理</a>
+                        <a href="/admin/#"><i class="icon-warning-sign"></i>文章举报管理</a>
                         <ul>
                             <li><a href="/admin/areports">文章举报列表</a></li>
                         </ul>
@@ -270,10 +270,16 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/admin/#"><i class="icon-play-circle"></i>前台轮播图管理</a>
+                        <a href="/admin/#"><i class="icon-bullhorn"></i>前台轮播图管理</a>
                         <ul>
                             <li><a href="/admin/slides/create">轮播图添加</a></li>
                             <li><a href="/admin/slides">轮播图列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/#"><i class="icon-feather"></i>文章管理</a>
+                        <ul>
+                            <li><a href="/admin/articles">文章列表</a></li>
                         </ul>
                     </li>
 
@@ -298,13 +304,7 @@
 
 
 
-
-
-
-
-
-
-<!-- ****************************************************314************************************************ -->
+<!-- ****************************************************307************************************************ -->
                 </ul>
             </div>
         </div>      

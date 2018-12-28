@@ -8,8 +8,8 @@
                     <div class="mws-panel-body no-padding">
                     	<form class="mws-form" action="/admin/label" method="post">
                               {{ csrf_field() }}
-                    		<div class="mws-form-inline">
-                    			<div class="mws-form-row">
+                    		<div class="mws-form-inline" >
+                    			<div class="mws-form-row" style="width:960px">
                     				<label class="mws-form-label">类别</label>
                     				<div class="mws-form-item">
                     					<select class="large" name="cates">
