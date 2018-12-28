@@ -68,16 +68,16 @@ class UsersController extends Controller
                 'email' => 'required|email',
                 'tel' => 'required|regex:/^1{1}[3-9]{1}[\d]{9}$/'
                  ],[
-                'uname.required'=>'用户名必填',
-                'uname.regex'=>'用户名格式错误',
-                'upwd.required'=>'密码必填',
-                'upwd.regex'=>'密码格式错误',
-                'reupwd.required'=>'验证密码必填',
+                'uname.required'=>'请输入用户名',
+                'uname.regex'=>'用户名请以字母开头,字母数字的组合',
+                'upwd.required'=>'请输入密码',
+                'upwd.regex'=>'请输入6-18位数字字母的密码',
+                'reupwd.required'=>'请输入验证密码',
                 'reupwd.same'=>'密码不一致',
-                'email.required'=>'邮箱必填',
+                'email.required'=>'请输入邮箱',
                 'email.email'=>'邮箱格式不正确',
-                'tel.required'=>'手机号必填',
-                'tel.regex'=>'手机号格式错误',
+                'tel.required'=>'请输入手机号',
+                'tel.regex'=>'请输入正确的手机号',
 
                  ]);
                 

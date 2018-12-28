@@ -101,6 +101,8 @@ Route::resource('admin/husers','admin\HUsersController');
 
 
 
+
+
 /*------------------------------------------------------------  zhangjianjun 104 ----------------------------------------------*/
 
 Route::resource('admin/cates','admin\CatesController');   //后台类别管理
@@ -169,6 +171,7 @@ Route::resource('home/layout','home\LayoutControlle');                          
 
 //home
 Route::resource('home/articles','home\ArticlesControlle');                       //后台用户路由
+Route::resource('admin/articles','admin\HArticlesController');
 
 
 

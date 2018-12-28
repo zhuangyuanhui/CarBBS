@@ -283,12 +283,12 @@
                             <li><a href="/admin/slides">轮播图列表</a></li>
                         </ul>
                     </li>
-
-
-
-
-
-
+                    <li>
+                        <a href="/admin/#"><i class="icon-play-circle"></i>文章管理</a>
+                        <ul>
+                            <li><a href="/admin/articles">文章列表</a></li>
+                        </ul>
+                    </li>
 
 
 

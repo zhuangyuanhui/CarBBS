@@ -21,12 +21,12 @@
                     	<form class="mws-form" action="/admin/users" method="post"  enctype="multipart/form-data">
                               {{ csrf_field() }}
                     		<div class="mws-form-inline">
-                    			<div class="mws-form-row">
+                    			   <div class="mws-form-row">
                                         <label class="mws-form-label">上传头像</label>
-                                        <div class="mws-form-item" style="width:150px">
+                                        <div class="mws-form-item" style="width:150px;display: none">
                                             <input type="file" onchange="preview(this)"  multiple class="small" name="profiles" id="profiles">
-                                            <label for="profiles"><div id="preview" style="width:150px"></div>
                                         </div>
+                                         <label for="profiles"><div id="preview" style="width:150px;height: 150px;background: url(/admin/images/jia.jpg);"></div></label>
                                    </div>
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">用户名</label>
@@ -57,10 +57,10 @@
                                    </div>
 
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">邮箱验证</label>
+                                        <label class="mws-form-label">邮箱验证码</label>
                                         <div class="mws-form-item">
                                              <input type="text" class="small" name="email_code" value="" style="width: 600px">
-                                             <a href="javascript:;" onclick="sendEmailCode()"><span class="btn btn-success" id="dyMobileButton" style="width: 160px"> 接 受 邮 箱 验 证 码 </span></a>
+                                             <a href="javascript:;" onclick="sendEmailCode()"><span class="btn btn-success" id="dyMobileButton" style="width: 160px"> 接 收 邮 箱 验 证 码 </span></a>
                                         </div>
                                    </div>   
 
@@ -104,17 +104,18 @@
                          
                             //发送验证码
                                 $('#dyMobileButton').click(function(){
+                                   var email = $('#email').val();
+                                        var email_preg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+                                        if(!email_preg.test(email)){
+                                          return false;
+                                         }
                                     $(this).attr("disabled",true);
                                     if(flag){
                                         var timer = setInterval(function () {
                                             if(time == 5 && flag){
                                                 $("#dyMobileButton").html("已发送");
                                                 flag = false;
-                                                var email = $('#email').val();
-                                                var email_preg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
-                                                if(!email_preg.test(email)){
-                                                  return false;
-                                                 }
+                                         
                                                   var url = '/admin/users/sendemail/'+email;
                                                  //发送AJAX
                                                  $.get(url,{'email':email},function(data){
