@@ -151,69 +151,62 @@
             
             <!-- 左侧导航栏开始 -->
             <div id="mws-navigation">
-                <ul>                 
+                <ul>                                   
+<!-- -----------------------------------------zhuangyuanhui -----------------------当前行数155------------------------------ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- -----------------------------------------zhangjianjun -----------------------------当前行数 200 ------------------------ -->
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>后台用户管理</a>
-                        <ul>
-                            <li><a href="/admin/form_layouts.html">用户添加</a></li>
-                            <li><a href="/admin/form_elements.html">用户列表</a></li>
-                        </ul>
-                    </li>
-<!-- -----------------------------------------zhuangyuanhui -----------------------当前行数162------------------------------ -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- -----------------------------------------zhangjianjun -----------------------------当前行数 207 ------------------------ -->
-                    <li>
-                        <a href="/admin/#"><i class="icon-list"></i>后台类别管理</a>
+                        <a href="/admin/#"><i class="icon-th"></i>后台类别管理</a>
                         <ul>
                             <li><a href="/admin/cates/create">类别添加</a></li>
                             <li><a href="/admin/cates">类别列表</a></li>
                         </ul>
                     </li>                    
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>友情链接管理</a>
+                        <a href="/admin/#"><i class="icon-network"></i>友情链接管理</a>
                         <ul>
                             <li><a href="/admin/links/create">链接添加</a></li>
                             <li><a href="/admin/links">友情链接列表</a></li>
@@ -227,10 +220,16 @@
                         </ul>
                     </li>         
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>网站配置管理</a>
+                        <a href="/admin/#"><i class="icon-monitor"></i>网站配置管理</a>
                         <ul>
                             <li><a href="/admin/basics/create">网站配置添加</a></li>
                             <li><a href="/admin/basics">网站配置列表</a></li>
+                        </ul>
+                    </li>      
+                    <li>
+                        <a href="/admin/#"><i class="icon-monitor"></i>文章举报管理</a>
+                        <ul>
+                            <li><a href="/admin/areports">文章举报列表</a></li>
                         </ul>
                     </li>
 
@@ -261,7 +260,7 @@
 
 
 
-<!-- -----------------------------------------shaomingshuo ----------------------------------当前行数264------------------- -->
+<!-- -----------------------------------------shaomingshuo ----------------------------------当前行数257------------------- -->
                     <li>
                         <a href="/admin/#"><i class="icon-users"></i>后台用户管理</a>
                         <ul>
