@@ -1,6 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="http://open.weibo.com/wb">
  <head> 
+
+
+
+
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
   <title>{{ $title }}</title> 
@@ -13,15 +18,17 @@
   <meta http-equiv="MSThemeCompatible" content="Yes" /> 
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_portal_index.css" /> 
-  <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" /> 
-  <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <meta name="msapplication-task" content="name=首页;action-uri=http://quaters.cn/display/che/portal.php;icon-uri=http://quaters.cn/display/che/static/image/common/portal.ico" /> 
   <meta name="msapplication-task" content="name=论坛;action-uri=http://quaters.cn/display/che/forum.php;icon-uri=http://quaters.cn/display/che/static/image/common/bbs.ico" /> 
   <meta name="msapplication-task" content="name=群组;action-uri=http://quaters.cn/display/che/group.php;icon-uri=http://quaters.cn/display/che/static/image/common/group.ico" /> 
   <meta name="msapplication-task" content="name=动态;action-uri=http://quaters.cn/display/che/home.php;icon-uri=http://quaters.cn/display/che/static/image/common/home.ico" /> 
+
+        <!-- <script src="/home/js/jquery.min.js" type="text/javascript"></script> --> 
+        <script src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css"/>
 
 
 

@@ -387,48 +387,48 @@
 
                     </script>
                         <script type="text/javascript">
-                            $(function(){   
+                            jQuery(function(){   
                             //标识符                             
                                var isUname,isUpwd,isReupwd,isPhone = false;
 
                                 //绑定聚焦事件
-                                $('.preg').focus(function(){
-                                    $(this).parent().next().children([0]).css('display','block');
+                                jQuery('.preg').focus(function(){
+                                    jQuery(this).parent().next().children([0]).css('display','block');
                                 });
 
                                 //绑定失焦事件
-                               $('#users_name').blur(function(){
+                               jQuery('#users_name').blur(function(){
                                     var uname_preg = /^[a-zA-Z]{1}[\w]{4,15}$/;
-                                    var uname_val = $('#users_name').val();
+                                    var uname_val = jQuery('#users_name').val();
                                    //正则判断用户名
                                     if(uname_preg.test(uname_val)){
                                         var url = "/home/users/checkname/" + uname_val;
                                         //发送ajax检测账号是否存在
-                                        $.get(url,{'uname':uname_val},function(data){
+                                        jQuery.get(url,{'uname':uname_val},function(data){
                                             if(data.code == 'success'){
                                                  isUname = true;
-                                                $('#users_name').parent().next().children([0]).html('恭喜用户名可用');
-                                                $('#users_name').parent().next().children([0]).css('color','green');
+                                                jQuery('#users_name').parent().next().children([0]).html('恭喜用户名可用');
+                                                jQuery('#users_name').parent().next().children([0]).css('color','green');
                                             }else{
-                                                $('#users_name').parent().next().children([0]).html('用户名已存在');
-                                                $('#users_name').parent().next().children([0]).css('color','red');
+                                                jQuery('#users_name').parent().next().children([0]).html('用户名已存在');
+                                                jQuery('#users_name').parent().next().children([0]).css('color','red');
                                             }
                                         },'json');
                                     }else{
                                         isUname = false;
-                                        $(this).parent().next().children([0]).html('用户名格式不正确');
-                                        $(this).parent().next().children([0]).css('color','red');
+                                        jQuery(this).parent().next().children([0]).html('用户名格式不正确');
+                                        jQuery(this).parent().next().children([0]).css('color','red');
                                     }
                                });
 
-                               $('#upwd_name').blur(function(){
+                               jQuery('#upwd_name').blur(function(){
                                     var upwd_preg = /^[a-zA-Z]{1}/;
-                                    var upwd_val = $('#upwd_name').val();
+                                    var upwd_val = jQuery('#upwd_name').val();
                                   
 
                                     if( upwd_val.length < 5 ){
-                                        $(this).parent().next().children([0]).html('密码长度不得少于6位');
-                                        $(this).parent().next().children([0]).css('color','red');
+                                        jQuery(this).parent().next().children([0]).html('密码长度不得少于6位');
+                                        jQuery(this).parent().next().children([0]).css('color','red');
                                     }else if(upwd_preg.test(upwd_val)){
 
                                         //声明数组当作标识符
@@ -458,65 +458,65 @@
                                         // 处理密码结果
                                         switch(arr.length){
                                             case 1:
-                                            $(this).parent().next().children([0]).html('密码为弱');
+                                            jQuery(this).parent().next().children([0]).html('密码为弱');
                                                 break;
                                             case 2:
-                                            $(this).parent().next().children([0]).html('密码为中');
+                                            jQuery(this).parent().next().children([0]).html('密码为中');
                                                 break;
                                             case 3:
-                                            $(this).parent().next().children([0]).html('密码为强');
+                                            jQuery(this).parent().next().children([0]).html('密码为强');
                                                 break;
                                             case 4:
-                                            $(this).parent().next().children([0]).html('密码为超强');
+                                            jQuery(this).parent().next().children([0]).html('密码为超强');
                                                 break;
                                         }
                                             //确认密码框绑定失焦事件
-                                            $('#reupwd_name').blur(function(){
-                                                 var reupwd_val = $('#reupwd_name').val();
-                                                 var upwd_val = $('#upwd_name').val();
+                                            jQuery('#reupwd_name').blur(function(){
+                                                 var reupwd_val = jQuery('#reupwd_name').val();
+                                                 var upwd_val = jQuery('#upwd_name').val();
                                                 if( upwd_val == reupwd_val){
                                                     isReupwd = true;
-                                                    $(this).parent().next().children([0]).html('恭喜密码一致');
-                                                    $(this).parent().next().children([0]).css('color','green');
+                                                    jQuery(this).parent().next().children([0]).html('恭喜密码一致');
+                                                    jQuery(this).parent().next().children([0]).css('color','green');
                                                 }else{
                                                     isReupwd = false;
-                                                     $(this).parent().next().children([0]).html('两次密码不一致');
-                                                      $(this).parent().next().children([0]).css('color','red');
+                                                     jQuery(this).parent().next().children([0]).html('两次密码不一致');
+                                                      jQuery(this).parent().next().children([0]).css('color','red');
                                                 }
                                             });
                                     }else{
-                                        $(this).parent().next().children([0]).html('密码格式不正确');
-                                        $(this).parent().next().children([0]).css('color','red');
+                                        jQuery(this).parent().next().children([0]).html('密码格式不正确');
+                                        jQuery(this).parent().next().children([0]).css('color','red');
 
                                     }                                  
                                });
-                            $('#tel_name').blur(function(){
+                            jQuery('#tel_name').blur(function(){
                                  var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
-                                var tel_val = $('#tel_name').val();
+                                var tel_val = jQuery('#tel_name').val();
                                 if(tel_preg.test(tel_val)){
                                     isPhone = true;
-                                    $(this).parent().next().children([0]).html('手机号格式正确');
-                                    $(this).parent().next().children([0]).css('color','green');
+                                    jQuery(this).parent().next().children([0]).html('手机号格式正确');
+                                    jQuery(this).parent().next().children([0]).css('color','green');
 
                                     var time = 5;
                                     var flag = true;   //设置点击标记，防止5内再次点击生效
                                 //发送验证码
-                                $('#dyMobileButton').click(function(){
-                                    $(this).attr("disabled",true);
+                                jQuery('#dyMobileButton').click(function(){
+                                    jQuery(this).attr("disabled",true);
                                     if(flag){
                                         var timer = setInterval(function () {
                                             if(time == 5 && flag){
                                                 flag = false;
                                                 var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
-                                                 var tel = $('#tel_name').val();
+                                                 var tel = jQuery('#tel_name').val();
                                                    if(!tel_preg.test(tel)){
                                                     return false;
                                                    }
                                                     var url = '/home/users/send/'+tel;
-                                                $.get(url,{'tel':tel},function(data){
+                                                jQuery.get(url,{'tel':tel},function(data){
                                                     //接受短信发送结果
                                                     if(data.code == 2){
-                                                        $("#dyMobileButton").html("已发送");
+                                                        jQuery("#dyMobileButton").html("已发送");
                                                     }else{
                                                         flag = true;
                                                         time = 5;
@@ -524,13 +524,13 @@
                                                     }
                                                },'json');
                                             }else if(time == 0){
-                                                $("#dyMobileButton").removeAttr("disabled");
-                                                $("#dyMobileButton").html("免费获取验证码");
+                                                jQuery("#dyMobileButton").removeAttr("disabled");
+                                                jQuery("#dyMobileButton").html("免费获取验证码");
                                                 clearInterval(timer);
                                                 time = 5;
                                                 flag = true;
                                             }else {
-                                                $("#dyMobileButton").html(time + " s 重新发送");
+                                                jQuery("#dyMobileButton").html(time + " s 重新发送");
                                                 time--;
                                             }
                                  },1000);
@@ -539,12 +539,12 @@
                         }); 
                                 }else{
                                     isPhone = false;
-                                    $(this).parent().next().children([0]).html('手机号格式不正确');
-                                     $(this).parent().next().children([0]).css('color','red');
+                                    jQuery(this).parent().next().children([0]).html('手机号格式不正确');
+                                     jQuery(this).parent().next().children([0]).css('color','red');
                                 }
                             });
                             //注册按钮点击事件,当用户名,手机,密码都正确才能发送提交
-                            $('#registerformsubmit').click(function(){
+                            jQuery('#registerformsubmit').click(function(){
                                 if(isUname&&isPhone&&isReupwd){
                                     return true;
                                 }else{
@@ -569,7 +569,7 @@
                                     <br />
                                 </div>
                                 <p class="fsb pns cl hm">
-                                    <button class="pn pnc" onclick="$('agreebbrule').checked = true;hideMenu('fwin_dialog', 'dialog');">
+                                    <button class="pn pnc" onclick="jQuery('agreebbrule').checked = true;hideMenu('fwin_dialog', 'dialog');">
                                         <span>
                                             同意
                                         </span>
