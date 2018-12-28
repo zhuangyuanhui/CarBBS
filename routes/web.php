@@ -108,7 +108,7 @@ Route::resource('admin/comment','admin\CommentsController');	//用户举报后�
 Route::resource('admin/cates','admin\CatesController');   //后台类别管理
 Route::resource('admin/links','admin\LinksController');   //友情链接管理
 Route::resource('admin/basics','admin\BasicsController');   //网站基本配置管理
-
+Route::resource('admin/areports','admin\AreportsController');   //文章举报管理
 
 
 
