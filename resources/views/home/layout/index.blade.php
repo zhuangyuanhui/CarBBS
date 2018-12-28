@@ -3,7 +3,7 @@
  <head> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-  <title>门户 </title> 
+  <title>{{ $title }}</title> 
   <meta name="keywords" content="首页" /> 
   <meta name="description" content="首页 " /> 
   <meta name="generator" content="Discuz! X3.2" /> 
@@ -13,150 +13,103 @@
   <meta http-equiv="MSThemeCompatible" content="Yes" /> 
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_portal_index.css" /> 
-  <script src="/home/js/jquery.min.js" type="text/javascript"></script> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvcG9ydGFsLnBocA==', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
+  <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" /> 
+  <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <meta name="msapplication-task" content="name=首页;action-uri=http://quaters.cn/display/che/portal.php;icon-uri=http://quaters.cn/display/che/static/image/common/portal.ico" /> 
   <meta name="msapplication-task" content="name=论坛;action-uri=http://quaters.cn/display/che/forum.php;icon-uri=http://quaters.cn/display/che/static/image/common/bbs.ico" /> 
   <meta name="msapplication-task" content="name=群组;action-uri=http://quaters.cn/display/che/group.php;icon-uri=http://quaters.cn/display/che/static/image/common/group.ico" /> 
   <meta name="msapplication-task" content="name=动态;action-uri=http://quaters.cn/display/che/home.php;icon-uri=http://quaters.cn/display/che/static/image/common/home.ico" /> 
-  <script src="/home/js/portal.js" type="text/javascript"></script> 
 
 
 
-  <title>车模  - 玩车达人</title> 
   <meta name="keywords" content="车模" /> 
   <meta name="description" content="车模 ,玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_portal_list.css" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvcG9ydGFsLnBocD9tb2Q9bGlzdCZjYXRpZD00', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
-  <script src="/home/js/portal.js" type="text/javascript"></script> 
 
-
-  <title>尤果网美女韩雨菲人体诱惑 车模韩雨菲性感图片曝光 - 车模  - 玩车达人</title> 
   <meta name="keywords" content="尤果网美女韩雨菲人体诱惑 车模韩雨菲性感图片曝光" /> 
   <meta name="description" content="近日，车模韩雨菲曝出一组身穿蕾丝装跟红色法拉利跑车缠绵的照片，车模韩雨菲躺在超跑法拉利发动机盖上面，穿着蕾丝丝袜非常诱惑。还有一组穿着丁字裤，红色毛衣的写真照片，戴着墨镜，非常时尚……尤果网美女韩雨菲 ... ,玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_portal_view.css" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvYXJ0aWNsZS0zMS0xLmh0bWw=', SITEURL = 'http://quaters.cn/display/che/', JSPATH = '/public/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
-  <script src="/home/js/portal.js" type="text/javascript"></script> 
 
 
-  <title>登录  - 玩车达人</title> 
   <meta name="keywords" content="" /> 
   <meta name="description" content=",玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvbWVtYmVyLnBocD9tb2Q9bG9nZ2luZyZhY3Rpb249bG9naW4=', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css" /> 
   <script type="text/javascript">HTMLNODE.className += ' widthauto'</script> 
 
-
-  <title>方希的个人资料  - 玩车达人</title> 
   <meta name="keywords" content="方希的个人资料" /> 
   <meta name="description" content="方希的个人资料 ,玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvaG9tZS5waHA/bW9kPXNwYWNlJnVpZD02JmRvPXByb2ZpbGU=', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css" /> 
   <script type="text/javascript">HTMLNODE.className += ' widthauto'</script> 
-  <script src="/home/js/home.js" type="text/javascript"></script> 
 
 
-  <title>关于  - 玩车达人</title> 
   <meta name="keywords" content="关于" /> 
   <meta name="description" content="关于 ,玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvYWJvdXQv', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
-  <script src="/home/js/portal.js" type="text/javascript"></script> 
 
-
-  <title>论坛 </title> 
   <meta name="keywords" content="论坛" /> 
   <meta name="description" content="论坛 " /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvZm9ydW0ucGhw', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <link rel="archives" title="玩车达人" href="http://quaters.cn/display/che/archiver/" /> 
   <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css" /> 
   <script type="text/javascript">HTMLNODE.className += ' widthauto'</script> 
-  <script src="/home/js/forum.js" type="text/javascript"></script> 
 
 
-  <title>用户竞价排行 - 排行榜  - 玩车达人</title> 
   <meta name="keywords" content="用户竞价排行" /> 
   <meta name="description" content="用户竞价排行 ,玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvbWlzYy5waHA/bW9kPXJhbmtsaXN0JnR5cGU9bWVtYmVy', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
 
-
-  <title>门户 </title> 
   <meta name="keywords" content="首页" /> 
   <meta name="description" content="首页 " /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvcG9ydGFsLnBocA==', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
-  <script src="/home/js/portal.js" type="text/javascript"></script> 
 
-
-
-  <title>导读-最新发表  - 玩车达人</title> 
   <meta name="keywords" content="" /> 
   <meta name="description" content=",玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvZm9ydW0ucGhwP21vZD1ndWlkZSZ2aWV3PW5ld3RocmVhZA==', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <link rel="archives" title="玩车达人" href="http://quaters.cn/display/che/archiver/" /> 
   <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css" /> 
   <script type="text/javascript">HTMLNODE.className += ' widthauto'</script> 
-  <script src="/home/js/forum.js" type="text/javascript"></script> 
 
 
-  <title>威廉王子揭幕“创意英伦”，中英设计对话“创造非凡” - 产品讨论  - 玩车达人</title> 
   <link href="http://quaters.cn/display/che/thread-10-1-1.html" rel="canonical" /> 
   <meta name="keywords" content="威廉王子揭幕“创意英伦”，中英设计对话“创造非凡”" /> 
   <meta name="description" content=" 威廉王子揭幕“创意英伦”，中英设计对话“创造非凡” ,玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvdGhyZWFkLTEwLTEtMS5odG1s', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <link rel="archives" title="玩车达人" href="http://quaters.cn/display/che/archiver/" /> 
   <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css" /> 
   <script type="text/javascript">HTMLNODE.className += ' widthauto'</script> 
-  <script src="/home/js/forum.js" type="text/javascript"></script> 
 
 
 
-  <title>SUV  - 玩车达人</title> 
   <meta name="keywords" content="SUV" /> 
   <meta name="description" content="SUV ,玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvcG9ydGFsLnBocD9tb2Q9bGlzdCZjYXRpZD0y', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
 
@@ -164,24 +117,38 @@
   <meta name="keywords" content="颜值动力皆具备 三款运动中型车推荐" /> 
   <meta name="description" content="随着中国汽车市场的日益发展，居民购车年龄日趋年轻化，80后90后日渐成为购车的主题，他们的需求日益多样化，运动化，所以现在很多品牌定位都在向年轻 化靠拢，例如雷克萨斯、本田、大众、日产等等。他们的换代车型  ... ,玩车达人" /> 
   <meta name="generator" content="Discuz! X3.2" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvYXJ0aWNsZS0xNy0xLmh0bWw=', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
 
 
-  <title>立即注册  - 玩车达人</title> 
   <meta name="keywords" content="" /> 
-  <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvbWVtYmVyLnBocD9tb2Q9cmVnaXN0ZXI=', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <script type="text/javascript">HTMLNODE.className += ' widthauto'</script> 
  </head>
 
 
-
-
+<!-- **************************************************************后台样式**************************************************************** -->
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!-- Plugin Stylesheets first to ease overrides -->
+<link rel="stylesheet" type="text/css" href="/home/admin/plugins/colorpicker/colorpicker.css" media="screen">
+<!-- Required Stylesheets -->
+<link rel="stylesheet" type="text/css" href="/home/admin/bootstrap/css/bootstrap.min.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/home/admin/css/fonts/ptsans/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/home/admin/css/fonts/icomoon/style.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/home/admin/css/mws-style.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/home/admin/css/icons/icol16.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/home/admin/css/icons/icol32.css" media="screen">
+<!-- 导入分页的css样式 -->
+<link rel="stylesheet" type="text/css" href="/home/admin/css/pages_pages.css" >
+<!-- Demo Stylesheet -->
+<link rel="stylesheet" type="text/css" href="/home/admin/css/demo.css" media="screen">
+<!-- jQuery-UI Stylesheet -->
+<link rel="stylesheet" type="text/css" href="/home/admin/jui/css/jquery.ui.all.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/home/admin/jui/jquery-ui.custom.css" media="screen">
+<!-- Theme Stylesheet -->
+<link rel="stylesheet" type="text/css" href="/home/admin/css/mws-theme.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/home/admin/css/themer.css" media="screen">
 
  <!-- ********************************************************************************************************************** -->
  <body id="nv_portal" class="pg_index" onkeydown="if(event.keyCode==27) return false;"> 
@@ -190,11 +157,11 @@
   <div id="Quater_headtop"> 
    <div class="wp cl"> 
    </div> 
-   <div id="Quater_bar" class="cl"> 
+   <div id="Quater_bar" class="cl" style="height: 80px;"> 
     <div class="wp cl"> 
      <!-- 站点LOGO --> 
-     <div class="hd_logo"> 
-      <h2><a href="portal.php"><img src="/home/picture/logo.png" /></a></h2> 
+     <div class="hd_logo" style="height: 80px;"> 
+      <h2><a href="portal.php"> <img src="/home/picture/logo.png" style="height: 80px;"/> </a></h2> 
      </div> 
      <!-- 导航 --> 
      <div class="nav"> 
@@ -205,19 +172,19 @@
        <li id="mn_forum_2"><a href="forum.php" hidefocus="true" title="BBS">论坛<span>BBS</span></a> </li> 
        <li id="mn_N708e" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a href="javascript:void(0);" hidefocus="true">优化</a> </li> 
        <li id="mn_P5"><a href="http://quaters.cn/display/che/wei/" hidefocus="true">微官网</a> </li> 
-       <li id="mn_P6"><a href="http://quaters.cn/display/che/about/" hidefocus="true">关于</a> </li> 
        <li id="mn_N9175"><a href="http://addon.discuz.com/?@quater_6_che.template.72473" hidefocus="true" target="_blank">购买</a> </li> 
       </ul> 
      </div> 
      <!-- 用户信息 --> 
-     <div class="Quater_user lg_box" style="width: 92px; margin-left: 20px;"> 
+     <div class="Quater_user lg_box" style="width: 150px; margin-right: 50px;"> 
       <ul> 
-       <li class="z" style="margin-right: 0;"><a href="member.php?mod=logging&amp;action=login" class="log1"><i></i>登录 / </a></li> 
-       <li class="z"><a href="member.php?mod=register" class="reg1"><i></i>注册</a></li> 
+       <li class="z" style="margin-right: 0;">
+        <a href="" class="log1">登录/</a>
+        <a href="" class="reg1">注册</a>
+        </li> 
       </ul> 
      </div> 
      <div style="display:none"> 
-      <script src="/home/js/logging.js" type="text/javascript"></script> 
       <form method="post" autocomplete="off" id="lsform" action="member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes" onsubmit="return lsSubmit();"> 
        <div class="fastlg cl"> 
         <span id="return_ls" style="display:none"></span> 
@@ -397,6 +364,7 @@ jQuery('.quater_search').slideUp(300);
   </div> 
   @section('content')
 
+   
   @show
   <div id="footer" class="footer cl"> 
    <div class="footer_top cl"> 
@@ -455,7 +423,6 @@ jQuery('.quater_search').slideUp(300);
      <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP201500801号-1</a> 
     </div> 
    </div> 
-   <script src="/home/js/home.js" type="text/javascript"></script> 
    <div id="share"> 
     <a class="moquu_wxin">
      <div class="moquu_wxinh">

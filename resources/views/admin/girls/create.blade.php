@@ -32,10 +32,11 @@
                                         </div>
                                    </div>
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">车模配图</label>
-                                        <div class="mws-form-item" style="width:770px">
-                                        <input type="file"  multiple class="small" name="profiles[]" onchange="preview(this)">
+                                        <label class="mws-form-label">车模</label>
+                                        <div class="mws-form-item" style="width:150px;display: none">
+                                            <input type="file" onchange="preview(this)"  multiple class="small" name="profiles[]" id="profiles">
                                         </div>
+                                         <label for="profiles"><div id="preview" style="width:150px;height: 150px;background: url(/admin/images/jia.jpg);"></div></label>
                                    </div>
                                    <div class="picList mws-form-row">
 
@@ -57,7 +58,7 @@
               <script type="text/javascript">
                   var ue = UE.getEditor('container',{toolbars: [
                                        ['fullscreen', 'source', 'undo', 'redo'],
-                                       ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist','insertunorderedlist', 'selectall', 'cleardoc']
+                                       ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist','insertunorderedlist', 'selectall', 'simpleupload','cleardoc']
                                    ]});
 
                   //上传前图片预览

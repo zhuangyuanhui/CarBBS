@@ -152,68 +152,61 @@
             <!-- 左侧导航栏开始 -->
             <div id="mws-navigation">
                 <ul>                 
+<!-- -----------------------------------------zhuangyuanhui -----------------------当前行数155------------------------------ -->
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>后台用户管理</a>
+                        <a href="/admin/husers"><i class="icon-user"></i>前台用户管理</a>
                         <ul>
-                            <li><a href="/admin/form_layouts.html">用户添加</a></li>
-                            <li><a href="/admin/form_elements.html">用户列表</a></li>
+                            <li><a href="/admin/husers">前台用户列表</a></li>
                         </ul>
                     </li>
-<!-- -----------------------------------------zhuangyuanhui -----------------------当前行数162------------------------------ -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- -----------------------------------------zhangjianjun -----------------------------当前行数 207 ------------------------ -->
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>后台类别管理</a>
+                        <a href="/admin/girls"><i class="icon-bus"></i>车模管理</a>
+                        <ul>
+                            <li><a href="/admin/girls/create">车模添加</a></li>
+                            <li><a href="/admin/girls">车模列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/label"><i class="icon-cloud"></i>云标签管理</a>
+                        <ul>
+                            <li><a href="/admin/label/create">云标签添加</a></li>
+                            <li><a href="/admin/label">云标签列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/reports"><i class="icon-cloud"></i>用户举报管理</a>
+                        <ul>
+                            <li><a href="/admin/reports">用户举报管理列表</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/comment"><i class="icon-cloud"></i>评论管理</a>
+                        <ul>
+                            <li><a href="/admin/comment">评论管理列表</a></li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- -----------------------------------------zhangjianjun -----------------------------当前行数 200 ------------------------ -->
+                    <li>
+                        <a href="/admin/#"><i class="icon-th"></i>后台类别管理</a>
                         <ul>
                             <li><a href="/admin/cates/create">类别添加</a></li>
                             <li><a href="/admin/cates">类别列表</a></li>
                         </ul>
                     </li>                    
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>友情链接管理</a>
+                        <a href="/admin/#"><i class="icon-network"></i>友情链接管理</a>
                         <ul>
                             <li><a href="/admin/links/create">链接添加</a></li>
                             <li><a href="/admin/links">友情链接列表</a></li>
@@ -261,7 +254,7 @@
 
 
 
-<!-- -----------------------------------------shaomingshuo ----------------------------------当前行数264------------------- -->
+<!-- -----------------------------------------shaomingshuo ----------------------------------当前行数257------------------- -->
                     <li>
                         <a href="/admin/#"><i class="icon-users"></i>后台用户管理</a>
                         <ul>
@@ -311,7 +304,7 @@
 
 
 
-<!-- ****************************************************314************************************************ -->
+<!-- ****************************************************307************************************************ -->
                 </ul>
             </div>
         </div>      
