@@ -21,7 +21,7 @@
                     </div>
                     <div class="dataTables_filter" id="DataTables_Table_0_filter">
                      <label>搜索: 
-                        <input type="text" name="search_uname" value="{{$params['res'] or ''}}">
+                        <input type="text" name="search_uname" value="{{$params['search_uname'] or ''}}">
                         <input type="submit" value="搜索">
                      </label>
                     </div>

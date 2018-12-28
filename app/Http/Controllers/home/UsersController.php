@@ -27,7 +27,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('home.users.create');
+        return view('home.users.create',['title'=>'前台注册']);
     }
 
     /**
@@ -36,27 +36,27 @@ class UsersController extends Controller
      */
     public function sendTelCode($tel)
     {
-        $tel_code = '8899';
+        $tel_code = rand(1000,9999);
         session(['tel_code'=>$tel_code]);
-       //  $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
-       //  $target .= "&account=C27705034&password=b11f588eee93d5a6d5432fcc448df1fb&format=json&mobile=".$tel."&content=".rawurlencode("您的验证码是：".$tel_code."。请不要把验证码泄露给其他人。");
-       //  //使用curl(百度)
+        $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
+        $target .= "&account=C27705034&password=b11f588eee93d5a6d5432fcc448df1fb&format=json&mobile=".$tel."&content=".rawurlencode("您的验证码是：".$tel_code."。请不要把验证码泄露给其他人。");
+        //使用curl(百度)
 
-       //  //初使化init方法
-       // $ch = curl_init();
+        //初使化init方法
+       $ch = curl_init();
 
-       // //指定URL
-       // curl_setopt($ch, CURLOPT_URL, $target);
+       //指定URL
+       curl_setopt($ch, CURLOPT_URL, $target);
 
-       // //设定请求后返回结果
-       // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+       //设定请求后返回结果
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-       // //发送请求
-       // $res = curl_exec($ch);
+       //发送请求
+       $res = curl_exec($ch);
 
-       // dump($res);
-       // //关闭curl
-       // curl_close($ch);
+       dump($res);
+       //关闭curl
+       curl_close($ch);
     }
     /**
      * 前台用户注册存入数据库
@@ -67,6 +67,11 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $data = $request->only(['uname','upwd','tel','tel_code']);
+
+        $code = session('tel_code');
+        if($data['tel_code'] != $code){
+            return back()->with('error','验证码错误');
+        }
         //开启事务
         DB::beginTransaction();
         //将数据存入前台用户表
@@ -88,7 +93,7 @@ class UsersController extends Controller
 
         if($res1 && $res2){
             DB::commit();
-            return back()->with('success','注册成功');
+            return redirect()->with('success','注册成功');
         }else{
             DB::rollBack();
             return back()->with('error','注册失败');
@@ -153,17 +158,4 @@ class UsersController extends Controller
         }
     }
 
-    /**
-     * ajax方法判断验证码是否正确
-     */
-    public function checkcode($tel_code)
-    {   dump($tel_code);
-        $code = session('tel_code');
-        dump($code);
-        if($code == $tel_code){
-           echo json_encode(['code'=>'success']);
-        }else{
-             echo json_encode(['code'=>'error']);
-        }
-    }
 }

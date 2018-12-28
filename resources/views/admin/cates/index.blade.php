@@ -52,7 +52,7 @@
                                                 {{ method_field('DELETE') }}
                                                 <input type="submit" value="删除"  class="btn btn-danger" onclick="return confirm('确定要删除么?')">
                                             </form>
-                                            <a href="/admin/cates/{{ $v->id }}/edit" class="btn btn-success">修改</a>
+                                            <a href="/admin/cates/{{ $v->id }}/edit" class="btn btn-warning">修改</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -62,7 +62,4 @@
                     </div>
                     </div>
                     </div>
-                 
-
-
 @endsection

@@ -64,11 +64,11 @@ Route::get('home/users/send/{tel}','home\UsersController@sendTelCode');     //�
 
 Route::get('home/users/checkname/{name}','home\UsersController@checkname');     //注册页面ajax检测用户是否存在
 
-Route::get('home/users/checkcode/{tel_code}','home\UsersController@checkcode');     //注册页面ajax检测验证是否正确
+Route::resource('admin/husers','admin\HUsersController');     //前台用户后台管理
 
-Route::resource('admin/husers','admin\HUsersController');
+Route::resource('admin/reports','admin\ReportsController');	//用户举报后台管理
 
-
+Route::resource('admin/comment','admin\CommentsController');	//用户举报后台管理
 
 
 
