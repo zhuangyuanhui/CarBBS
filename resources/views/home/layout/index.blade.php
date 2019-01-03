@@ -21,11 +21,11 @@
   <meta name="msapplication-task" content="name=首页;action-uri=http://quaters.cn/display/che/portal.php;icon-uri=http://quaters.cn/display/che/static/image/common/portal.ico" /> 
   <meta name="msapplication-task" content="name=论坛;action-uri=http://quaters.cn/display/che/forum.php;icon-uri=http://quaters.cn/display/che/static/image/common/bbs.ico" /> 
   <meta name="msapplication-task" content="name=群组;action-uri=http://quaters.cn/display/che/group.php;icon-uri=http://quaters.cn/display/che/static/image/common/group.ico" /> 
-  <meta name="msapplication-task" content="name=动态;action-uri=http://quaters.cn/display/che/home.php;icon-uri=http://quaters.cn/display/che/static/image/common/home.ico" /> 
-        
-        <script src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js" type="text/javascript"></script>
-
-        <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css"/>
+  <meta name="msapplication-task" content="name=动态;action-uri=http://quaters.cn/display/che/home.php;icon-uri=http://quaters.cn/display/che/static/image/common/home.ico" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
+  <script src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css"/>
 
 
   <meta name="keywords" content="车模" /> 

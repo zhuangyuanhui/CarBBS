@@ -25,4 +25,10 @@ class Article extends Model
 	{
         return $this->belongsTo('App\models\admin\Cates','cates_id');
 	}
+
+	//获取文章评论数量
+	public function getComment()
+	{
+        return $this->hasOne('App\models\admin\Comment','article_id');
+	}
 }

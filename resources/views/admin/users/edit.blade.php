@@ -22,14 +22,12 @@
                               {{ csrf_field() }}
                               {{ method_field('PUT') }}
                     		          <div class="mws-form-inline">
-                                  <div class="mws-form-row">
+                                    <div class="mws-form-row">
                                         <label class="mws-form-label">上传头像</label>
-                                        <div class="mws-form-item" style="width:150px">
+                                        <div class="mws-form-item" style="width:150px;display: none">
                                             <input type="file" onchange="preview(this)"  multiple class="small" name="profiles" id="profiles">
-                                            <label for="profiles"><div id="preview" style="width:150px">
-                                              <img src="/uploads/{{ $data->users_pic }}" style="height:120px;width:120px;margin:4px;border-radius:70px 70px">
-                                            </div>
                                         </div>
+                                         <label for="profiles"><div id="preview" style="width:150px;height: 150px;background: url(/admin/images/jia.jpg);"></div></label>
                                    </div>
                     			         <div class="mws-form-row">
                                         <label class="mws-form-label">用户名</label>

@@ -15,41 +15,36 @@
 
             	<div class="mws-panel grid_8">
                 	<div class="mws-panel-header" style="height:50px">
-                    	<span>用户添加</span>
+                    	<span>{{ $title }}</span>
                     </div>
                     <div class="mws-panel-body no-padding">
-                    	<form class="mws-form" action="/admin/users" method="post"  enctype="multipart/form-data">
+                    	<form class="mws-form" action="/admin/login/{{ $id }}" method="post"  enctype="multipart/form-data">
                               {{ csrf_field() }}
+                              {{ method_field('PUT')}}
                     		<div class="mws-form-inline">
-                    			   <div class="mws-form-row">
-                                        <label class="mws-form-label">上传头像</label>
-                                        <div class="mws-form-item" style="width:150px;display: none">
-                                            <input type="file" onchange="preview(this)"  multiple class="small" name="profiles" id="profiles">
-                                        </div>
-                                         <label for="profiles"><div id="preview" style="width:150px;height: 150px;background: url(/admin/images/jia.jpg);"></div></label>
-                                   </div>
+
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">用户名</label>
+                                        <label class="mws-form-label">旧密码密码</label>
                                         <div class="mws-form-item">
-                                             <input type="text" class="small" name="uname" value="{{ old('uname') }}">
+                                             <input type="password" class="small" name="oldupwd" value="">
                                         </div>
                                    </div>
 
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">用户密码</label>
+                                        <label class="mws-form-label">新密码</label>
                                         <div class="mws-form-item">
                                              <input type="password" class="small" name="upwd" value="">
                                         </div>
                                    </div>
 
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">确认密码</label>
+                                        <label class="mws-form-label">确认新密码</label>
                                         <div class="mws-form-item">
                                              <input type="password" class="small" name="reupwd" value="">
                                         </div>
                                    </div>
 
-                                   <div class="mws-form-row">
+<!--                                    <div class="mws-form-row">
                                         <label class="mws-form-label">用户邮箱</label>
                                         <div class="mws-form-item">
                                              <input type="text" class="small" name="email" id="email" value="{{ old('email') }}">
@@ -60,42 +55,18 @@
                                         <label class="mws-form-label">邮箱验证码</label>
                                         <div class="mws-form-item">
                                              <input type="text" class="small" name="email_code" value="" style="width: 600px">
-                                             <a href="javascript:;" ><span class="btn btn-success" id="dyMobileButton" style="width: 160px"> 接 收 邮 箱 验 证 码 </span></a>
+                                             <a href="javascript:;" onclick="sendEmailCode()"><span class="btn btn-success" id="dyMobileButton" style="width: 160px"> 接 收 邮 箱 验 证 码 </span></a>
                                         </div>
-                                   </div>   
+                                   </div>  -->  
 
-                                   <div class="mws-form-row">
-                                        <label class="mws-form-label">用户手机</label>
-                                        <div class="mws-form-item">
-                                             <input type="text" class="small" id="tel" name="tel" value="{{ old('tel') }}">
-                                        </div>
-                                   </div>                                   
-
-
-                                  
                     		</div>
                     		<div class="mws-button-row">
-                    			<input type="submit" value="添加" class="btn btn-danger">
+                    			<input type="submit" value="修改" class="btn btn-danger">
                     			<input type="reset" value="重置" class="btn ">
                     		</div>
                     	</form>
                     </div>    	
                 </div>
-                <!-- 浏览用户头像 -->
-                <script type="text/javascript">
-                    function preview(file){
-                        if (file.files && file.files[0]){ 
-                        var reader = new FileReader(); 
-                        reader.onload = function(evt){ 
-                            $("#preview").html('<img src="' + evt.target.result + '" style="height:120px;width:120px;margin:4px;border-radius:70px 70px" />'); 
-                        } 
-                            reader.readAsDataURL(file.files[0]); 
-                        } else {
-                            $("#preview").html('<div style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>'); 
-
-                              } 
-                        }
-                </script>
                
                 <!-- 发送邮箱验证码 -->
                 <script type="text/javascript">

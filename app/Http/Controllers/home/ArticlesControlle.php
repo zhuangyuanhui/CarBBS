@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\admin\Cates;
 use App\models\home\Article;
+use App\Http\Controllers\home\ArtRankController;
 
 class ArticlesControlle extends Controller
 {
@@ -14,9 +15,28 @@ class ArticlesControlle extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id=0)
     {
+        switch ($id) {
+            case 0:
+                 $data = Article::all();
+                break;
+             case 1: 
+                 $data = ArtRankController::click();
+                break;
+             case 2:
+                 $data = ArtRankController::time();
+                break;
+             case 3:
+                 $data = ArtRankController::praise();
+                break;
+        }
         
+        return view('home.articles.index',
+                                        [
+                                            'data'=>$data,
+                                            'title'=>'文章列表'
+                                        ]);
     }
 
     /**
@@ -99,7 +119,8 @@ class ArticlesControlle extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::where('id',$id)->first();
+        return view('home.articles.details',['article'=>$article,'title'=>'文章详情','click'=> ArtRankController::click()]);
     }
 
     /**

@@ -155,25 +155,32 @@ Route::resource('admin/areports','admin\AreportsController');   //文章举报�
 
 
 /*------------------------------------------------------------  shaomingshuo 155 ----------------------------------------------*/
+Route::get('admin/users/sendemail/{email}','admin\UsersController@sendEmailCode');     //发送邮箱验证码
+Route::get('admin/loginout','admin\LoginController@loginout');                         //退出登录
+Route::get('admin/login/forget','admin\LoginController@forget');                       //忘记密码                 
+Route::get('admin/login/sendemail/{email}','admin\LoginController@sendEmailCode');     //发送邮箱验证码
+Route::get('admin/login/reset','admin\LoginController@reset');                         //跳转修改密码
+Route::get('admin/layout','admin\LayoutController@index');                             //后台主页面
+Route::get('home/articles/click','home\ArtRankController@click');                      //根据点击量进行排行
+Route::get('home/articles/time','home\ArtRankController@time');                        //根据时间进行排行
+Route::get('home/articles/praise','home\ArtRankController@praise');                    //根据点赞进行排行
+
+Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
+
+Route::post('admin/login/check','admin\LoginController@check');                        //检查登录
+Route::post('admin/login/checkemail','admin\LoginController@checkemail');              //审查邮箱                 
+Route::post('admin/login/changepwd','admin\LoginController@changepwd');
+
 
 Route::resource('admin/users','admin\UsersController');                                //后台用户路由
-Route::get('admin/users/sendemail/{email}','admin\UsersController@sendEmailCode');     //发送邮箱验证码
 Route::resource('admin/adverts','admin\AdvertsController');                            //广告位路由
 Route::resource('admin/slides','admin\SlidesController');                              //轮播图路由  
-Route::resource('home/layout','home\LayoutControlle');                                 //Layout图路由  
-
-
-
-
-
-
-
+Route::resource('admin/articles','admin\HArticlesController')->middleware('login');    //后台文章管理
+Route::resource('admin/login','admin\LoginController');                                //后台登录管理
+Route::resource('home/layout','home\LayoutControlle');                                 //Layout图路由 
 
 //home
-Route::resource('home/articles','home\ArticlesControlle');                       //后台用户路由
-Route::resource('admin/articles','admin\HArticlesController');
-
-
+Route::resource('home/articles','home\ArticlesControlle');                            //前台用户路由
 
 
 
