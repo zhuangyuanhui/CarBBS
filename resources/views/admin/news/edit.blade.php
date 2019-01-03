@@ -52,17 +52,17 @@
                                         </div>
                                    </div>
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">新闻配图</label>
+                                        <label class="mws-form-label">新闻封面</label>
                                         <div class="mws-form-item"  style="width: 800px">
-                                        <input type="file"  multiple class="small" name="news_pic[]" onchange="preview(this)" placeholder="请选择图片上传">
+                                        <input type="file"  class="small" name="news_pic" onchange="preview(this)" placeholder="请选择图片上传">
                                         </div>
                                    </div>
 
                                    <div class="picList mws-form-row">
                                     <div>
-                                    @foreach($data->news_pic as $k=>$v)
-                                      <img src="/uploads/{{$v}}" alt="原图" width="200px" height="100px">
-                                    @endforeach
+
+                                      <img src="/uploads/{{$data->news_pic}}" alt="原图" width="200px" height="100px">
+
                                    </div>
                                   </div>
                               </div>

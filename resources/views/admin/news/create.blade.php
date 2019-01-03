@@ -43,11 +43,26 @@
                                         </div>
                                    </div>
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">新闻配图</label>
-                                        <div class="mws-form-item">
-                                        <input type="file"  multiple class="small" name="news_pic[]" onchange="preview(this)" placeholder="请选择图片上传">
+                                        <label class="mws-form-label">新闻封面</label>
+                                        <div class="mws-form-item" style="width:150px;display: none">
+                                        <input type="file" id="news_pic" class="small" name="news_pic" onchange="preview(this)" placeholder="请选择图片上传">
                                         </div>
+                                        <label for="news_pic"><div id="preview" style="width:150px;height: 150px;background: url(/admin/images/jia.jpg);"></div></label>
                                    </div>
+
+                                  <!-- <div class="mws-form-row">
+                                        <label class="mws-form-label">上传头像</label>
+                                        <div class="mws-form-item" style="width:150px;display: none">
+                                            <input type="file" onchange="preview(this)"  multiple class="small" name="profiles" id="profiles">
+                                        </div>
+                                         <label for="profiles"><div id="preview" style="width:150px;height: 150px;background: url(/admin/images/jia.jpg);"></div></label>
+                                   </div> -->
+
+                                    
+
+
+
+
                                    <div class="picList mws-form-row">
                                         
                                   </div>

@@ -10,4 +10,8 @@ class UsersInfo extends Model
 
     protected $primaryKey = 'id';
 
+    public function getUsers()
+    {
+    	return $this->belongsTo('App\models\home\Users','users_id');
+    }
 }

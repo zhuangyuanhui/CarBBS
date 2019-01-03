@@ -15,36 +15,6 @@
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
   <script src="/home/js/jquery.min.js" type="text/javascript"></script> 
   <script type="text/javascript">var STYLEID = '6', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'umN', charset = 'gbk', discuz_uid = '0', cookiepre = 'EqVX_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3F1YXRlcnMuY24vZGlzcGxheS9jaGUvbWlzYy5waHA/bW9kPXJhbmtsaXN0JnR5cGU9bWVtYmVy', SITEURL = 'http://quaters.cn/display/che/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script> 
-  <script src="/home/js/common.js" type="text/javascript"></script> 
-  <!--[if IE 6]>
-
-
-
-     <script language='javascript' type="text/javascript">   
-
-
-
-    function ResumeError() {  
-
-
-
-         return true;  
-
-
-
-    }  
-
-
-
-    window.onerror = ResumeError;   
-
-
-
-    </script> 
-
-
-
-    <![endif]--> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <meta name="msapplication-task" content="name=首页;action-uri=http://quaters.cn/display/che/portal.php;icon-uri=http://quaters.cn/display/che/static/image/common/portal.ico" /> 

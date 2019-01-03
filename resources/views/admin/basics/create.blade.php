@@ -24,6 +24,7 @@
                                              <input type="text" class="small" name="name"  value="{{ old('name') }}">
                                         </div>
                                    </div>
+                              </div>
                               <div class="mws-form-inline">
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">电话</label>
@@ -31,6 +32,7 @@
                                              <input type="text" class="small" name="tel"  value="{{ old('tel') }}">
                                         </div>
                                    </div>
+                              </div>
                               <div class="mws-form-inline">
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">网站备案号</label>
@@ -38,6 +40,7 @@
                                              <input type="text" class="small" name="record_number"  value="{{ old('record_number') }}" placeholder="例:鲁ICP备*******号">
                                         </div>
                                    </div>
+                              </div>
                               <div class="mws-form-inline">
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">版权信息</label>
@@ -45,7 +48,7 @@
                                              <input type="text" class="small" name="copyright"  value="{{ old('copyright') }}" placeholder="例:Copyright © 2018 CarBBS AllRightsReserved.">
                                         </div>
                                    </div>
-                                   
+                              </div>
                               <div class="mws-form-row">
                                         <label class="mws-form-label">网站描述</label>
                                         <div class="mws-form-item">

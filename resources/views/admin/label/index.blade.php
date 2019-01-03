@@ -43,7 +43,7 @@
                                             <form style="display: inline-block;" method="post" action="/admin/label/{{ $v->id }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <input type="submit" value="删除"  class="btn btn-danger">
+                                                <input type="submit" value="删除" onclick="return confirm('确定要删除吗')"  class="btn btn-danger">
                                             </form>
                                             <a href="/admin/label/{{ $v->id }}/edit" class="btn btn-warning">修改</a>
                                         </td>

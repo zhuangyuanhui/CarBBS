@@ -65,19 +65,18 @@ class NewsController extends Controller
         ]);
    
         //判断文件上传 
-        $temp = '';
+      
         if ($request->file('news_pic')) {
             $file = $request->file('news_pic');
-            foreach ($file as $key => $value) {
-                $temp.=$value->store('admin/images').',';
-            }
-            $data['news_pic'] = $temp;
+           
+              $data['news_pic'] =   $file->store('/admin/news/images');
+          
         }
 
         $news = new News;
         $news->cates_id=$data['cates_id'];
         $news->title =$data['title'];
-        $news->content =$data['content'];
+        $news->content =$data['content']; 
         $news->news_pic =$data['news_pic'];
         // 追加时间戳 和 点击量
         $news->ctime = time();
@@ -94,14 +93,6 @@ class NewsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -113,11 +104,7 @@ class NewsController extends Controller
         $data= News::find($id);
         //获取所有值
         $datas = Cates::all();
-        //  dump($data);exit;
-        // 去掉最右边字符
-        $data->news_pic = rtrim($data->news_pic,',');
-        //拼成数组
-        $data->news_pic = explode(',', $data->news_pic);
+
 
         //加载视图
         return view('admin.news.edit',['data'=>$data,'datas'=>$datas,'title'=>'新闻信息修改','id'=>$id]);
@@ -137,39 +124,27 @@ class NewsController extends Controller
         $this->validate($request, [
             'title' => 'required|max:50',
             'content' => 'required|min:10',
-            'news_pic' => 'required',
-          
-
         ],[
             'title.required' => '标题不能为空',
-            
             'title.max' => '标题长度过大,最大为50',
             'content.required' => '内容不能为空',
             'content.min' => '文章内容最低不得少于10字',
-            'news_pic.required' => '请选择图片上传',
-         
         ]);
    
-        //判断文件上传 
-        $temp = '';
-        if ($request->file('news_pic')) {
-            $file = $request->file('news_pic');
-            foreach ($file as $key => $value) {
-                $temp.=$value->store('admin/images').',';
-            }
-            $new['news_pic'] = $temp;
-        }
+        
 
         $news =News::find($id);
-        // 追加时间戳
-        $news->ctime = time();
 
         $news->cates_id=$new['cates_id'];
         $news->title =$new['title'];
         $news->clicks =$new['clicks'];
         $news->content =$new['content'];
-        $news->news_pic =$new['news_pic'];
-        
+        //判断文件上传 
+        if ($request->file('news_pic')) {
+            $file = $request->file('news_pic');
+              $new['news_pic']  =$file->store('/admin/news/images');
+                $news->news_pic =$new['news_pic'];
+        }
         //cunshu time
         $res = $news->save();
         if ($res) {

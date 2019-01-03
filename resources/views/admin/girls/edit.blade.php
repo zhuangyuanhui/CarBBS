@@ -35,7 +35,7 @@
                                         </div>
                                    </div>
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">车模配图</label>
+                                        <label class="mws-form-label">车模封面</label>
                                         <div class="mws-form-item" style="width:770px">
                                         <input type="file"  multiple class="small" name="profiles[]" onchange="preview(this)" placeholder="请选择图片上传">
                                         </div>

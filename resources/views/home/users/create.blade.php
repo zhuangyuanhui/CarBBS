@@ -1,5 +1,7 @@
 @extends('home.layout.index')
 @section('content')
+<link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
         <div class="mus_box cl">
             <div id="mus" class="wp cl">
             </div>
@@ -218,7 +220,7 @@
                                                         </td>
                                                         <td class="tipcol">
                                                             <i id="users_content" class="p_tip" style="display: none" >
-                                                                用户名由字母开头的 5 到 15 个字符组成,
+                                                                用户名由字母开头的 5 到 15 个字符组成
                                                             </i>
                                                         </td>
                                                     </tr>
@@ -236,7 +238,7 @@
                                                             </label>
                                                         </th>
                                                         <td>
-                                                            <input type="text" id="upwd_name" name="upwd" size="25" tabindex="1" class="px preg"
+                                                            <input type="password" id="upwd_name" name="upwd" size="25" tabindex="1" class="px preg"
                                                             required />
                                                         </td>
                                                         <td class="tipcol">
@@ -381,56 +383,54 @@
                                 </div>
                             </form>
                         </div>
-
-                        <script type="text/javascript">
-                            
-
-                    </script>
                         <script type="text/javascript">
                             jQuery(function(){   
-                            //标识符                             
+                                //标识符   全为true时才可提交注册                         
                                var isUname,isUpwd,isReupwd,isPhone = false;
 
-                                //绑定聚焦事件
+                                //给所有input框绑定聚焦事件
                                 jQuery('.preg').focus(function(){
                                     jQuery(this).parent().next().children([0]).css('display','block');
                                 });
 
-                                //绑定失焦事件
-                               jQuery('#users_name').blur(function(){
+                                //用户名框绑定失焦事件
+                               jQuery('#users_name').keyup(function(){
                                     var uname_preg = /^[a-zA-Z]{1}[\w]{4,15}$/;
                                     var uname_val = jQuery('#users_name').val();
-                                   //正则判断用户名
+                                   //正则判断用户名格式
                                     if(uname_preg.test(uname_val)){
                                         var url = "/home/users/checkname/" + uname_val;
                                         //发送ajax检测账号是否存在
                                         jQuery.get(url,{'uname':uname_val},function(data){
                                             if(data.code == 'success'){
+                                                //用户名不存在,可注册.改变标识符值
                                                  isUname = true;
                                                 jQuery('#users_name').parent().next().children([0]).html('恭喜用户名可用');
                                                 jQuery('#users_name').parent().next().children([0]).css('color','green');
                                             }else{
+                                                isUname = false;
                                                 jQuery('#users_name').parent().next().children([0]).html('用户名已存在');
                                                 jQuery('#users_name').parent().next().children([0]).css('color','red');
                                             }
                                         },'json');
                                     }else{
                                         isUname = false;
-                                        jQuery(this).parent().next().children([0]).html('用户名格式不正确');
-                                        jQuery(this).parent().next().children([0]).css('color','red');
+                                        jQuery(this).parent().next().children([0]).html('用户名由字母开头的 5 到 15 个字符组成');
                                     }
                                });
 
-                               jQuery('#upwd_name').blur(function(){
+                               //给密码框绑定失焦事件
+                               jQuery('#upwd_name').keyup(function(){
                                     var upwd_preg = /^[a-zA-Z]{1}/;
                                     var upwd_val = jQuery('#upwd_name').val();
                                   
-
+                                    //正则匹配密码格式
                                     if( upwd_val.length < 5 ){
                                         jQuery(this).parent().next().children([0]).html('密码长度不得少于6位');
                                         jQuery(this).parent().next().children([0]).css('color','red');
                                     }else if(upwd_preg.test(upwd_val)){
 
+                                        //验证密码强度
                                         //声明数组当作标识符
                                         var arr = [];
                                         // 检测数字
@@ -471,9 +471,10 @@
                                                 break;
                                         }
                                             //确认密码框绑定失焦事件
-                                            jQuery('#reupwd_name').blur(function(){
+                                            jQuery('#reupwd_name').keyup(function(){
                                                  var reupwd_val = jQuery('#reupwd_name').val();
                                                  var upwd_val = jQuery('#upwd_name').val();
+                                                 //判断两次输入的密码是否一致
                                                 if( upwd_val == reupwd_val){
                                                     isReupwd = true;
                                                     jQuery(this).parent().next().children([0]).html('恭喜密码一致');
@@ -490,59 +491,74 @@
 
                                     }                                  
                                });
-                            jQuery('#tel_name').blur(function(){
+                            
+                            //给手机输入框绑定失焦事件
+                            jQuery('#tel_name').keyup(function(){
                                  var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
-                                var tel_val = jQuery('#tel_name').val();
+                                 var tel_val = jQuery('#tel_name').val();
+                                 //正则判断手机号格式是否正确
                                 if(tel_preg.test(tel_val)){
-                                    isPhone = true;
+
                                     jQuery(this).parent().next().children([0]).html('手机号格式正确');
                                     jQuery(this).parent().next().children([0]).css('color','green');
 
-                                    var time = 5;
-                                    var flag = true;   //设置点击标记，防止5内再次点击生效
-                                //发送验证码
-                                jQuery('#dyMobileButton').click(function(){
-                                    jQuery(this).attr("disabled",true);
-                                    if(flag){
-                                        var timer = setInterval(function () {
-                                            if(time == 5 && flag){
-                                                flag = false;
-                                                var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
-                                                 var tel = jQuery('#tel_name').val();
-                                                   if(!tel_preg.test(tel)){
-                                                    return false;
-                                                   }
-                                                    var url = '/home/users/send/'+tel;
-                                                jQuery.get(url,{'tel':tel},function(data){
-                                                    //接受短信发送结果
-                                                    if(data.code == 2){
-                                                        jQuery("#dyMobileButton").html("已发送");
-                                                    }else{
-                                                        flag = true;
-                                                        time = 5;
-                                                        clearInterval(timer);
-                                                    }
-                                               },'json');
-                                            }else if(time == 0){
-                                                jQuery("#dyMobileButton").removeAttr("disabled");
-                                                jQuery("#dyMobileButton").html("免费获取验证码");
-                                                clearInterval(timer);
-                                                time = 5;
-                                                flag = true;
-                                            }else {
-                                                jQuery("#dyMobileButton").html(time + " s 重新发送");
-                                                time--;
-                                            }
-                                 },1000);
-                              }
+                                    var tel_url = "/home/users/checktel/" + tel_val;
 
-                        }); 
+                                    //发送ajax检测手机号是否已被注册
+                                    jQuery.get(tel_url,{'tel':tel_val},function(data){
+                                        if(data.code == 'success'){
+                                             isPhone = true;
+                                        }else{
+                                            jQuery('#tel_name').parent().next().children([0]).html('该手机号已被注册');
+                                            jQuery('#tel_name').parent().next().children([0]).css('color','red');
+                                        }
+                                    },'json');
+
+                                        var time = 5;
+                                        var flag = true;   //设置点击标记，防止5内再次点击生效
+                                        //发送验证码
+                                        jQuery('#dyMobileButton').click(function(){
+                                            jQuery(this).attr("disabled",true);
+                                            if(flag){
+                                                var timer = setInterval(function () {
+                                                    if(time == 5 && flag){
+                                                        flag = false;
+                                                        var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
+                                                         var tel = jQuery('#tel_name').val();
+                                                           if(!tel_preg.test(tel)){
+                                                            return false;
+                                                           }
+                                                            var url = '/home/users/send/'+tel;
+                                                        jQuery.get(url,{'tel':tel},function(data){
+                                                            //接受短信发送结果
+                                                            if(data.code == 2){
+                                                                jQuery("#dyMobileButton").html("已发送");
+                                                            }else{
+                                                                flag = true;
+                                                                time = 5;
+                                                                clearInterval(timer);
+                                                            }
+                                                       },'json');
+                                                    }else if(time == 0){
+                                                        jQuery("#dyMobileButton").removeAttr("disabled");
+                                                        jQuery("#dyMobileButton").html("免费获取验证码");
+                                                        clearInterval(timer);
+                                                        time = 5;
+                                                        flag = true;
+                                                    }else {
+                                                        jQuery("#dyMobileButton").html(time + " s 重新发送");
+                                                        time--;
+                                                    }
+                                                },1000);
+                                             }
+                                         });
+
                                 }else{
                                     isPhone = false;
-                                    jQuery(this).parent().next().children([0]).html('手机号格式不正确');
-                                     jQuery(this).parent().next().children([0]).css('color','red');
+                                    jQuery(this).parent().next().children([0]).html('请输入正确的手机号');
                                 }
                             });
+
                             //注册按钮点击事件,当用户名,手机,密码都正确才能发送提交
                             jQuery('#registerformsubmit').click(function(){
                                 if(isUname&&isPhone&&isReupwd){

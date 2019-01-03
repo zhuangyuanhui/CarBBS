@@ -101,23 +101,23 @@
         <!-- Logo Container -->
         <div id="mws-logo-container">       
             <!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
-            <div id="mws-logo-wrap">
-                <img src="/admin/images/mws-logo.png" alt="mws admin">
-            </div>
         </div>        
         <!-- User Tools (notifications, logout, profile, change password) -->
         <div id="mws-user-tools" class="clearfix">
     
             <!-- User Information and functions section -->
-            <div id="mws-user-info" class="mws-inset">
+            <div id="mws-user-info" class="mws-inset" style="width: 150px;">
+                <div id="mws-logo-wrap" style="width: 41px;height: 31px;">
+                        <img src="/uploads/{{ session('users')->users_pic  }}"  style="width: 40px;height: 32px;  margin-top: -4px;">
+                </div> 
                 <!-- Username and Functions -->
-                <div id="mws-user-functions">
+                <div id="mws-user-functions" style="width: 500px; margin-top: -35px;margin-left: 57px;">
                     <div id="mws-username">
-                        你好,管理员
+                        {{ session('users')->uname }}
                     </div>
                     <ul>
-                        <li><a href="/admin/#">修改密码</a></li>
-                        <li><a href="/admin/index.html">退出</a></li>
+                        <li><a href="/admin/login/{{ session('users')->id }}/edit">修改密码</a></li>
+                        <li><a href="/admin/loginout">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -174,20 +174,20 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/admin/reports"><i class="icon-cloud"></i>用户举报管理</a>
+                        <a href="/admin/reports"><i class="icon-exclamation-sign"></i>用户举报管理</a>
                         <ul>
                             <li><a href="/admin/reports">用户举报管理列表</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/admin/comment"><i class="icon-cloud"></i>评论管理</a>
+                        <a href="/admin/comment"><i class="icon-edit"></i>评论管理</a>
                         <ul>
                             <li><a href="/admin/comment">评论管理列表</a></li>
                         </ul>
                     </li>
 
 
-
+                                  
 
 
 
@@ -213,25 +213,25 @@
                         </ul>
                     </li>               
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>新闻管理</a>
+                        <a href="/admin/#"><i class="icon-globe"></i>新闻管理</a>
                         <ul>
                             <li><a href="/admin/news/create">新闻添加</a></li>
                             <li><a href="/admin/news">新闻列表</a></li>
                         </ul>
                     </li>         
                     <li>
-                        <a href="/admin/#"><i class="icon-list"></i>网站配置管理</a>
+                        <a href="/admin/#"><i class="icon-monitor"></i>网站配置管理</a>
                         <ul>
                             <li><a href="/admin/basics/create">网站配置添加</a></li>
                             <li><a href="/admin/basics">网站配置列表</a></li>
                         </ul>
+                    </li>      
+                    <li>
+                        <a href="/admin/#"><i class="icon-warning-sign"></i>文章举报管理</a>
+                        <ul>
+                            <li><a href="/admin/areports">文章举报列表</a></li>
+                        </ul>
                     </li>
-
-
-
-
-
-
 
 
 
@@ -270,18 +270,18 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/admin/#"><i class="icon-play-circle"></i>前台轮播图管理</a>
+                        <a href="/admin/#"><i class="icon-bullhorn"></i>前台轮播图管理</a>
                         <ul>
                             <li><a href="/admin/slides/create">轮播图添加</a></li>
                             <li><a href="/admin/slides">轮播图列表</a></li>
                         </ul>
                     </li>
-
-
-
-
-
-
+                    <li>
+                        <a href="/admin/#"><i class="icon-feather"></i>文章管理</a>
+                        <ul>
+                            <li><a href="/admin/articles">文章列表</a></li>
+                        </ul>
+                    </li>
 
 
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\home\Users;
 use App\models\home\UsersInfo;
+use App\models\home\Concern;
+use Illuminate\Support\Facades\Hash;
 use DB;
 
 class UsersController extends Controller
@@ -77,7 +79,7 @@ class UsersController extends Controller
         //将数据存入前台用户表
         $users = new Users;
         $users->uname = $data['uname'];
-        $users->upwd = $data['upwd'];
+        $users->upwd = Hash::make($data['upwd']);
         $users->tel = $data['tel'];
         $users->ctime = time();
         $users->status = 1;
@@ -135,17 +137,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
      * ajax方法判断用户名是否存在
      */
     public function checkname($name)
@@ -156,6 +147,61 @@ class UsersController extends Controller
         }else{
             echo json_encode(['code'=>'success']);
         }
+    }
+    
+    /**
+     * ajax方法判断手机号是否存在
+     */
+    public function checktel($tel)
+    {  
+       $res = Users::where('tel','=',$tel)->first();
+        if($res){
+            echo json_encode(['code'=>'error']);
+        }else{
+            echo json_encode(['code'=>'success']);
+        } 
+    }
+
+    /**
+     * 按照积分排序得出用户排行
+     */
+    static function number_users()
+    {
+        $number_users = UsersInfo::orderBy('sign_number','desc')->limit(20)->get();
+        return $number_users;
+    }
+
+    /**
+     * 按照粉丝量排序得出用户排行
+     */
+    static function fans_users()
+    {
+        $users = Users::all();
+        foreach($users as $key=>$value){
+            $value->count = Concern::where('users_id',$value->id)->count();
+        }
+
+        dump($users);exit;
+        return $users;
+    }
+
+
+    /**
+     * 按照发帖量排序得出用户排行
+     */
+    static function article_users()
+    {
+        $article_users = UsersInfo::orderBy('sign_number','desc')->limit(20)->get();
+        return $article_users;
+    }
+
+    /**
+     * 按照连续签到排序得出用户排行
+     */
+    static function sign_users()
+    {
+        $sign_users = UsersInfo::orderBy('sign_days','desc')->limit(20)->get();
+        return $sign_users;
     }
 
 }
