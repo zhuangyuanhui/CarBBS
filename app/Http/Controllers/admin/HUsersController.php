@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\home\Users;
 use App\models\home\UsersInfo;
+use App\models\admin\InformUsers;
 use DB;
 
 class HUsersController extends Controller
@@ -87,8 +88,6 @@ class HUsersController extends Controller
      */
     public function update(Request $request, $id)
     {   
-
-
         DB::beginTransaction();
         $data = $request->only('sign_number','sign_days','status','seal_time');
         
@@ -101,6 +100,23 @@ class HUsersController extends Controller
         //修改用户表
         $huser = Users::find($id);
         $huser->status = $data['status'];
+        //解封或永久封号,修改封号道奇时间
+         if($data['status'] == 1 || $data['status'] == 2){
+            $huser->seal_time == time();
+        }
+        
+        //添加封号到期时间
+        if(isset($data['seal_time'])){
+            //获取当前时间戳
+            $times = time();
+            switch($data['seal_time']){
+                case(1) : $huser->seal_time = $times+(86400 * 3); break;
+                case(2) : $huser->seal_time = $times+(86400 * 7); break;
+                case(3) : $huser->seal_time = $times+(86400 * 30); break;
+                case(4) : $huser->seal_time = $times+(86400 * 180); break;
+                case(5) : $huser->seal_time = $times+(86400 * 365); break;
+            }
+        }
         $res2 = $huser->update();
 
         if($res1 && $res2){

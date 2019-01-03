@@ -186,14 +186,14 @@
                         <div class="comForm cl" id="main_message" style="border: 0;">
                             <div class="bm_h" id="main_hnav" style="padding-left: 20px; height: 70px; line-height: 50px; border-bottom: 0; background: none;">
                                 <h3 id="layer_reginfo_t" style="height: 70px; line-height: 50px; padding-top: 10px; font-size: 24px; font-weight: bold; color: #CCCCCC;">
-                                    立即注册
+                                    找回密码
                                 </h3>
                             </div>
                             <p id="returnmessage4">
                             </p>
 
                             <form method="post" autocomplete="off" name="register" 
-                            enctype="multipart/form-data" return false;" action="/home/users">
+                            enctype="multipart/form-data" return false;" action="/home/login/alert">
                             {{ csrf_field() }}
                                 <div class="bm_c">
                                     <input type="hidden" name="regsubmit" value="yes" />
@@ -220,53 +220,7 @@
                                                         </td>
                                                         <td class="tipcol">
                                                             <i id="users_content" class="p_tip" style="display: none" >
-                                                                用户名由字母开头的 5 到 15 个字符组成
-                                                            </i>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="rfm">
-                                                <table>
-                                                    <tr>
-                                                        <th>
-                                                            <span class="rq">
-                                                                *
-                                                            </span>
-                                                            <label for="h7b79Y">
-                                                                密码:
-                                                            </label>
-                                                        </th>
-                                                        <td>
-                                                            <input type="password" id="upwd_name" name="upwd" size="25" tabindex="1" class="px preg"
-                                                            required />
-                                                        </td>
-                                                        <td class="tipcol">
-                                                            <i id="upwd_content" class="p_tip" style="display: none">
-                                                                请填写密码字母开头, 最小长度为 6 个字符
-                                                            </i>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="rfm">
-                                                <table>
-                                                    <tr>
-                                                        <th>
-                                                            <span class="rq">
-                                                                *
-                                                            </span>
-                                                            <label for="UCi73k">
-                                                                确认密码:
-                                                            </label>
-                                                        </th>
-                                                        <td>
-                                                            <input type="password" id="reupwd_name" name="reupwd" size="25" tabindex="1" value=""
-                                                            class="px preg" required />
-                                                        </td>
-                                                        <td class="tipcol">
-                                                            <i id="reupwd_content" class="p_tip" style="display: none">
-                                                                请再次输入密码
+                                                                请输入要找回密码的用户名
                                                             </i>
                                                         </td>
                                                     </tr>
@@ -293,7 +247,7 @@
                                                         </td>
                                                         <td class="tipcol">
                                                             <i id="reupwd_content" class="p_tip" style="display: none">
-                                                                请输入正确的手机号
+                                                                请输入该用户名绑定的手机号
                                                             </i>
                                                         </td>
                                                     </tr>
@@ -325,6 +279,52 @@
                                                         </td>
                                                     </tr>
 
+                                                </table>
+                                            </div>
+                                            <div class="rfm">
+                                                <table>
+                                                    <tr>
+                                                        <th>
+                                                            <span class="rq">
+                                                                *
+                                                            </span>
+                                                            <label for="h7b79Y">
+                                                                新密码:
+                                                            </label>
+                                                        </th>
+                                                        <td>
+                                                            <input type="password" id="upwd_name" name="upwd" size="25" tabindex="1" class="px preg"
+                                                            required />
+                                                        </td>
+                                                        <td class="tipcol">
+                                                            <i id="upwd_content" class="p_tip" style="display: none">
+                                                                请填写新密码,以字母开头, 最小长度为 6 个字符
+                                                            </i>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="rfm">
+                                                <table>
+                                                    <tr>
+                                                        <th>
+                                                            <span class="rq">
+                                                                *
+                                                            </span>
+                                                            <label for="UCi73k">
+                                                                确认密码:
+                                                            </label>
+                                                        </th>
+                                                        <td>
+                                                            <input type="password" id="reupwd_name" name="reupwd" size="25" tabindex="1" value=""
+                                                            class="px preg" required />
+                                                        </td>
+                                                        <td class="tipcol">
+                                                            <i id="reupwd_content" class="p_tip" style="display: none">
+                                                                请再次输入密码
+                                                            </i>
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                             <span id="seccode_cSeL39bp" class="seccode_1">
@@ -362,7 +362,7 @@
                                                         </em>
                                                         <button class="pn pnc" id="registerformsubmit" type="submit" name="regsubmit"
                                                         value="true" tabindex="1">
-                                                            注册
+                                                            确认找回
                                                         </button>
                                                     </div>
                                                 </td>
@@ -399,23 +399,24 @@
                                     var uname_val = jQuery('#users_name').val();
                                    //正则判断用户名格式
                                     if(uname_preg.test(uname_val)){
-                                        var url = "/home/users/checkname/" + uname_val;
+                                        var url = "/home/login/checkname/" + uname_val;
                                         //发送ajax检测账号是否存在
                                         jQuery.get(url,{'uname':uname_val},function(data){
                                             if(data.code == 'success'){
-                                                //用户名不存在,可注册.改变标识符值
+                                                //用户名存在,可修改密码
                                                  isUname = true;
-                                                jQuery('#users_name').parent().next().children([0]).html('恭喜用户名可用');
-                                                jQuery('#users_name').parent().next().children([0]).css('color','green');
+                                                 jQuery('#users_name').parent().next().children([0]).html('');
                                             }else{
+                                                 //用户名不存在,改变标识符值
                                                 isUname = false;
-                                                jQuery('#users_name').parent().next().children([0]).html('用户名已存在');
-                                                jQuery('#users_name').parent().next().children([0]).css('color','red');
+                                                jQuery('#users_name').parent().next().children([0]).html('该用户不存在');
+                                                jQuery('#users_name').parent().next().children([0]).css('color','green');
                                             }
                                         },'json');
                                     }else{
                                         isUname = false;
-                                        jQuery(this).parent().next().children([0]).html('用户名由字母开头的 5 到 15 个字符组成');
+                                        jQuery(this).parent().next().children([0]).html('用户名格式不正确');
+                                        jQuery(this).parent().next().children([0]).css('color','red');
                                     }
                                });
 
@@ -496,66 +497,70 @@
                             jQuery('#tel_name').keyup(function(){
                                  var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
                                  var tel_val = jQuery('#tel_name').val();
+                                 var uname_val = jQuery('#users_name').val(); 
                                  //正则判断手机号格式是否正确
                                 if(tel_preg.test(tel_val)){
 
                                     jQuery(this).parent().next().children([0]).html('手机号格式正确');
                                     jQuery(this).parent().next().children([0]).css('color','green');
 
-                                    var tel_url = "/home/users/checktel/" + tel_val;
+                                    var tel_url = "/home/login/checktel/" + tel_val;
 
-                                    //发送ajax检测手机号是否已被注册
+                                    //发送ajax检测手机号是否为该用户的绑定手机号
                                     jQuery.get(tel_url,{'tel':tel_val},function(data){
                                         if(data.code == 'success'){
-                                             isPhone = true;
+                                            isPhone = true;
+                                            jQuery('#tel_name').parent().next().children([0]).html('');
+
+                                            var time = 5;
+                                            var flag = true;   //设置点击标记，防止5内再次点击生效
+                                            //发送验证码
+                                            jQuery('#dyMobileButton').click(function(){
+                                                jQuery(this).attr("disabled",true);
+                                                if(flag){
+                                                    var timer = setInterval(function () {
+                                                        if(time == 5 && flag){
+                                                            flag = false;
+                                                            var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
+                                                             var tel = jQuery('#tel_name').val();
+                                                               if(!tel_preg.test(tel)){
+                                                                return false;
+                                                               }
+                                                                var url = '/home/login/send/'+tel;
+                                                            jQuery.get(url,{'tel':tel},function(data){
+                                                                //接受短信发送结果
+                                                                if(data.code == 2){
+                                                                    jQuery("#dyMobileButton").html("已发送");
+                                                                }else{
+                                                                    flag = true;
+                                                                    time = 5;
+                                                                    clearInterval(timer);
+                                                                }
+                                                           },'json');
+                                                        }else if(time == 0){
+                                                            jQuery("#dyMobileButton").removeAttr("disabled");
+                                                            jQuery("#dyMobileButton").html("免费获取验证码");
+                                                            clearInterval(timer);
+                                                            time = 5;
+                                                            flag = true;
+                                                        }else {
+                                                            jQuery("#dyMobileButton").html(time + " s 重新发送");
+                                                            time--;
+                                                        }
+                                                    },1000);
+                                                 }
+                                             });
                                         }else{
-                                            jQuery('#tel_name').parent().next().children([0]).html('该手机号已被注册');
+                                            isPhone = false;
+                                            jQuery('#tel_name').parent().next().children([0]).html('手机号不正确');
                                             jQuery('#tel_name').parent().next().children([0]).css('color','red');
                                         }
                                     },'json');
 
-                                        var time = 5;
-                                        var flag = true;   //设置点击标记，防止5内再次点击生效
-                                        //发送验证码
-                                        jQuery('#dyMobileButton').click(function(){
-                                            jQuery(this).attr("disabled",true);
-                                            if(flag){
-                                                var timer = setInterval(function () {
-                                                    if(time == 5 && flag){
-                                                        flag = false;
-                                                        var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
-                                                         var tel = jQuery('#tel_name').val();
-                                                           if(!tel_preg.test(tel)){
-                                                            return false;
-                                                           }
-                                                            var url = '/home/users/send/'+tel;
-                                                        jQuery.get(url,{'tel':tel},function(data){
-                                                            //接受短信发送结果
-                                                            if(data.code == 2){
-                                                                jQuery("#dyMobileButton").html("已发送");
-                                                            }else{
-                                                                flag = true;
-                                                                time = 5;
-                                                                clearInterval(timer);
-                                                            }
-                                                       },'json');
-                                                    }else if(time == 0){
-                                                        jQuery("#dyMobileButton").removeAttr("disabled");
-                                                        jQuery("#dyMobileButton").html("免费获取验证码");
-                                                        clearInterval(timer);
-                                                        time = 5;
-                                                        flag = true;
-                                                    }else {
-                                                        jQuery("#dyMobileButton").html(time + " s 重新发送");
-                                                        time--;
-                                                    }
-                                                },1000);
-                                             }
-                                         });
-
                                 }else{
                                     isPhone = false;
-                                    jQuery(this).parent().next().children([0]).html('请输入正确的手机号');
+                                    jQuery(this).parent().next().children([0]).html('手机号格式不正确');
+                                     jQuery(this).parent().next().children([0]).css('color','red');
                                 }
                             });
 

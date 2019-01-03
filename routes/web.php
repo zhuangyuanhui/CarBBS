@@ -53,31 +53,31 @@ Route::get('/', function () {
 
 
 Route::resource('admin/news','admin\NewsController');		//后台新闻管理
-
 Route::resource('admin/girls','admin\GirlsController');		//后台车模管理
-
 Route::resource('admin/label','admin\LabelController');		//后台云标签管理
+Route::resource('admin/husers','admin\HUsersController');     	//前台用户后台管理
+Route::resource('admin/reports','admin\ReportsController');		//用户举报后台管理
+Route::resource('admin/comment','admin\CommentsController');	//评论后台管理
 
-Route::resource('home/users','home\UsersController');		//前台用户页面
 
 Route::get('home/users/send/{tel}','home\UsersController@sendTelCode');     //发送手机号验证码
-
 Route::get('home/users/checkname/{name}','home\UsersController@checkname');     //注册页面ajax检测用户是否存在
+Route::get('home/users/checktel/{tel}','home\UsersController@checktel');     //注册页面ajax检测手机号是否已注册
+Route::resource('home/users','home\UsersController');		//前台用户页面
 
-Route::resource('admin/husers','admin\HUsersController');     //前台用户后台管理
+Route::get('home/login/login','home\LoginController@login');	//前台用户登录
+Route::get('home/login/checkphone/{phone}','home\LoginController@checkphone');	//登陆检测用户是否存在
+Route::post('home/login/dologin','home\LoginController@dologin');		//前台用户提交登陆
 
-Route::resource('admin/reports','admin\ReportsController');	//用户举报后台管理
+Route::get('home/login/forget','home\LoginController@forget');		//用户忘记密码修改页面
+Route::get('home/login/checkname/{name}','home\LoginController@checkname');	//前台用户忘记密码检测用户是否存在
+Route::get('home/login/checktel/{tel}','home\LoginController@checktel');	//前台用户忘记密码检测手机号是否正确
+Route::get('home/login/send/{tel}','home\LoginController@sendTelCode');     //发送手机号验证码
+Route::post('home/login/alert','home\LoginController@alert');		//修改用户密码
 
-Route::resource('admin/comment','admin\CommentsController');	//用户举报后台管理
+Route::get('home/news/index/{id}','home\NewsController@index');        //前台页面新闻列表
 
-
-
-
-
-
-
-
-
+Route::get('home/rank/index/{type}','home\RankController@index');			//前台排行页面
 
 
 
@@ -155,6 +155,7 @@ Route::resource('admin/areports','admin\AreportsController');   //文章举报�
 
 
 /*------------------------------------------------------------  shaomingshuo 155 ----------------------------------------------*/
+<<<<<<< HEAD
 Route::get('admin/users/sendemail/{email}','admin\UsersController@sendEmailCode');     //发送邮箱验证码
 Route::get('admin/loginout','admin\LoginController@loginout');                         //退出登录
 Route::get('admin/login/forget','admin\LoginController@forget');                       //忘记密码                 
@@ -181,6 +182,10 @@ Route::resource('home/layout','home\LayoutControlle');                          
 
 //home
 Route::resource('home/articles','home\ArticlesControlle');                            //前台用户路由
+=======
+
+
+>>>>>>> car/zhuang
 
 
 

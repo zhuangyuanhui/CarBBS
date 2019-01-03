@@ -85,9 +85,9 @@
                 <script type="text/javascript">
                     function preview(file){
                         if (file.files && file.files[0]){ 
-                        var reader = new FileReader(); 
-                        reader.onload = function(evt){ 
-                            $("#preview").html('<img src="' + evt.target.result + '" style="height:120px;width:120px;margin:4px;border-radius:70px 70px" />'); 
+                             var reader = new FileReader(); 
+                             reader.onload = function(evt){ 
+                             $("#preview").html('<img src="' + evt.target.result + '" style="height:120px;width:120px;margin:4px;border-radius:70px 70px" />'); 
                         } 
                             reader.readAsDataURL(file.files[0]); 
                         } else {
@@ -136,4 +136,5 @@
 
 
                     </script>
+                    <!-- 发送邮箱验证码 js -->
 @endsection

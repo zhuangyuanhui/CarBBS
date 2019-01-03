@@ -72,7 +72,7 @@
                                                 <td>评论</td>
                                                 @break
 
-                                            @default
+                                            @case(5)
                                                 <td>私信</td>
                                         @endswitch
                                     <td>{{ $v->ctime }}</td>
@@ -84,12 +84,18 @@
                                     <td>已驳回</td>
                                     @endif
                                     <td>
+                                        <form action="/admin/reports/{{$v->id}}" method="post" style="display: inline-block;">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <input type="submit" value="删除" onclick="return confirm('确定要删除吗')" class="btn btn-danger">
+                                        </form>
                                         <a href="/admin/reports/{{$v->id}}/edit" class="btn btn-warning">审核</a>
                                     </td>
                                 </tr>
                                 @endforeach
                         </table>
-                        <div id="pages_pages">
+                       <div id="pages_pages">
+                            {{ $reports->appends('params')->links() }}
                         </div>
                     </div>
                     </div>

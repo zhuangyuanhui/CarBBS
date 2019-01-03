@@ -10,8 +10,9 @@
         </ul>
     </div>
 @endif
+<!-- 导入页码的css文件 -->
+<link rel="stylesheet" type="text/css" href="/admin/css/pages_pages.css">
 
-	
  <div class="mws-panel grid_8">
             <div class="mws-panel-header" style="height:50px">
                 <span><i class="icon-table"></i>{{$title or '后台网站列表'}}</span>
@@ -61,7 +62,7 @@
                                     @elseif($value->status == 2)
                                     <td>已永久封号</td>
                                     @elseif($value->status == 3)
-                                    <td>已临时封号</td>
+                                    <td>已临时封号(到期时间:{{date('Y-m-d H:i:s',$value->seal_time)}}) </td>
                                     @endif
                                     <td>{{ $value->getUserInfo->sign_number }}</td>
                                     <td>{{ $value->getUserInfo->sign_days }}</td>
