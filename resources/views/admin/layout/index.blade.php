@@ -101,23 +101,23 @@
         <!-- Logo Container -->
         <div id="mws-logo-container">       
             <!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
-            <div id="mws-logo-wrap">
-                <img src="/admin/images/mws-logo.png" alt="mws admin">
-            </div>
         </div>        
         <!-- User Tools (notifications, logout, profile, change password) -->
         <div id="mws-user-tools" class="clearfix">
     
             <!-- User Information and functions section -->
-            <div id="mws-user-info" class="mws-inset">
+            <div id="mws-user-info" class="mws-inset" style="width: 150px;">
+                <div id="mws-logo-wrap" style="width: 41px;height: 31px;">
+                        <img src="/uploads/{{ session('users')->users_pic  }}"  style="width: 40px;height: 32px;  margin-top: -4px;">
+                </div> 
                 <!-- Username and Functions -->
-                <div id="mws-user-functions">
+                <div id="mws-user-functions" style="width: 500px; margin-top: -35px;margin-left: 57px;">
                     <div id="mws-username">
-                        你好,管理员
+                        {{ session('users')->uname }}
                     </div>
                     <ul>
-                        <li><a href="/admin/#">修改密码</a></li>
-                        <li><a href="/admin/index.html">退出</a></li>
+                        <li><a href="/admin/login/{{ session('users')->id }}/edit">修改密码</a></li>
+                        <li><a href="/admin/loginout">退出</a></li>
                     </ul>
                 </div>
             </div>

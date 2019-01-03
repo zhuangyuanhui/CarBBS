@@ -101,16 +101,16 @@
     padding-left: 30px;
 }
 
-.dataTables_wrapper table thead th.sorting {
-    background-image: url(../images/core/sort.png);
+.dataTables_wrapper table th.sorting {
+    background-image: url(/admin/images/core/sort.png);
 }
 
-.dataTables_wrapper table thead th.sorting_asc {
-    background-image: url(../images/core/sort_asc.png);
+.dataTables_wrapper table th.sorting_asc {
+    background-image: url(/admin/images/core/sort_asc.png);
 }
 
-.dataTables_wrapper table thead th.sorting_desc {
-    background-image: url(../images/core/sort_desc.png);
+.dataTables_wrapper table th.sorting_desc {
+    background-image: url(/admin/images/core/sort_desc.png);
 }
 
 .dataTables_wrapper:before,

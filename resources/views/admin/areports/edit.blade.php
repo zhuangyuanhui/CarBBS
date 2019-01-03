@@ -26,8 +26,22 @@
                                         </div>
                                    </div>
                               </div>
-                              
-                         
+                             <div class="mws-form-inline">
+                                  <div class="mws-form-row">
+                                       <label class="mws-form-label">被举报人文章标题</label>
+                                       <div class="mws-form-item">
+                                            <input type="text" class="small" name="title" value="{{ $edit->articlesuser->title }}" readonly>
+                                       </div>
+                                  </div>
+                             </div>
+                             <div class="mws-form-inline">
+                                  <div class="mws-form-row">
+                                       <label class="mws-form-label">被举报人文章内容</label>
+                                       <div class="mws-form-item">
+                                             <textarea name="" id="" cols="80" rows="6" disabled>{{ $edit->articlesuser->content }}</textarea>
+                                       </div>
+                                  </div>
+                             </div>
                               <div class="mws-form-inline">
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">举报原因</label>
@@ -46,10 +60,22 @@
                               </div>
                               <div class="mws-form-inline">
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">违规类型</label>
+                                        <label class="mws-form-label">审核状态</label>
                                         <div class="mws-form-item">
                                         <label for="sh" class="radio_label">
-                                        <select size="1" name="type" style="width: 110px">
+                                          待审核 <input type="radio" name="status" id="sh" value="1" @if($edit->status==1) checked @endif>
+                                          同意 <input type="radio" name="status" id="sh" value="2" @if($edit->status==2) checked @endif> 
+                                          驳回 <input type="radio" name="status" id="sh" value="3" @if($edit->status==3) checked @endif>  
+                                        </label> 
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="mws-form-inline">
+                                   <div class="mws-form-row">
+                                        <label class="mws-form-label">违规类型</label>
+                                        <div class="mws-form-item">
+                                        <label class="radio_label">
+                                        <select name="type" style="width: 110px" id="fave" disabled> 
                                           <option value="1" @if($edit->type==1) selected @endif>其它</option> 
                                           <option value="2" @if($edit->type==2) selected @endif>低俗色情</option>
                                           <option value="3" @if($edit->type==3) selected @endif>政治敏感</option>
@@ -61,18 +87,6 @@
                                         </div>
                                    </div>
                               </div>
-                              <div class="mws-form-inline">
-                                   <div class="mws-form-row">
-                                        <label class="mws-form-label">审核状态</label>
-                                        <div class="mws-form-item">
-                                        <label for="sh" class="radio_label">
-                                          待审核 <input type="radio" name="status" id="sh" value="1" @if($edit->status==1) checked @endif>
-                                          同意 <input type="radio" name="status" id="sh" value="2" @if($edit->status==2) checked @endif> 
-                                          驳回 <input type="radio" name="status" id="sh" value="3" @if($edit->status==3) checked @endif>  
-                                        </label> 
-                                        </div>
-                                   </div>
-                              </div>
                               <div class="mws-button-row">
                                    <input type="submit" value="修改" class="btn btn-danger">
                                    <input type="reset" value="重置" class="btn ">
@@ -80,5 +94,17 @@
                          </form>
                     </div>         
                 </div>
+                <script>
+                // 违规类型 默认为不可选
+                  $(function(){
+                      $('input:radio').not(1).click(function(){
+                          $('#fave').attr('disabled','false');
+                      });
+                  
+                      $('input:radio').eq(1).click(function(){
+                          $('#fave').removeAttr('disabled');
+                      });
+                  });
+                </script>
             
 @endsection

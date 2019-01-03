@@ -57,17 +57,13 @@ class GirlsController extends Controller
 
         //接收表单数据
         $data = $request->except('_token');
-        $temp = '';
+
         //判断图片上传处理
         if ($request->file('profiles')) {
             $files = $request->file('profiles');           
-            foreach ($files as $key => $value) {
-                //将多图的路径拼接成长字符串,
-                $temp .= $value->store('admin/images').'&';           
+            
+                $data['car_pic']= $files->store('admin/images');           
             }
-
-            $data['car_pic'] = $temp;
-        }
 
         //追加创建时间 和 初始点击量
         $data['ctime'] = time();
@@ -121,8 +117,8 @@ class GirlsController extends Controller
         //获取相应文章信息
         $girls = Girls::find($id);
         //将car_pic图片路径,由字符串转换成数组
-        $girls->car_pic = rtrim($girls->car_pic,'&');
-        $girls->car_pic = explode('&', $girls->car_pic);
+        // $girls->car_pic = rtrim($girls->car_pic,'&');
+        // $girls->car_pic = explode('&', $girls->car_pic);
 
         return view('admin.girls.edit',['title'=>'后台车模修改','girls'=>$girls]);
     }
@@ -149,16 +145,11 @@ class GirlsController extends Controller
 
         //接收表单数据
         $data = $request->except('_token');
-        $temp = '';
         //判断图片上传处理
         if ($request->file('profiles')) {
             $files = $request->file('profiles');           
-            foreach ($files as $key => $value) {
-                $temp .= $value->store('admin/images').'&';           
+              $data['car_pic']  = $files->store('admin/images');           
             }
-
-            $data['car_pic'] = $temp;
-        }
 
         //追加创建时间 和 初始点击量
         $data['ctime'] = time();

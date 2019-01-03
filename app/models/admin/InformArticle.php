@@ -21,9 +21,9 @@ class InformArticle extends Model
    		return $this->belongsTo('App\models\home\Users','users_id');
    	}
 
-	// 配置 一对多  文章表
-   	// public function articlesuser()
-   	// {
-   	// 	return $this->hasMany('App\models\admin\Article','article_id');
-   	// }
+	// 配置 一对多  文章表  举报
+   	public function articlesuser()
+   	{
+   		return $this->belongsTo('App\models\home\Article','article_id');
+   	}
 }

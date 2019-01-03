@@ -64,6 +64,26 @@
                                             <a href="javascript:;" class="btn btn-success" onclick="shows({{ $v->id}})">查看内容</a>
                                         </td>
                                     </tr>
+                                  <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                  <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">新闻详情</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                         <div class="picList mws-form-row">
+
+                                            新闻内容:
+                                                   {!! $v->content !!}
+                                                   @foreach($pic as $key => $value)
+                                                        <img src="/uploads/{{ $value }}/">
+                                                   @endforeach
+                                         </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                                 @endforeach
                         </table>
                         <div id="pages_pages"></div>
@@ -73,30 +93,9 @@
                     </div>
                     <script type="text/javascript">
                         function shows(id) {
-                            var url = '/admin/news/'+ id;  
-                            $.get(url,{'id':id},function(data){
-                                 if(data.code != 'error'){
-                                    console.log(data);
-                                    // 修改模态框的值 并且显示
-                                    $('#myModal h4').eq(0).html(data.title);
-                                    $('#myModal .modal-body').html(data.content);
                                     // 显示模态框
                                      $('#myModal').modal('show');
                                 }
-                            },'json');
-                        }
                     </script>   
-                         <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                  <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">新闻详情</h4>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                       
 @endsection

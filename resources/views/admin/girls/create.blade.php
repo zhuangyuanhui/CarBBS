@@ -32,9 +32,9 @@
                                         </div>
                                    </div>
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">车模</label>
+                                        <label class="mws-form-label">车模封面</label>
                                         <div class="mws-form-item" style="width:150px;display: none">
-                                            <input type="file" onchange="preview(this)"  multiple class="small" name="profiles[]" id="profiles">
+                                            <input type="file" onchange="preview(this)" class="small" name="profiles" id="profiles">
                                         </div>
                                          <label for="profiles"><div id="preview" style="width:150px;height: 150px;background: url(/admin/images/jia.jpg);"></div></label>
                                    </div>

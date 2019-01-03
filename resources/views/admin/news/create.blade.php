@@ -43,7 +43,7 @@
                                         </div>
                                    </div>
                                    <div class="mws-form-row">
-                                        <label class="mws-form-label">新闻配图</label>
+                                        <label class="mws-form-label">新闻封面</label>
                                         <div class="mws-form-item" style="width:150px;display: none">
                                         <input type="file" id="news_pic" multiple class="small" name="news_pic[]" onchange="preview(this)" placeholder="请选择图片上传">
                                         </div>

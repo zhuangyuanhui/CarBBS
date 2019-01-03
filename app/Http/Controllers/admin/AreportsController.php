@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\admin\InformArticle;
+use App\models\home\Article;
 class AreportsController extends Controller
 {
     /**
@@ -15,8 +16,11 @@ class AreportsController extends Controller
     public function index(Request $request)
     {
         //获取全部数据
-        $data = InformArticle::paginate(5);
-        return view('admin.areports.index',['data'=>$data,'title'=>'文章举报列表']);
+        $params = $request->all();
+        $res = $request->input('search_name','');
+        $pag = $request->input('search_count',5);
+        $data = InformArticle::paginate($pag);
+        return view('admin.areports.index',['data'=>$data,'title'=>'文章举报列表','params'=>$params]);
     }
 
     /**
@@ -74,15 +78,21 @@ class AreportsController extends Controller
     {
         //获取审核内容 的状态  违规类型
         $data = $request->only(['status','type']);
-        //拿到单个数据  修改状态 删除文章内容(未启用)
+        //拿到单个数据 同意2之后 修改状态 删除j举报文章内容
         $report = InformArticle::find($id);
+        //在文章举报列表中找到文章ID  在文章模型中进行删除
+        $article = Article::find($report->article_id);
         if ($data['status'] ==1) {
 
             $report->status = 1;
         } else if ($data['status'] == 2) {
-
-            $report->status = 2; 
+            //状态为同意
+            $report->status = 2;
+            //同时修改类型 
             $report->type = $data['type'];
+            //删除文章
+            $article->delete();
+
         } else {
 
              $report->status = 3;
