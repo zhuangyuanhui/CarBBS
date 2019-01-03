@@ -101,21 +101,17 @@ Route::get('home/rank/index/{type}','home\RankController@index');			//前台排�
 
 
 
-
-
 /*------------------------------------------------------------  zhangjianjun 104 ----------------------------------------------*/
 
 Route::resource('admin/cates','admin\CatesController');   //后台类别管理
 Route::resource('admin/links','admin\LinksController');   //友情链接管理
 Route::resource('admin/basics','admin\BasicsController');   //网站基本配置管理
 Route::resource('admin/areports','admin\AreportsController');   //文章举报管理
+// 未完成页面  缺少用户  无法点赞
+Route::get('home/girls/zan/{id}','home\GirlsController@zan');   //前台车模点赞  
+Route::resource('home/girls','home\GirlsController');   //前台车模列表
 
-
-
-
-
-
-
+Route::get('home/index','home\IndexController@index');   //前台首页
 
 
 
@@ -155,7 +151,6 @@ Route::resource('admin/areports','admin\AreportsController');   //文章举报�
 
 
 /*------------------------------------------------------------  shaomingshuo 155 ----------------------------------------------*/
-<<<<<<< HEAD
 Route::get('admin/users/sendemail/{email}','admin\UsersController@sendEmailCode');     //发送邮箱验证码
 Route::get('admin/loginout','admin\LoginController@loginout');                         //退出登录
 Route::get('admin/login/forget','admin\LoginController@forget');                       //忘记密码                 
@@ -166,11 +161,15 @@ Route::get('home/articles/click','home\ArtRankController@click');               
 Route::get('home/articles/time','home\ArtRankController@time');                        //根据时间进行排行
 Route::get('home/articles/praise','home\ArtRankController@praise');                    //根据点赞进行排行
 
+
 Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
+
 
 Route::post('admin/login/check','admin\LoginController@check');                        //检查登录
 Route::post('admin/login/checkemail','admin\LoginController@checkemail');              //审查邮箱                 
 Route::post('admin/login/changepwd','admin\LoginController@changepwd');
+
+
 
 
 Route::resource('admin/users','admin\UsersController');                                //后台用户路由
@@ -180,13 +179,9 @@ Route::resource('admin/articles','admin\HArticlesController')->middleware('login
 Route::resource('admin/login','admin\LoginController');                                //后台登录管理
 Route::resource('home/layout','home\LayoutControlle');                                 //Layout图路由 
 
+
 //home
 Route::resource('home/articles','home\ArticlesControlle');                            //前台用户路由
-=======
-
-
->>>>>>> car/zhuang
-
 
 
 

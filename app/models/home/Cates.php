@@ -9,4 +9,5 @@ class Cates extends Model
     protected $table = "cates";
 
     protected $primaryKey = "id";
+
 }

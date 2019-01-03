@@ -37,15 +37,13 @@
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">车模封面</label>
                                         <div class="mws-form-item" style="width:770px">
-                                        <input type="file"  multiple class="small" name="profiles[]" onchange="preview(this)" placeholder="请选择图片上传">
+                                        <input type="file" class="small" name="profiles" onchange="preview(this)" placeholder="请选择图片上传">
                                         </div>
                                    </div>
                                    <div class="picList mws-form-row">
 
-                                    @foreach($girls->car_pic as $key=>$value)
-                                      <img src="/uploads/{{$value}}" style="height:120px;width:120px;margin:4px;border-radius:60px 60px">
+                                      <img src="/uploads/{{$girls->car_pic}}" style="height:120px;width:120px;margin:4px;border-radius:60px 60px">
 
-                                    @endforeach
                                   </div>
                             </div>
                             <div class="mws-button-row">

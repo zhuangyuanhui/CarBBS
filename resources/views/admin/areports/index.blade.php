@@ -53,7 +53,7 @@
                                     <tr style="text-align:center">
                                         <td>{{$v->id}}</td>
                                         <td>{{$v->userarticles->uname}}</td>
-	                                    <td>{{$v->article_id}}</td>
+	                                    <td>{{isset($v->articlesuser->title) ?  $v->articlesuser->title : '文章已删除'}}</td>
 	                                    @switch($v->type)
 										    @case(1) <td>其它</td> @break
 										    @case(2) <td>低俗色情</td> @break

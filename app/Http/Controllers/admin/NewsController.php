@@ -19,7 +19,11 @@ class NewsController extends Controller
         $res = $request->input('search_title','');
         $pag = $request->input('search_count',5);
         $news = News::where('title','like','%'.$res.'%')->paginate($pag);
-        return view('admin.news.index',['news'=>$news,'title'=>'新闻列表','params'=>$params]);
+        $pic = [];
+        foreach ($news as $key => $value) {
+            $pic = explode(',',rtrim($value->news_pic,','));
+        }
+        return view('admin.news.index',['news'=>$news,'title'=>'新闻列表','params'=>$params,'pic'=>$pic]);
     }
 
     /**
