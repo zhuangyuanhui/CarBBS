@@ -194,4 +194,25 @@ class ArticlesControlle extends Controller
     {
         //
     }
+
+
+    /**
+     * 根据浏览量排序,拿20条数据用于排行榜
+     */
+    static public function clicks_article()
+    {
+        $clicks_article = Article::orderBy('clicks','desc')->limit(20)->get();
+
+        return $clicks_article;
+    }
+
+    /**
+     * 根据点赞量排序,拿20条数据用于排行榜
+     */
+    static public function praise_article()
+    {
+        $praise_article = Article::orderBy('praise','desc')->limit(20)->get();
+
+        return $praise_article;
+    }
 }

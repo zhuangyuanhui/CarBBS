@@ -373,7 +373,7 @@
                                     </div>
                                 </div>
                                 <div class="login_now cl" style="padding-left: 446px;">
-                                    <a href="#"
+                                    <a href="/home/login/login"
                                     onclick="showWindow('login', this.href);return false;" class="xi2">
                                         <em style="color: #000000;">
                                             已有账号？
@@ -412,7 +412,7 @@
                                                 jQuery('#users_name').parent().next().children([0]).html('用户名已存在');
                                                 jQuery('#users_name').parent().next().children([0]).css('color','red');
                                             }
-                                        },'json');
+                                        },'json'); 
                                     }else{
                                         isUname = false;
                                         jQuery(this).parent().next().children([0]).html('用户名由字母开头的 5 到 15 个字符组成');

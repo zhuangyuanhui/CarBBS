@@ -68,8 +68,10 @@
      <!-- 导航 --> 
      <div class="nav"> 
       <ul> 
-       <li class="a" id="mn_portal"><a href="portal.php" hidefocus="true" title="Portal">首页<span>Portal</span></a> </li> 
-       <li id="mn_P1" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=1" hidefocus="true">新闻</a> </li> 
+       <li class="a" id="mn_portal"><a href="/home/index" hidefocus="true" title="Portal">首页<span>Portal</span></a> </li> 
+       <li id="mn_P1" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})">
+        <a href="">新闻</a>
+        </li> 
        <li id="mn_P4"><a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=4" hidefocus="true">车模</a> </li> 
        <li id="mn_forum_2"><a href="forum.php" hidefocus="true" title="BBS">论坛<span>BBS</span></a> </li> 
        <li id="mn_N708e" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a href="javascript:void(0);" hidefocus="true">优化</a> </li> 
@@ -309,7 +311,7 @@ jQuery('.quater_search').slideUp(300);
    <li><a href="home.php?mod=space&amp;do=favorite&amp;view=me">我的收藏</a></li> 
    <li></li> 
    <li></li> 
-   <li></li> 
+   <li></li>   
    <li></li> 
    <li><a href="member.php?mod=logging&amp;action=logout&amp;formhash=d85bbf62">退出</a></li> 
   </ul> 
@@ -317,7 +319,37 @@ jQuery('.quater_search').slideUp(300);
    <!-- 第三方登录 --> 
    <li class="user_list app_login"><a href="connect.php?mod=login&amp;op=init&amp;referer=forum.php&amp;statfrom=login"><i class="i_qq"></i>腾讯QQ</a></li> 
    <li class="user_list app_login"><a href="wechat-login.html"><i class="i_wb"></i>微信登录</a></li> 
-  </ul> 
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div id="wp" class="wp time_wp cl"> 
    <link rel="stylesheet" type="text/css" id="time_diy" href="/home/css/portaldiy.css" /> 
    <style id="diy_style" type="text/css"></style> 

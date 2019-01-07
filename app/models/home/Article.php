@@ -32,6 +32,16 @@ class Article extends Model
         return $this->hasOne('App\models\admin\Comment','article_id');
 	}
 
+<<<<<<< HEAD
 	//获取文章云标签
 
+=======
+	/**
+     * 多对多模型关联,收藏文章
+     */
+    public function getUsers()
+    {
+        return $this->belongsToMany('App\models\home\Users','users_article','users_id','article_id');
+    }
+>>>>>>> car/zhuang
 }
