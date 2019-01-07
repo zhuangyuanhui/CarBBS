@@ -31,4 +31,7 @@ class Article extends Model
 	{
         return $this->hasOne('App\models\admin\Comment','article_id');
 	}
+
+	//获取文章云标签
+
 }

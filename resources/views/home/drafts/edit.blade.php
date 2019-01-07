@@ -117,9 +117,8 @@
    <div class="wp cl"> 
     <div class="space_nav cl"> 
      <ul class="tb_1 cl"> 
-      <li class="a"><a href="/home/articles
-        /create"><img src="javascript:;" class="vm" />编辑文章</a></li> 
-      <li><a href="/home/drafts/{{ $id }}/index"><img src="picture/space_follow.png" class="vm" />草稿箱</a></li> 
+      <li><a href="/home/articles/create"><img src="javascript:;" class="vm" />编辑文章</a></li> 
+      <li class="a"><a href="javascript:;"><img src="picture/space_follow.png" class="vm" />草稿箱</a></li> 
      </ul> 
     </div> 
    </div> 
@@ -139,27 +138,28 @@
         @endif
         <!-- 用户被重定向后，你可以从 session 中显示闪存消息 -->
          <div style="margin-left: 150px;">
-           <form action="/home/articles" id="articles_info" method="post" enctype="multipart/form-data" >
+           <form action="/home/articles/store/{{ $id }}" id="articles_info" method="post" enctype="multipart/form-data" >
               {{ csrf_field() }}
+              {{ method_field('PUT') }}
             <div class="form-group">
               <label for="exampleInputEmail1">文章类型</label>
               <select class="form-control" name="cates_id" style="width: 770px;">
                       <option value=""><--请选择--></option>
                       @foreach($Cates as $k => $v)
-                      <option value="{{ $v->id }}" >{{ $v->cname }}</option>
+                      <option value="{{ $v->id }}" @if( $draft->cates_id == $v->id ) selected @endif >{{ $v->cname }}</option>
                       @endforeach
               </select>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">文章标题</label>
-              <input type="text" class="form-control" name="title" id="exampleInputPassword1" placeholder="文章标题" style="width: 770px;">
+              <input type="text" class="form-control" name="title" id="exampleInputPassword1" placeholder="文章标题" value="{{ $draft->title }}" style="width: 770px;">
             </div> 
 
            <div style="width: 670px;">
               <label for="exampleInputPassword1">云标签</label><br>
               @foreach($Labels as $k => $v)
               <div class="btn btn-success" style="margin-left: 20px;margin-top: 20px;">
-                 <input type="checkbox"   name="labels[]" value="{{ $v->id }}">{{ $v->lname }}
+                 <input type="checkbox"   name="labels[]" value="{{ $v->id }}"  @if( in_array( $v->id , $lab ) ) checked @endif >{{ $v->lname }}
               </div>
               @endforeach
           </div>
@@ -173,7 +173,9 @@
           <div class="form-group">
             <label for="exampleInputPassword1">文章内容</label>
             <!-- 加载编辑器的容器 -->
-            <script id="container" style="width:770px;height:400px" name="content" type="text/plain"></script>
+            <script id="container" style="width:770px;height:400px" name="content" type="text/plain">
+              {!! $draft->content !!}
+            </script>
           </div>
 
           <div class="form-group">
@@ -193,7 +195,7 @@
             $(function(){
               $('#save').click(function(){
                 $.ajax({
-                  url:'/home/drafts',
+                  url:"/home/drafts/{{ $id }}",
                   type:'post',
                   data:new FormData($('#articles_info')[0]), //创建表单数据
                   processData:false,                         //不限定格式

@@ -150,6 +150,8 @@ Route::get('home/index','home\IndexController@index');   //前台首页
 
 
 
+
+
 /*------------------------------------------------------------  shaomingshuo 155 ----------------------------------------------*/
 Route::get('admin/users/sendemail/{email}','admin\UsersController@sendEmailCode');     //发送邮箱验证码
 Route::get('admin/loginout','admin\LoginController@loginout');                         //退出登录
@@ -160,9 +162,12 @@ Route::get('admin/layout','admin\LayoutController@index');                      
 Route::get('home/articles/click','home\ArtRankController@click');                      //根据点击量进行排行
 Route::get('home/articles/time','home\ArtRankController@time');                        //根据时间进行排行
 Route::get('home/articles/praise','home\ArtRankController@praise');                    //根据点赞进行排行
-
-
+Route::get('home/articles/create','home\ArticlesControlle@create');                    //前台文章发表
+Route::put('home/articles/store/{id}','home\ArticlesControlle@store');                     //前台文章发表
 Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
+Route::get('home/news/{id}/details','home\NewsController@details');                    //前台新闻详情
+Route::get('home/drafts/{id}/index','home\DraftsController@index');                    //草稿箱主页
+
 
 
 Route::post('admin/login/check','admin\LoginController@check');                        //检查登录
@@ -178,6 +183,7 @@ Route::resource('admin/slides','admin\SlidesController');                       
 Route::resource('admin/articles','admin\HArticlesController')->middleware('login');    //后台文章管理
 Route::resource('admin/login','admin\LoginController');                                //后台登录管理
 Route::resource('home/layout','home\LayoutControlle');                                 //Layout图路由 
+Route::resource('home/drafts','home\DraftsController');                                //草稿箱路由
 
 
 //home

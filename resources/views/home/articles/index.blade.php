@@ -100,10 +100,10 @@
        <a onclick="showWindow('nav', this.href, 'get', 0)" href="forum.php?mod=misc&amp;action=nav"><img src="/home/picture/pn_post.png" alt="发新帖" /></a> 
       </div> 
       <ul id="thread_types" class="ttp bm cl"> 
-       <li><a href="/home/articles/{{ 1 }}">最新热门<span></span></a></li> 
-       <li><a href="/home/articles/{{ 2 }}">最新精华<span></span></a></li> 
-       <li><a href="/home/articles/{{ 3 }}">最新发表<span></span></a></li> 
-       <li><a id="filter_special" href="/home/articles/{{ 4 }}" onmouseover="showMenu(this.id)">我的帖子<span></span></a></li> 
+       <li @if($id == 1) class = "xw1 a" @endif ><a href="/home/articles/{{ 1 }}">最新热门<span></span></a></li> 
+       <li @if($id == 2) class = "xw1 a" @endif ><a href="/home/articles/{{ 2 }}">最新精华<span></span></a></li> 
+       <li @if($id == 3) class = "xw1 a" @endif ><a href="/home/articles/{{ 3 }}">最新发表<span></span></a></li> 
+       <li @if($id == 4) class = "xw1 a" @endif ><a id="filter_special" href="/home/articles/{{ 4 }}" onmouseover="showMenu(this.id)">我的帖子<span></span></a></li> 
       </ul> 
       <div id="threadlist" class="tl bm bmw"> 
        <div class="th" style="display: none;"> 
@@ -128,7 +128,7 @@
               <tr> 
                <td class="icn"> 
                 <div class="time_reply"> 
-                 <a href="thread-21-1-1.html" target="_blank" title="3 个回复">{{  count($v->getComment) or '0' }}</a> 
+                 <a href="thread-21-1-1.html" target="_blank" title="3 个回复">{{  $v->count }}</a> 
                 </div> </td> 
                <th class="common"> 
                 <div class="top_line cl"> 

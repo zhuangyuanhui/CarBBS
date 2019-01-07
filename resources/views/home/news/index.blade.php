@@ -67,15 +67,15 @@
           <ul id="itemContainer"> 
            @foreach($news as $key=>$value)
            <div class="mbox_list recommend_article_list cl" style="width:710px;height: 183px;margin-left: 20px"> 
-            <a href="article-35-1.html" target="_blank" class="recommend_article_list_pic"><img src="/uploads/{{$value->news_pic}}"/></a> 
+            <a href="/home/news/{{$value->id}}/details" target="_blank" class="recommend_article_list_pic"><img src="/uploads/{{$value->news_pic}}"/></a> 
             <div class="recommend_article_list_content" style="margin-left: 20px"> 
-             <h3 class="list_title" style="height: 29px"><a href="article-35-1.html" target="_blank" style="">{{$value->title}}</a></h3> 
+             <h3 class="list_title" style="height: 29px"><a href="/home/news/{{$value->id}}/details" target="_blank" style="">{{$value->title}}</a></h3> 
              <div class="recommend_article_list_simple">
               {!!$value->content!!}
              </div> 
              <div class="recommend_article_list_info"> 
-              <a href="article-35-1.html" target="_blank" style="width:48.13px;height: 19px"  class="icon16link"><i class="s_view"></i>{{$value->clicks}}</a> 
-              <a href="home.php?mod=space&amp;uid=authorid" target="_blank" class="colorlink">爱车网</a>
+              <a href="/home/news/{{$value->id}}/details" target="_blank" style="width:48.13px;height: 19px"  class="icon16link"><i class="s_view"></i>{{$value->clicks}}</a> 
+              <a href="/home/index" target="_blank" class="colorlink">爱车网</a>
               <span class="pipe" style="color: #999999;">/</span>{{date('Y-m-d H:i',$value->ctime)}}
              </div> 
             </div> 
@@ -147,7 +147,7 @@
              <div class="nano has-scrollbar"> 
               <ul style="right: -17px;" tabindex="0" class="nano-content">
                 @foreach($news_top as $key => $value)
-               <li><i><span></span></i><a href="article-40-1.html" target="_blank">{{$value->title}}</a><p>{{date('Y-m-d H:i',$value->ctime)}}</p></li>
+               <li><i><span></span></i><a href="/home/news/{{$value->id}}/details" target="_blank">{{$value->title}}</a><p>{{date('Y-m-d H:i',$value->ctime)}}</p></li>
                @endforeach
               </ul> 
              </div> 

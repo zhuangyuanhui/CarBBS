@@ -40,19 +40,31 @@
     <div class="cl"> 
      <div class="sd"> 
       <div class="itofeedback cl"> 
-       <a class="bluebigbutton" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=2')" href="javascript:;" title="发新帖">发新帖</a> 
-       <a href="dsu_paulsign-sign.html" target="_blank" id="sign" class="greenbigbutton" title="签到" style="margin-right: 0;">签到SIGN</a> 
+       <a href="/home/articles/create" class="bluebigbutton"  title="发新帖">发新帖</a> 
+       <a href="javascript:;" id="sign"     class="greenbigbutton" title="签到" style="margin-right: 0;">签到SIGN</a> 
       </div> 
-      <script type="text/javascript"></script>
+      <script type="text/javascript">
+        $('#sign').click(function(){
+          alert($);
+        });
+      </script>
       <div class="quater_author_info cl"> 
        <div class="quater_author_info_1 cl"> 
-        <a href="space-uid-1.html" target="_blank" class="toux"><img src="/home/picture/avatar.php" /></a> 
-        <p><a href="space-uid-1.html" target="_blank">admin</a> </p> 
-        <p style="margin-top: 3px;"><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=1" target="_blank" style="color: #FF0000;">管理员</a></p> 
+        <a href="space-uid-1.html" target="_blank" class="toux"><img src="/uploads/{{ $user->getUserInfo->face }}" /></a> 
+        <p><a href="space-uid-1.html" target="_blank">{{ $user->uname }}</a> </p> 
+        <p style="margin-top: 3px;">
+          <a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=1" target="_blank" style="color: #FF0000;">
+             @if($user->id == 1)
+               管理员
+             @else
+               用户
+             @endif
+           </a>
+         </p> 
         <div class="time_thread_stat cl"> 
          <ul> 
-          <li><a>91</a><p>积分</p></li> 
-          <li><a>20</a><p>帖子</p></li> 
+          <li><a>{{ $user->getUserInfo->sign_number }}</a><p>积分</p></li> 
+          <li><a>{{ $user->art_count }}</a><p>帖子</p></li> 
           <li style="border-right: 0;"><a>3</a><p>精华</p></li> 
          </ul> 
         </div> 
@@ -61,7 +73,7 @@
         <div class="s_timeline s_timeline2 cl" style="margin: 0 20px 20px 20px;"> 
          <ul style="border-top: 0;"> 
           @foreach($click as $k => $v)
-          <li><i><span></span></i><a href="thread-20-1-1.html" target="_blank">{{ $v->title }}</a><p></p></li> 
+          <li><i><span></span></i><a href="/home/articles/{{$v->id}}/edit" target="_blank">{{ $v->title }}</a><p></p></li> 
          @endforeach
          </ul> 
         </div> 
@@ -244,8 +256,9 @@
       <!--[/diy]--> 
       <div class="box cl" style="padding: 25px 25px 0 25px;"> 
        <div class="forum_tag cl" style="padding: 0; margin: 0 0 20px 0; border-top: 0;"> 
-        <a title="威廉王子" href="misc.php?mod=tag&amp;id=11" target="_blank">威廉王子</a>
-        <a title="创意" href="misc.php?mod=tag&amp;id=12" target="_blank">创意</a>
+        @foreach($labels as $k => $v)
+          <a title="{{ $v }}" href="javascript:;" target="_blank">{{ $v }}</a>
+        @endforeach
        </div> 
        <div id="postlist" class="pl bm postlist_reply"> 
         <div class="reply_tit cl"> 
@@ -309,30 +322,16 @@ new lazyload();
           <div id="portal_block_211_content" class="dxb_bc">
            <div class="news-l-box" style="margin-bottom: 15px;width: 750px; margin-left: 0px;"> 
             <ul style="margin-left: 0px;">
+              @foreach($cate as $k => $v)
              <dl class="news-l-dl "> 
               <dt>
-               <a href="thread-20-1-1.html" title="2015.10.3~10.18 台湾单车环岛"> <img style="display: inline;" src="/home/picture/5a68d36abda3ffd2a7beaa97ffb94a66.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="2015.10.3~10.18 台湾单车环岛" title="2015.10.3~10.18 台湾单车环岛" width="220" height="120" /> </a> 
+               <a href="/home/articles/{{$v->id}}/edit" title="{{ $v->title }}"> <img style="display: inline;" src="/uploads/{{ $v->cover }}" class="attachment-thumbnail size-thumbnail wp-post-image" alt="{{ $v->title }}" title="{{ $v->title }}" width="220" height="120" /> </a> 
               </dt> 
               <dd>
-               <a href="thread-20-1-1.html" title="2015.10.3~10.18 台湾单车环岛">2015.10.3~10.18 台湾单车环岛</a> 
+               <a href="/home/articles/{{$v->id}}/edit" title="{{ $v->title }}">{{ $v->title }}</a> 
               </dd> 
              </dl>
-             <dl class="news-l-dl "> 
-              <dt>
-               <a href="thread-14-1-1.html" title="高级电子表Apple Watch零售版首发体验"> <img style="display: inline;" src="/home/picture/9e88cdf60ce5293d26d5bd09ed9e15b4.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="高级电子表Apple Watch零售版首发体验" title="高级电子表Apple Watch零售版首发体验" width="220" height="120" /> </a> 
-              </dt> 
-              <dd>
-               <a href="thread-14-1-1.html" title="高级电子表Apple Watch零售版首发体验">高级电子表Apple Watch零售版首发体验</a> 
-              </dd> 
-             </dl>
-             <dl class="news-l-dl "> 
-              <dt>
-               <a href="thread-8-1-1.html" title="3月2日聚焦巴塞罗那世界移动通信大会"> <img style="display: inline;" src="/home/picture/989858c95cbc00fe6562a80da29cd309.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="3月2日聚焦巴塞罗那世界移动通信大会" title="3月2日聚焦巴塞罗那世界移动通信大会" width="220" height="120" /> </a> 
-              </dt> 
-              <dd>
-               <a href="thread-8-1-1.html" title="3月2日聚焦巴塞罗那世界移动通信大会">3月2日聚焦巴塞罗那世界移动通信大会</a> 
-              </dd> 
-             </dl>
+             @endforeach
             </ul> 
            </div>
           </div>
@@ -375,8 +374,8 @@ var disablepostctrl = parseInt('0');
                <div class="area"> 
                 <div class="pt hm">
                   您需要登录后才可以回帖 
-                 <a href="member.php?mod=logging&amp;action=login" onclick="showWindow('login', this.href)" class="xi2">登录</a> | 
-                 <a href="member.php?mod=register" class="xi2">立即注册</a> 
+                 <a href="/home/login/login" class="xi2">登录</a> | 
+                 <a href="/home/users/create" class="xi2">立即注册</a> 
                 </div> 
                </div> 
               </div> 

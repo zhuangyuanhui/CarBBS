@@ -38,7 +38,7 @@ class UsersController extends Controller
      */
     public function sendTelCode($tel)
     {
-        $tel_code = rand(1000,9999);
+        $tel_code = 1111;
         session(['tel_code'=>$tel_code]);
         $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
         $target .= "&account=C27705034&password=b11f588eee93d5a6d5432fcc448df1fb&format=json&mobile=".$tel."&content=".rawurlencode("您的验证码是：".$tel_code."。请不要把验证码泄露给其他人。");
@@ -69,7 +69,9 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $data = $request->only(['uname','upwd','tel','tel_code']);
-
+        
+        $tel_code = 1111;
+        session(['tel_code'=>$tel_code]);
         $code = session('tel_code');
         if($data['tel_code'] != $code){
             return back()->with('error','验证码错误');
@@ -95,7 +97,7 @@ class UsersController extends Controller
 
         if($res1 && $res2){
             DB::commit();
-            return redirect()->with('success','注册成功');
+            return redirect('/home/login/login')->with('success','注册成功');
         }else{
             DB::rollBack();
             return back()->with('error','注册失败');

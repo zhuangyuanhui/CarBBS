@@ -61,4 +61,22 @@ class NewsController extends Controller
 
     	return $news_nine;
     }
+
+    /**
+     * 新闻详情
+     */
+    public function details($id)
+    {
+        //获取新闻详情信息
+        $new      = News::where('id',$id)->first();
+        //获取相同类别文章
+        $cate_new = News::where('cates_id',$new->cates_id)->orderBy('clicks','desc')->limit(10)->get(); 
+        return view('home.news.details',
+                                      [
+                                        'cate_new'=>$cate_new,
+                                        'new'=>$new,
+                                        'title'=>'新闻详情'
+                                      ]);
+
+    }
 }

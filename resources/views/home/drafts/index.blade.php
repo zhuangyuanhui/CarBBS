@@ -117,9 +117,8 @@
    <div class="wp cl"> 
     <div class="space_nav cl"> 
      <ul class="tb_1 cl"> 
-      <li class="a"><a href="/home/articles
-        /create"><img src="javascript:;" class="vm" />编辑文章</a></li> 
-      <li><a href="/home/drafts/{{ $id }}/index"><img src="picture/space_follow.png" class="vm" />草稿箱</a></li> 
+      <li><a href="/home/articles/create"><img src="picture/space_profile.png" class="vm" />编辑文章</a></li> 
+      <li class="a"><a href="javascript:;"><img src="picture/space_follow.png" class="vm" />草稿箱</a></li> 
      </ul> 
     </div> 
    </div> 
@@ -138,109 +137,37 @@
             </div>
         @endif
         <!-- 用户被重定向后，你可以从 session 中显示闪存消息 -->
-         <div style="margin-left: 150px;">
-           <form action="/home/articles" id="articles_info" method="post" enctype="multipart/form-data" >
-              {{ csrf_field() }}
-            <div class="form-group">
-              <label for="exampleInputEmail1">文章类型</label>
-              <select class="form-control" name="cates_id" style="width: 770px;">
-                      <option value=""><--请选择--></option>
-                      @foreach($Cates as $k => $v)
-                      <option value="{{ $v->id }}" >{{ $v->cname }}</option>
-                      @endforeach
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">文章标题</label>
-              <input type="text" class="form-control" name="title" id="exampleInputPassword1" placeholder="文章标题" style="width: 770px;">
-            </div> 
-
-           <div style="width: 670px;">
-              <label for="exampleInputPassword1">云标签</label><br>
-              @foreach($Labels as $k => $v)
-              <div class="btn btn-success" style="margin-left: 20px;margin-top: 20px;">
-                 <input type="checkbox"   name="labels[]" value="{{ $v->id }}">{{ $v->lname }}
-              </div>
-              @endforeach
-          </div>
-
-          <script type="text/javascript">
-            $('.btn:even').removeClass('btn-success');
-            $('.btn:even').addClass('btn-info');
-            $('.btn:even').append('<br/>');
-          </script>
-  
-          <div class="form-group">
-            <label for="exampleInputPassword1">文章内容</label>
-            <!-- 加载编辑器的容器 -->
-            <script id="container" style="width:770px;height:400px" name="content" type="text/plain"></script>
-          </div>
-
-          <div class="form-group">
-                <label for="exampleInputFile">文章封面</label>
-                <div style="width:770px;display: none;">
-                <input type="file"  multiple class="small" name="cover" onchange="preview(this)" id="exampleInputFile" placeholder="请选择图片上传" style="display: none;">
-                </div>
-                <label for="exampleInputFile">
-                  <div id="picList" style="width:200px;height: 200px;background: url(/home/images/jia.jpg) "></div>
-                </label>
-           </div>
-          <button type="submit"  style="width: 670px;" class="btn btn-success">提交</button>
-          <a href="javascript:;" id="save" style="width: 100px;" ><span class="btn btn-warning">保存草稿箱</span></a>
-
-        </form>
-          <script teype="text/javascript">
-            $(function(){
-              $('#save').click(function(){
-                $.ajax({
-                  url:'/home/drafts',
-                  type:'post',
-                  data:new FormData($('#articles_info')[0]), //创建表单数据
-                  processData:false,                         //不限定格式
-                  contentType:false,                         //不进行特定格式编码
-                  dataType:'html',
-                  success:function(msg){
-                    console.log(msg);
-                    if(msg == 'success'){
-                      alert('保存到草稿箱');
-                    }else{
-                      alert('保存失败');
-                    }
-                  }
-                });
-              });
-            });
-          </script>
-      </div>
-
-       <!-- 配置文件 -->
-              <script type="text/javascript" src="/home/utf8-php/ueditor.config.js"></script>
-              <!-- 编辑器源码文件 -->
-              <script type="text/javascript" src="/home/utf8-php/ueditor.all.js"></script>
-              <!-- 实例化编辑器 -->
-              <script type="text/javascript">
-                  var ue = UE.getEditor('container',{toolbars: [
-                                       ['fullscreen', 'source', 'undo', 'redo'],
-                                       ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist','insertunorderedlist', 'selectall', 'cleardoc']
-                                   ]});
-
-                  //上传前图片预览
-                  function preview(obj){
-                   var length = obj.files.length;
-                   //多图上传时遍历文件信息（可以通过object.files查看）
-                   for (var i = 0; i < length; i++) {//循环输出预览图片
-                    jQuery('#picList').append('<img src="'+window.URL.createObjectURL(obj.files[i])+'" style="width:200px;height:200px;margin:4px"/>');
-                    }
-                   }
-                  
-              </script>
+        <table class="table table-hover">
+          <tr>
+            <td>ID</td>
+            <td>标题</td>
+            <td>类型</td>
+            <td>操作</td>
+          </tr>
+          @foreach($drafts as $k => $v)
+          <tr>
+            <td>{{ $v->id }}</td>
+            <td>{{ $v->title }}</td>
+            <td>{{ $v->getCates->cname }}</td>
+            <td>
+              <form action="/home/drafts/{{ $v->id }}" method="post" style="display: inline">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <input type="submit" value="删除" onclick="return confirm('确认删除??')" name="" class="btn btn-danger">
+              </form>
+              <a href="/home/drafts/{{ $v->id }}/edit"><span class="btn btn-info">修改</span></a>
+            </td>
+         
+          </tr>
+          @endforeach
+        </table>
 
 
-    <div class="mn"> 
-     <!--[diy=diycontenttop]-->
-     <div id="diycontenttop" class="area"></div>
-     <!--[/diy]--> 
-     <div class="bm bw0"> 
+        <div class="mn"> 
+         <!--[diy=diycontenttop]-->
+         <div id="diycontenttop" class="area"></div>
+         <!--[/diy]--> 
+         <div class="bm bw0"> 
 
 
       </div> 
