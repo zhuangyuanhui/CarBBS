@@ -13,9 +13,9 @@ class Label extends Model
 	// 设置模型操作的主键
     protected $primaryKey = 'id';
 
-    public function getCates()
+    //通过标签找文章
+     public function labelarticle()
     {
-    	return $this->belongsTo('App\models\admin\Cates','cates_id');
+        return $this->hasMany('App\models\home\Article','labels_id');
     }
-
 }

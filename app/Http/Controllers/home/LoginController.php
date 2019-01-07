@@ -29,6 +29,7 @@ class LoginController extends Controller
         $users = Users::where('tel','=',$data['phone'])->orWhere('uname','=',$data['phone'])->first();
         if(Hash::check($data['upwd'],$users->upwd)){
             session(['login_users'=>$users]);
+            return redirect('home/index')->with('success','登录成功');
         }else{
             return back()->with('error','密码错误,请重新输入');
         }

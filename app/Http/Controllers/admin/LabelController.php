@@ -33,8 +33,8 @@ class LabelController extends Controller
     public function create()
     {   
         //获取所有分类
-        $data = Cates::all();
-        return view('admin/label/create',['title'=>'后台云标签添加','data'=>$data]);
+        //$data = Cates::all();
+        return view('admin/label/create',['title'=>'后台云标签添加']);
     }
 
     /**
@@ -46,12 +46,12 @@ class LabelController extends Controller
     public function store(Request $request)
     {
         //获取表单中分类id和标签名
-        $id = $request->input('cates');
+        //$id = $request->input('cates');
         $lname = $request->input('lname');
 
         //将数据写入数据库
         $label = new Label;
-        $label->cates_id = $id;
+       // $label->cates_id = $id;
         $label->lname = $lname;
         $res = $label->save();
 
@@ -83,9 +83,9 @@ class LabelController extends Controller
     public function edit($id)
     {
         $label = Label::find($id);
-        $data = Cates::all();
+        //$data = Cates::all();
 
-        return view('admin.label.edit',['title'=>'云标签修改','label'=>$label,'data'=>$data]);
+        return view('admin.label.edit',['title'=>'云标签修改','label'=>$label]);
     }
 
     /**
@@ -99,7 +99,7 @@ class LabelController extends Controller
     {
         //对数据进行修改
         $label = Label::find($id);
-        $label->cates_id = $request->input('cates');
+        //$label->cates_id = $request->input('cates');
         $label->lname = $request->input('lname');
         $res = $label->save();
         

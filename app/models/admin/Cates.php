@@ -18,4 +18,9 @@ class Cates extends Model
 	// 设置模型时间字段的存储格式
 	//protected $dateFormat = 'U';
 	
+	//获取文章
+	public function getArticle()
+	{
+        return $this->hasMany('App\models\home\Article','cates_id');
+	}
 }

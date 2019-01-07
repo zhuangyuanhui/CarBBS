@@ -53,6 +53,7 @@ class SlidesController extends Controller
         }
             $slides->slides_url = $request->input('slides_url','');
             $slides->slides_status = 1;
+            $slides->sname = $request->input('sname');
             $res = $slides->save();
             if($res){
                 return redirect('admin/slides')->with('success','图片添加成功');
@@ -107,6 +108,7 @@ class SlidesController extends Controller
         }
             $slides->slides_url = $request->input('slides_url','');
             $slides->slides_status =$request->input('slides_status','');
+            $slides->sname = $request->input('sname');
             $res = $slides->save();
             if($res){
                 return redirect('admin/slides')->with('success','图片修改成功');

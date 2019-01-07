@@ -111,7 +111,7 @@
                         <a href="javascript:;" onclick="ajaxget('member.php?mod=clearcookies&formhash=dfa1e3c8', 'returnmessage_LTh70', 'returnmessage_LTh70');return false;" title="清除痕迹" class="y">清除痕迹</a></div>
                     </div>
                     <div class="rfm" style="padding: 5px 0 0 0; text-align: center;">
-                      <a href="member.php?mod=register" style="float: none; height: 44px; line-height: 44px; color: #333333; font-size: 16px;">极速注册</a></div>
+                      <a href="/home/users/create" style="float: none; height: 44px; line-height: 44px; color: #333333; font-size: 16px;">极速注册</a></div>
                     <div class="third-box">
                       <div class="tits">
                         <span>第三方登录</span></div>

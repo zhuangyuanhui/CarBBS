@@ -17,6 +17,14 @@
                     <div class="mws-panel-body no-padding">
                     	<form class="mws-form" action="/admin/slides" method="post"  enctype="multipart/form-data">
                               {{ csrf_field() }}
+                               <div class="mws-form-inline">
+                                   <div class="mws-form-row">
+                                        <label class="mws-form-label">轮播图名称</label>
+                                        <div class="mws-form-item">
+                                             <input type="text" class="small" name="sname"  value="{{ old('sname') }}">
+                                        </div>
+                                   </div>
+                              </div>
                     		<div class="mws-form-inline">
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">跳转地址</label>

@@ -112,6 +112,8 @@ Route::get('home/girls/zan/{id}','home\GirlsController@zan');   //前台车模�
 Route::resource('home/girls','home\GirlsController');   //前台车模列表
 
 Route::get('home/index','home\IndexController@index');   //前台首页
+Route::get('/home/index/{id}','home\IndexController@index');   //前台首页
+
 
 
 
@@ -162,7 +164,6 @@ Route::get('home/articles/time','home\ArtRankController@time');                 
 Route::get('home/articles/praise','home\ArtRankController@praise');                    //根据点赞进行排行
 
 
-Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
 
 
 Route::post('admin/login/check','admin\LoginController@check');                        //检查登录
@@ -170,6 +171,7 @@ Route::post('admin/login/checkemail','admin\LoginController@checkemail');       
 Route::post('admin/login/changepwd','admin\LoginController@changepwd');
 
 
+Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
 
 
 Route::resource('admin/users','admin\UsersController');                                //后台用户路由

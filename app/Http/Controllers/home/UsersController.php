@@ -95,7 +95,7 @@ class UsersController extends Controller
 
         if($res1 && $res2){
             DB::commit();
-            return redirect()->with('success','注册成功');
+            return redirect('home/login/login')->with('success','注册成功');
         }else{
             DB::rollBack();
             return back()->with('error','注册失败');
