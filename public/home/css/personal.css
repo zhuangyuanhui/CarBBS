@@ -1,0 +1,26 @@
+.ct2_a .mn {
+    width: 840px;
+    padding-top: 20px;
+    margin-right: 20px;
+}
+.ct2_a .mn {
+    display: inline;
+    margin-right: 10px;
+    padding-top: 10px;
+    width: 800px;
+}
+.ct2_a .mn {
+    float: right;
+    width: 810px;
+}
+.mn {
+    overflow: visible;
+}
+.mn {
+    overflow: hidden;
+}
+html, body, div, h1, h2, h3, h4, h5, h6, p, img, dl, dt, dd, ol, ul, li, form, table, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}

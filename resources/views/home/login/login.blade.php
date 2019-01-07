@@ -82,15 +82,12 @@
                         </tr>
                       </table>
                     </div>
-                    <div class="rfm">
-                      <table>
-                        <tr>
-                          <td>
-                            <h4 id="checkupwd">&nbsp</h4>
-                          <td class="tipcol" style="display: none;"></td>
-                        </tr>
-                      </table>
-                    </div>
+                    @if (session('error'))
+                      <div class="mws-form-message error" style="width:312px;height: 45px;">
+                          {{ session('error') }}
+                      </div>
+                  @endif
+
                     <div class="rfm" id="loginanswer_row_LTh70" style="display:none">
                       <table>
                         <tr>
@@ -111,7 +108,7 @@
                         <a href="javascript:;" onclick="ajaxget('member.php?mod=clearcookies&formhash=dfa1e3c8', 'returnmessage_LTh70', 'returnmessage_LTh70');return false;" title="清除痕迹" class="y">清除痕迹</a></div>
                     </div>
                     <div class="rfm" style="padding: 5px 0 0 0; text-align: center;">
-                      <a href="member.php?mod=register" style="float: none; height: 44px; line-height: 44px; color: #333333; font-size: 16px;">极速注册</a></div>
+                      <a href="/home/users/create" style="float: none; height: 44px; line-height: 44px; color: #333333; font-size: 16px;">极速注册</a></div>
                     <div class="third-box">
                       <div class="tits">
                         <span>第三方登录</span></div>
@@ -193,25 +190,40 @@
   </div>
 </div>
 <script type="text/javascript">
+    var isUname,isUpwd = false;
   //给手机号框绑定失焦事件
     $('#username_LTh70').blur(function(){
         var phone = $(this).val();
         var url = '/home/login/checkphone/' + phone;
 
          var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
+         var uname_preg = /^[a-zA-Z]{1}[\w]{4,15}$/;
          //验证手机号格式是否正确,正确发送ajax验证手机号是否已被注册
-         if(tel_preg.test(phone)){
+         if(tel_preg.test(phone) || uname_preg.test(phone)){
               $.get(url,{'phone':phone},function(data){
                     if(data.code == 'error'){
-                      $('#checkname').html('手机号不存在');
+                      isUname = false;
+                      $('#checkname').html('手机号或用户名不存在');
                       $('#checkname').css('color','red');
+                    }else{
+                      isUname = true;
                     }
               },'json');
           }else{
-                $('#checkname').html('手机号格式不正确');
+                isUname = false;
+                $('#checkname').html('手机号或用户名格式不正确');
+                $('#checkname').css('color','');
           }
       }).focus(function(){
         $('#checkname').html('&nbsp;');
       });
+
+      $('#lostpwsubmit').click(function(){
+        if(isUname && isUpwd){
+          return true;
+        }else{
+          return false;
+        }
+      })
 </script>
 @endsection

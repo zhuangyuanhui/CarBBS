@@ -61,4 +61,24 @@ class NewsController extends Controller
 
     	return $news_nine;
     }
+
+    /**
+     * 根据浏览量排序,拿20条数据用于排行榜
+     */
+    static public function clicks_new()
+    {
+        $clicks_new = News::orderBy('clicks','desc')->limit(20)->get();
+
+        return $clicks_new;
+    }
+
+    /**
+     * 根据点赞量排序,拿20条数据用于排行榜
+     */
+    static public function praise_new()
+    {
+        $praise_new = News::orderBy('praise','desc')->limit(20)->get();
+
+        return $praise_new;
+    }
 }

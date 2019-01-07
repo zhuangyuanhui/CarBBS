@@ -127,4 +127,24 @@ class GirlsController extends Controller
         }
     }
 
+
+    /**
+     * 根据浏览量排序,拿20条数据用于排行榜
+     */
+    static public function clicks_girls()
+    {
+        $clicks_girls = Girls::orderBy('clicks','desc')->limit(20)->get();
+
+        return $clicks_girls;
+    }
+
+    /**
+     * 根据点赞量排序,拿20条数据用于排行榜
+     */
+    static public function praise_girls()
+    {
+        $praise_girls = Girls::orderBy('praise','desc')->limit(20)->get();
+
+        return $praise_girls;
+    }
 }

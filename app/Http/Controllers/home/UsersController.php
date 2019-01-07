@@ -38,27 +38,28 @@ class UsersController extends Controller
      */
     public function sendTelCode($tel)
     {
-        $tel_code = rand(1000,9999);
+        // $tel_code = rand(1000,9999);
+        $tel_code = 1122;
         session(['tel_code'=>$tel_code]);
-        $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
-        $target .= "&account=C27705034&password=b11f588eee93d5a6d5432fcc448df1fb&format=json&mobile=".$tel."&content=".rawurlencode("您的验证码是：".$tel_code."。请不要把验证码泄露给其他人。");
-        //使用curl(百度)
+       //  $target = "http://106.ihuyi.com/webservice/sms.php?method=Submit";
+       //  $target .= "&account=C27705034&password=b11f588eee93d5a6d5432fcc448df1fb&format=json&mobile=".$tel."&content=".rawurlencode("您的验证码是：".$tel_code."。请不要把验证码泄露给其他人。");
+       //  //使用curl(百度)
 
-        //初使化init方法
-       $ch = curl_init();
+       //  //初使化init方法
+       // $ch = curl_init();
 
-       //指定URL
-       curl_setopt($ch, CURLOPT_URL, $target);
+       // //指定URL
+       // curl_setopt($ch, CURLOPT_URL, $target);
 
-       //设定请求后返回结果
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+       // //设定请求后返回结果
+       // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-       //发送请求
-       $res = curl_exec($ch);
+       // //发送请求
+       // $res = curl_exec($ch);
 
-       dump($res);
-       //关闭curl
-       curl_close($ch);
+       // dump($res);
+       // //关闭curl
+       // curl_close($ch);
     }
     /**
      * 前台用户注册存入数据库
@@ -95,7 +96,7 @@ class UsersController extends Controller
 
         if($res1 && $res2){
             DB::commit();
-            return redirect()->with('success','注册成功');
+            return redirect('home/login/login')->with('success','注册成功');
         }else{
             DB::rollBack();
             return back()->with('error','注册失败');
@@ -176,22 +177,17 @@ class UsersController extends Controller
      */
     static function fans_users()
     {
-        $users = Users::all();
-        foreach($users as $key=>$value){
-            $value->count = Concern::where('users_id',$value->id)->count();
-        }
-
-        dump($users);exit;
+        
+        $users = Users::orderBy('fans_count','desc')->limit(20)->get();
         return $users;
     }
-
 
     /**
      * 按照发帖量排序得出用户排行
      */
     static function article_users()
     {
-        $article_users = UsersInfo::orderBy('sign_number','desc')->limit(20)->get();
+        $article_users = Users::orderBy('art_count','desc')->limit(20)->get();
         return $article_users;
     }
 
@@ -200,7 +196,7 @@ class UsersController extends Controller
      */
     static function sign_users()
     {
-        $sign_users = UsersInfo::orderBy('sign_days','desc')->limit(20)->get();
+        $sign_users = UsersInfo::orderBy('sign_days','desc')->limit(20)->get(); 
         return $sign_users;
     }
 

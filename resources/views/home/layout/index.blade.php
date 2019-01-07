@@ -195,7 +195,7 @@
          <table cellspacing="0" cellpadding="0"> 
           <tbody>
            <tr> 
-            <td> <span class="ftid"> <select name="fastloginfield" id="ls_fastloginfield" width="40" tabindex="900"> <option value="username">用户名</option> <option value="email">Email</option> </select> </span> <script type="text/javascript">simulateSelect('ls_fastloginfield')</script> </td> 
+            <td> <span class="ftid"> <select name="fastloginfield" id="ls_fastloginfield" width="40" tabindex="900"> <option value="username">用户名</option> <option value="email">Email</option> </select> </span> <script type="text/javascript"></script> </td> 
             <td><input type="text" name="username" id="ls_username" autocomplete="off" class="px vm" tabindex="901" /></td> 
             <td class="fastlg_l"><label for="ls_cookietime"><input type="checkbox" name="cookietime" id="ls_cookietime" class="pc" value="2592000" tabindex="903" />自动登录</label></td> 
             <td>&nbsp;<a href="javascript:;" onclick="showWindow('login', 'member.php?mod=logging&amp;action=login&amp;viewlostpw=1')">找回密码</a></td> 
@@ -318,7 +318,6 @@ float: left;
        </ul> 
        <script type="text/javascript">
 
-initSearchmenu('scbar', '');
 
 </script> 
        <!-- 搜索筛选 --> 
@@ -330,7 +329,6 @@ initSearchmenu('scbar', '');
        </ul> 
        <script type="text/javascript">
 
-initSearchmenu('scbar', '');
 
 </script> 
       </div> 
@@ -356,15 +354,69 @@ jQuery('.global-search-mask').fadeOut(50);
 jQuery('.quater_search').slideUp(300);
 
 })
-
-
-
 })
 
     </script> 
     </div> 
    </div> 
+  </div>
+  <div class="mus_box cl"> 
+   <div id="mus" class="wp cl"> 
+   </div> 
   </div> 
+  <div id="qmenu_menu" class="p_pop blk" style="display: none;"> 
+   <div class="ptm pbw hm">
+     请 
+    <a href="javascript:;" class="xi2" onclick="lsSubmit()"><strong>登录</strong></a> 后使用快捷导航 
+    <br />没有帐号？ 
+    <a href="member.php?mod=register" class="xi2 xw1">立即注册</a> 
+   </div> 
+   <div id="fjump_menu" class="btda"></div> 
+  </div> 
+  <ul class="p_pop h_pop" id="plugin_menu" style="display: none"> 
+   <li><a href="dsu_paulsign-sign.html" id="mn_plink_sign">每日签到</a></li> 
+  </ul> 
+  <!-- 二级导航 --> 
+  <div class="sub_nav"> 
+   <ul class="p_pop h_pop" id="mn_P1_menu" style="display: none"> 
+    <li><a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=3" hidefocus="true">二手车</a></li> 
+    <li><a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=2" hidefocus="true">SUV</a></li> 
+    <li><a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=8" hidefocus="true">改装</a></li> 
+    <li><a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=7" hidefocus="true">汽车横评</a></li> 
+   </ul> 
+   <div class="p_pop h_pop" id="mn_userapp_menu" style="display: none"></div> 
+   <ul class="p_pop h_pop" id="mn_N708e_menu" style="display: none"> 
+    <li><a href="brands" hidefocus="true">品牌页</a></li> 
+    <li><a href="group.php" hidefocus="true">群组页</a></li> 
+    <li><a href="thread-21-1-1.html" hidefocus="true">活动页</a></li> 
+    <li><a href="forum.php?mod=guide&amp;view=newthread" hidefocus="true">导读页</a></li> 
+    <li><a href="thread-20-1-1.html" hidefocus="true">帖子页</a></li> 
+    <li><a href="home.php?mod=space&amp;uid=6&amp;do=profile" hidefocus="true">个人空间</a></li> 
+    <li><a href="misc.php?mod=ranklist" hidefocus="true">排行榜单</a></li> 
+    <li><a href="member.php?mod=logging&amp;action=login" hidefocus="true">登陆页面</a></li> 
+   </ul> 
+  </div> 
+  <!-- 用户菜单 --> 
+  <ul class="sub_menu" id="m_menu" style="display: none;"> 
+   <li style="display: none;"><a href="home.php?mod=magic" style="background-image:url(images/magic_b.png) !important">道具</a></li> 
+   <li style="display: none;"><a href="home.php?mod=medal" style="background-image:url(images/medal_b.png) !important">勋章</a></li> 
+   <li style="display: none;"><a href="home.php?mod=task" style="background-image:url(images/task_b.png) !important">任务</a></li> 
+   <li><a href="home.php?mod=spacecp">设置</a></li> 
+   <li><a href="home.php?mod=space&amp;do=favorite&amp;view=me">我的收藏</a></li> 
+   <li></li> 
+   <li></li> 
+   <li></li>   
+   <li></li> 
+   <li><a href="member.php?mod=logging&amp;action=logout&amp;formhash=d85bbf62">退出</a></li> 
+  </ul> 
+  <ul class="sub_menu" id="l_menu" style="display: none;"> 
+   <!-- 第三方登录 --> 
+   <li class="user_list app_login"><a href="connect.php?mod=login&amp;op=init&amp;referer=forum.php&amp;statfrom=login"><i class="i_qq"></i>腾讯QQ</a></li> 
+   <li class="user_list app_login"><a href="wechat-login.html"><i class="i_wb"></i>微信登录</a></li> 
+  </ul>
+  <script type="text/javascript">
+    
+  </script>
   @section('content')
 
    

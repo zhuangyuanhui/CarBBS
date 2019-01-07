@@ -27,8 +27,10 @@ class LoginController extends Controller
         $data = $request->only('phone','upwd');
 
         $users = Users::where('tel','=',$data['phone'])->orWhere('uname','=',$data['phone'])->first();
+
         if(Hash::check($data['upwd'],$users->upwd)){
             session(['login_users'=>$users]);
+            return redirect('/home/index')->with('success','登陆成功');
         }else{
             return back()->with('error','密码错误,请重新输入');
         }
@@ -36,7 +38,7 @@ class LoginController extends Controller
 
 
     /**
-     * 检测用户是否存在
+     * 登录时检测用户是否存在
      */
     public function checkphone($phone)
     {

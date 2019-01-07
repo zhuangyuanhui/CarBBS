@@ -373,7 +373,7 @@
                                     </div>
                                 </div>
                                 <div class="login_now cl" style="padding-left: 446px;">
-                                    <a href="#"
+                                    <a href="/home/login/login"
                                     onclick="showWindow('login', this.href);return false;" class="xi2">
                                         <em style="color: #000000;">
                                             已有账号？

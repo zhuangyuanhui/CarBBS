@@ -51,7 +51,6 @@ Route::get('/', function () {
 
 /*------------------------------------------------------------  zhuangyuanhui 52 ----------------------------------------------*/
 
-
 Route::resource('admin/news','admin\NewsController');		//后台新闻管理
 Route::resource('admin/girls','admin\GirlsController');		//后台车模管理
 Route::resource('admin/label','admin\LabelController');		//后台云标签管理
@@ -77,17 +76,18 @@ Route::post('home/login/alert','home\LoginController@alert');		//修改用户密
 
 Route::get('home/news/index/{id}','home\NewsController@index');        //前台页面新闻列表
 
-Route::get('home/rank/index/{type}','home\RankController@index');			//前台排行页面
+Route::get('home/rank/index/{type}','home\RankController@index');			//前台用户排行页面
+Route::get('home/rank/news/{type}','home\RankController@news');			//前台新闻排行页面
+Route::get('home/rank/articles/{type}','home\RankController@articles');			//前台文章排行页面
 
+Route::get('home/rank/girls/{type}','home\RankController@girls');			//前台车模排行页面
 
-
-
-
-
-
-
-
-
+Route::get('home/personal/index/{id}','home\PersonalController@index');			//前台个人首页
+Route::post('home/personal/image','home\PersonalController@image');			//前台个人资料修改头像
+Route::post('home/personal/store/{id}','home\PersonalController@store');			//前台个人资料提交修改
+Route::get('home/personal/edit/{id}','home\PersonalController@edit');		//前台个人首页
+Route::get('home/personal/articles/{id}','home\PersonalController@articles');	//前台个人文章
+Route::get('home/personal/users_articles','home\PersonalController@users_articles');	//前台个人文章
 
 
 
@@ -150,6 +150,8 @@ Route::get('home/index','home\IndexController@index');   //前台首页
 
 
 
+
+
 /*------------------------------------------------------------  shaomingshuo 155 ----------------------------------------------*/
 Route::get('admin/users/sendemail/{email}','admin\UsersController@sendEmailCode');     //发送邮箱验证码
 Route::get('admin/loginout','admin\LoginController@loginout');                         //退出登录
@@ -162,7 +164,7 @@ Route::get('home/articles/time','home\ArtRankController@time');                 
 Route::get('home/articles/praise','home\ArtRankController@praise');                    //根据点赞进行排行
 
 
-Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
+
 
 
 Route::post('admin/login/check','admin\LoginController@check');                        //检查登录
@@ -183,7 +185,7 @@ Route::resource('home/layout','home\LayoutControlle');                          
 //home
 Route::resource('home/articles','home\ArticlesControlle');                            //前台用户路由
 
-
+Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
 
 
 
