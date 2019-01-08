@@ -63,23 +63,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                
-                                @foreach($reply as $k=>$v)
-                                <tr>
-                                    <td>{{ $v->id }}</td>
-                                    <td>{{ $v->getUsers->uname }}</td>
-                                    <td>{{ $v->comment_id }}</td>
-                                    <td>{{ $v->content }}</td>
-                                    <td></td>
-                                    <td>
-                                    	<form action="/admin/comment/{{$v->id}}" method="post" style="display: inline-block;" >
-                                    		{{ csrf_field() }}
-                                    		{{ method_field('DELETE') }}
-                                    		<input type="submit" value="删除" onclick="return confirm('确定要删除吗?')" class="btn btn-danger">
-                                    	</form>
-                                    </td>
-                                </tr>
-                                @endforeach
                         </table>
                         <div id="pages_pages">
                         </div>

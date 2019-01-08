@@ -25,16 +25,26 @@ class ArticlesControlle extends Controller
         switch ($id) {
             case 0:
                  $data = Article::all();
+                 $flag = 0;
                 break;
              case 1: 
                  $data = ArtRankController::click();
+                 $flag = 1;
                 break;
              case 2:
                  $data = ArtRankController::time();
+                 $flag = 2;
                 break;
              case 3:
                  $data = ArtRankController::praise();
+                 $flag = 3;
                 break;
+             case 4:
+                 $login_users = session('login_users');
+                 $user = Users::where('uname',$login_users->uname)->first();
+                 $data = Article::where('users_id',$user->id)->get();
+                 $flag = 4;
+                 break;
         }
         foreach ($data as $key => $value) {
             $value->count = Comment::where('article_id',$value->id)->count();
@@ -42,6 +52,7 @@ class ArticlesControlle extends Controller
        
         return view('home.articles.index',
                                         [
+                                            'flag'=>$flag,
                                             'id'=>$id,
                                             'data'=>$data,
                                             'title'=>'文章列表'
@@ -61,7 +72,7 @@ class ArticlesControlle extends Controller
 
          $Cates  = Cates::all();
          $Labels = Label::all(); 
-         return view('home.articles.create',['Cates'=>$Cates,'Labels'=>$Labels,'id'=>$id,'title'=>'发表文章']);
+         return view('home.articles.create',['Cates'=>$Cates,'Labels'=>$Labels,'id'=>$id,'title'=>'发表文章','user'=>$user]);
     }
 
     /**
@@ -70,7 +81,7 @@ class ArticlesControlle extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id=0)
+    public function store(Request $request)
     {
         //开启事务
          DB::beginTransaction();
@@ -105,13 +116,12 @@ class ArticlesControlle extends Controller
              $Article->content = $request->input('content'); 
              $Article->ctime =time();
              $res1 = $Article->save();
-             $res2 = Drafts::where('id',$id)->delete();
-             if($res1 && $res2 ){
+             if($res1){
                 $count = $user->art_count+1;
                 $user->art_count = $count;
                  //成功提交事务
                 DB::commit();
-               return redirect("/home/articles/$user->id")->with('success','发表文章成功');
+               return redirect("/home/personal/articles/$user->id")->with('success','发表文章成功');
              } else {
                 //失败事务回滚
                  DB::rollBack();
@@ -152,6 +162,8 @@ class ArticlesControlle extends Controller
         //获取相同类型的文章
         $cate      = Article::where('cates_id',$article->cates_id)->orderBy('clicks','desc')->limit(3)->get();
 
+        //获取文章类别
+        $cates = Cates::find($article->cates_id);
         //获取云标签
         $Article = Article::where('id',$id)->first();
         $labels_id = explode(',',$Article->labels_id); 
@@ -164,6 +176,7 @@ class ArticlesControlle extends Controller
                                             'user'=>$user,
                                             'art_count'=>$art_count,
                                             'cate'=>$cate,
+                                            'cates'=>$cates,
                                             'article'=>$article,
                                             'title'=>'文章详情',
                                             'click'=> ArtRankController::click()

@@ -66,9 +66,9 @@
         <div id="pt" class="bm cl" style="padding: 20px 20px 0 20px; margin: 0;"> 
          <div class="z">
           <a>当前位置：</a>
-          <a href="portal.php">首页</a> 
+          <a href="/home/index">首页</a> 
           <em>›</em> 
-          <a href="http://www.carbbs.com/home/girls">车模</a>
+          <a href="javascript:;">车模</a>
          </div> 
         </div> 
         <div class="h hm cl"> 

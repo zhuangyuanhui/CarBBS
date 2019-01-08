@@ -138,7 +138,7 @@
         @endif
         <!-- 用户被重定向后，你可以从 session 中显示闪存消息 -->
          <div style="margin-left: 150px;">
-           <form action="/home/articles/store/{{ $id }}" id="articles_info" method="post" enctype="multipart/form-data" >
+           <form action="/home/drafts/save/{{ $id }}" id="articles_info" method="post" enctype="multipart/form-data" >
               {{ csrf_field() }}
               {{ method_field('PUT') }}
             <div class="form-group">

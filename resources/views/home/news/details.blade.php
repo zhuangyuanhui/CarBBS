@@ -63,11 +63,11 @@
         <div id="pt" class="bm cl" style="padding: 20px 20px 0 20px; margin: 0;"> 
          <div class="z">
           <a>当前位置：</a>
-          <a href="portal.php">首页</a> 
+          <a href="/home/index">首页</a> 
           <em>›</em> 
-          <a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=1">新闻</a>
+          <a href="/home/news/index/0">新闻</a>
           <em>›</em> 
-          <a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=2">SUV</a>
+          <a href="javascript:;">{{$cate->cname}}</a>
          </div> 
         </div> 
         <div class="h hm cl"> 
@@ -107,7 +107,7 @@
           <table cellpadding="0" cellspacing="0" class="vwtb"> 
            <tbody>
             <tr> 
-             <td id="article_content"> {{ $new->content }}<br /><br /><p><a href="data/attachment/portal/201704/01/131328kt6626ki6m62kztz.jpg" target="_blank"><img src="/home/picture/131328kt6626ki6m62kztz.jpg" /></a></p> </td> 
+             <td id="article_content"> {!! $new->content !!}<br /><br /><p><a href="data/attachment/portal/201704/01/131328kt6626ki6m62kztz.jpg" target="_blank"><img src="/home/picture/131328kt6626ki6m62kztz.jpg" /></a></p> </td> 
             </tr> 
            </tbody>
           </table> 
@@ -159,11 +159,7 @@ show_click(values['idtype'], values['id'], values['clickid']);
          </div> 
          <!--[diy=diycontentrelatetop]-->
          <div id="diycontentrelatetop" class="area"></div>
-         <!--[/diy]--> 
-         <div class="pren pbm cl"> 
-          <em class="z"><span class="i_prev" title="上一篇"></span><a href="article-15-1.html" title="上一篇">骑行在天山公路 尽赏美的画廊</a></em> 
-          <em class="y"><span class="i_next" title="下一篇"></span><a href="article-19-1.html" title="下一篇">宝马宝骏新车相当吸引 5月上市重点新车</a></em> 
-         </div> 
+         <!--[/diy]-->  
          <div class="contacts cl"> 
          </div> 
         </div> 

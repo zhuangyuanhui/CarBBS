@@ -77,9 +77,21 @@
     <div class="z"> 
      <a href="./" class="nvhm" title="首页">玩车达人</a>
      <em>&raquo;</em>
-     <a href="forum.php?mod=guide&amp;view=index">导读</a> 
-     <em>›</em> 
-     <a href="forum.php?mod=guide&amp;view=newthread">最新发表</a> 
+     <a href="/home/index">首页</a>
+     <em></em>
+     <a href="/home/articles">文章</a> 
+     <em>›</em>
+     @if($flag == 0)
+     <a href="javascript:;"></a>
+     @elseif($flag == 1)
+     <a href="javascript:;">最新热门</a>
+     @elseif($flag == 2)
+     <a href="javascript:;">最新精华</a>
+     @elseif($flag == 3)
+     <a href="javascript:;">最新发表</a>
+     @elseif($flag == 4)
+     <a href="javascript:;">我的帖子</a>
+     @endif
     </div> 
    </div> 
    <div class="boardnav"> 
@@ -103,7 +115,7 @@
        <li @if($id == 1) class = "xw1 a" @endif ><a href="/home/articles/{{ 1 }}">最新热门<span></span></a></li> 
        <li @if($id == 2) class = "xw1 a" @endif ><a href="/home/articles/{{ 2 }}">最新精华<span></span></a></li> 
        <li @if($id == 3) class = "xw1 a" @endif ><a href="/home/articles/{{ 3 }}">最新发表<span></span></a></li> 
-       <li @if($id == 4) class = "xw1 a" @endif ><a id="filter_special" href="/home/articles/{{ 4 }}" onmouseover="showMenu(this.id)">我的帖子<span></span></a></li> 
+       <li @if($id == 4) class = "xw1 a" @endif ><a href="/home/articles/{{ 4 }}">我的帖子<span></span></a></li> 
       </ul> 
       <div id="threadlist" class="tl bm bmw"> 
        <div class="th" style="display: none;"> 
@@ -158,7 +170,7 @@
       </div> 
      </div> 
      <div class="bm bw0 pgs cl" style="margin: 15px 0 0 0;"> 
-      <span class="pgb y"><a href="forum.php?mod=guide" style="padding: 5px 12px; border-radius: 0; border: 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);">导读首页</a></span> 
+      <span class="pgb y"><a href="/home/articles" style="padding: 5px 12px; border-radius: 0; border: 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);">文章首页</a></span> 
      </div> 
     </div> 
    </div> 

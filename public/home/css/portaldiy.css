@@ -749,7 +749,7 @@ a.xrkt:hover .mask_video {display: block;}
 	letter-spacing: 4px
 }
 .hot_tag .tag_wrap {
-    padding: 15px 0 0 0;
+    padding: 10px 0 0 0;
     width: 675px;
     height: 75px;
     float: left;
@@ -875,7 +875,7 @@ a.xrkt:hover .mask_video {display: block;}
     top: 2px;
 }
 .newsrecommend .newbox .ffot .right > span i.icon-eye { background: url(../images/eyex.png) no-repeat left 6px}
-.newsrecommend .newbox .ffot .right > span i.icon-like, .foot .reply i.icon-reply { background: url(../images/replyx.png) no-repeat left 6px}
+.newsrecommend .newbox .ffot .right > span i.icon-like, .foot .reply i.icon-reply { background: url(../images/eyex1.png) no-repeat left 6px}
 .foot .reply i.icon-reply { background-position: left 5px}
 
 
@@ -908,13 +908,13 @@ a.xrkt:hover .mask_video {display: block;}
     position: relative;
 }
 .part__header img {
-    width: 30px;
-    height: 30px;
-    min-height: 30px;
-    border-radius: 30px;
+   width: 58px;
+    height: 59px;
+    min-height: 18px;
+    border-radius: 5px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 6px;
+    left: 65px;
 }
 .part__header .author {
     margin-left: 40px;

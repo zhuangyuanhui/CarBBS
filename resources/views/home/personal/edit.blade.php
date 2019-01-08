@@ -33,7 +33,7 @@
             <input type="file" name="profile" value="" id="profile" style="display: none">
           </form>
        </div> 
-     <h2 class="mt"> {{$users->uname}} </h2> 
+     <h2 class="mt">{{$users->nickname}}  </h2> 
      <p class="follow_us">
         @if($users->id == $login_id)
           <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的关注</a>

@@ -30,7 +30,7 @@ class NewsController extends Controller
     	
     	//获取推荐位
     	$news_top = NewsController::getNewsTop();
-    	//获取九个热度最高的,轮播图
+    	//获取九个热度最高的,轮播图 
     	$news_nine = NewsController::getNewsNine();
     	return view('home.news.index',[
     									'title'=>'新闻列表',
@@ -63,7 +63,6 @@ class NewsController extends Controller
     }
 
     /**
-<<<<<<< HEAD
      * 新闻详情
      */
     public function details($id)
@@ -71,16 +70,20 @@ class NewsController extends Controller
         //获取新闻详情信息
         $new      = News::where('id',$id)->first();
         //获取相同类别文章
-        $cate_new = News::where('cates_id',$new->cates_id)->orderBy('clicks','desc')->limit(10)->get(); 
+        $cate_new = News::where('cates_id',$new->cates_id)->orderBy('clicks','desc')->limit(10)->get();
+        //获取相关分类信息
+            $cate = Cates::find($new->cates_id); 
         return view('home.news.details',
                                       [
                                         'cate_new'=>$cate_new,
                                         'new'=>$new,
-                                        'title'=>'新闻详情'
+                                        'title'=>'新闻详情',
+                                        'cate'=>$cate
                                       ]);
 
-=======
-     * 根据浏览量排序,拿20条数据用于排行榜
+    }
+
+    /* 根据浏览量排序,拿20条数据用于排行榜
      */
     static public function clicks_new()
     {
@@ -97,6 +100,6 @@ class NewsController extends Controller
         $praise_new = News::orderBy('praise','desc')->limit(20)->get();
 
         return $praise_new;
->>>>>>> car/zhuang
+
     }
 }

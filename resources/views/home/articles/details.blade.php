@@ -12,13 +12,14 @@
    <!--[/diy]--> 
    <div id="pt" class="bm cl"> 
     <div class="z">
-     <a href="forum.php">论坛</a> 
+       <em>&raquo;</em>
+     <a href="/home/index">首页</a>
+     <em></em>
+     <a href="/home/articles">文章</a> 
      <em>›</em> 
-     <a href="forum.php?gid=1">骑行天下</a> 
+     <a href="javascript:;">{{$cates->cname}}</a> 
      <em>›</em> 
-     <a href="forum-2-1.html">产品讨论</a> 
-     <em>›</em> 
-     <a href="thread-10-1-1.html">查看内容</a> 
+     <a href="javascript:;">查看内容</a> 
     </div> 
     <div class="y" style="display: none;"> 
      <a href="forum.php?mod=viewthread&amp;action=printable&amp;tid=10" title="打印" target="_blank"><img src="/home/picture/print.png" alt="打印" class="vm" /></a> 

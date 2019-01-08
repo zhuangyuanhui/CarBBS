@@ -9,7 +9,7 @@
     <div class="z"> 
      <a href="./" class="nvhm" title="首页">玩车达人</a> 
      <em>›</em> 
-     <a href="space-uid-6.html">方希</a> 
+     <a href="space-uid-6.html">{{$users->nickname}} </a> 
      <em>›</em> 个人资料 
     </div> 
    </div> 
@@ -33,7 +33,7 @@
             更换头像： <input type="file" name="profile" value="" id="profile">
           </form>
        </div> 
-     <h2 class="mt"> {{$users->uname}} </h2> 
+     <h2 class="mt">{{$users->nickname}}  </h2> 
      <p class="follow_us">
         @if($users->id == $login_id)
           <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的关注</a>
@@ -70,7 +70,9 @@
   <div class="bm_c">
     <p class="tbmu">
       <a href="javascript:;" class="a">主题</a>
+      <a href="/home/articles/create">发表文章</a>
     </p>
+
     <div class="tl">
       <form method="post" autocomplete="off" name="delform" id="delform" action="" >
         <input type="hidden" name="formhash" value="0408893d">

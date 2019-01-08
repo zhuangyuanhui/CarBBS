@@ -23,11 +23,8 @@ class CommentsController extends Controller
 
         //获取评论数据
         $comment = Comment::where('content','like','%'.$search_name.'%')->paginate($search_count);
-
-        //获取回复数据
-        $reply = Reply::where('content','like','%'.$search_name.'%')->paginate($search_count);
        
-        return view('admin.comment.index',['title'=>'后台评论管理','comment'=>$comment,'params'=>$params,'reply'=>$reply]);
+        return view('admin.comment.index',['title'=>'后台评论管理','comment'=>$comment,'params'=>$params]);
     }
 
     /**
@@ -92,9 +89,9 @@ class CommentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    { 
         $comment = Comment::find($id);
-        $res = $comment->destroy();
+        $res = $comment->delete();
         if($res){
             return redirect('/admin/comment')->with('success','删除成功');
         }else{

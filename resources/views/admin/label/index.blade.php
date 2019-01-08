@@ -30,14 +30,13 @@
                         <table class="mws-datatable-fn mws-table">
                                 <tr>
                                     <th>ID</th>
-                                    <th>分类</th>
+                                    <!-- <th>分类</th> -->
                                     <th>标签名</th>
                                     <th>操作</th>
                                 </tr>
                                 @foreach($label as $k=>$v)
                                     <tr style="text-align:center">
                                         <td>{{ $v->id }}</td>
-                                        <td>{{ $v->getCates->cname }}</td>
                                         <td>{{ $v->lname }}</td>
                                         <td>
                                             <form style="display: inline-block;" method="post" action="/admin/label/{{ $v->id }}">

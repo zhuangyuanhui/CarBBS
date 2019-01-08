@@ -9,7 +9,7 @@
     <div class="z"> 
      <a href="./" class="nvhm" title="首页">玩车达人</a> 
      <em>›</em> 
-     <a href="space-uid-6.html">方希</a> 
+     <a href="space-uid-6.html">{{$users->nickname}}</a> 
      <em>›</em> 个人资料 
     </div> 
    </div> 
@@ -33,7 +33,7 @@
             更换头像： <input type="file" name="profile" value="" id="profile">
           </form>
        </div> 
-     <h2 class="mt"> {{$users->uname}} </h2> 
+     <h2 class="mt"> {{$users->nickname}} </h2> 
      <p class="follow_us">
         @if($users->id == $login_id)
           <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的关注</a>
@@ -55,11 +55,13 @@
 
         <a href="/home/personal/articles/{{$users->id}}">
 
-          <img src="/home/picture/space_thread.png" class="vm" />&nbsp;&nbsp;文章&nbsp;&nbsp;</a></li> 
-      <li><a href=""><img src="/home/picture/space_blog.png" class="vm" />&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li> 
+          <img src="/home/picture/space_thread.png" class="vm" />&nbsp;&nbsp;文章&nbsp;&nbsp;</a></li>
+      <li><a href="/home/personal/users_articles"><img src="/home/picture/space_blog.png" class="vm" />&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li>
       <li><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;关注&nbsp;&nbsp;</a></li> 
+        @if($users->id == $login_id)
       <li><a href=""><img src="/home/picture/space_doing.png" class="vm" />&nbsp;&nbsp;粉丝&nbsp;&nbsp;</a></li> 
-      <li><a href=""><img src="/home/picture/space_share.png" class="vm" />&nbsp;&nbsp;私信&nbsp;&nbsp;</a></li> 
+      <li><a href=""><img src="/home/picture/space_share.png" class="vm" />&nbsp;&nbsp;私信&nbsp;&nbsp;</a></li>
+       @endif
      </ul> 
     </div> 
    </div> 
@@ -103,7 +105,7 @@
              保密
              @endif
            </li> 
-          <li><em>生日</em>{{$users->getUserInfo->age}}</li> 
+          <li><em>年龄</em>{{$users->getUserInfo->age}}</li> 
          </ul>
          <br>
          <ul class="pf_l cl">

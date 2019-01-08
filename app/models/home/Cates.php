@@ -10,4 +10,5 @@ class Cates extends Model
 
     protected $primaryKey = "id";
 
+    
 }

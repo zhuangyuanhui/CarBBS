@@ -29,6 +29,7 @@
     <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
             <tr>
                 <th>ID</th>
+                <th>轮播图名称</th>
                 <th>轮播图片</th>
                 <th>跳转地址</th>
                 <th>状态</th>
@@ -37,6 +38,7 @@
             @foreach($data as $k => $v)
             <tr>
                 <th>{{ $v->id }}</th>
+                <th>{{ $v->sname }}</th>
                 <th>
                     <img src="/uploads/{{ $v->slides_img }}" style="width: 200px;height: 100px;">
                 </th>

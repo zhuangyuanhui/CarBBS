@@ -51,12 +51,12 @@ Route::get('/', function () {
 
 /*------------------------------------------------------------  zhuangyuanhui 52 ----------------------------------------------*/
 
+Route::resource('admin/comment','admin\CommentsController');	//评论后台管理
 Route::resource('admin/news','admin\NewsController');		//后台新闻管理
 Route::resource('admin/girls','admin\GirlsController');		//后台车模管理
 Route::resource('admin/label','admin\LabelController');		//后台云标签管理
 Route::resource('admin/husers','admin\HUsersController');     	//前台用户后台管理
 Route::resource('admin/reports','admin\ReportsController');		//用户举报后台管理
-Route::resource('admin/comment','admin\CommentsController');	//评论后台管理
 
 
 Route::get('home/users/send/{tel}','home\UsersController@sendTelCode');     //发送手机号验证码
@@ -112,7 +112,7 @@ Route::get('home/girls/zan/{id}','home\GirlsController@zan');   //前台车模�
 Route::resource('home/girls','home\GirlsController');   //前台车模列表
 
 Route::get('home/index','home\IndexController@index');   //前台首页
-
+Route::get('/home/index/{id}','home\IndexController@index');   //前台首页
 
 
 
@@ -163,7 +163,7 @@ Route::get('home/articles/click','home\ArtRankController@click');               
 Route::get('home/articles/time','home\ArtRankController@time');                        //根据时间进行排行
 Route::get('home/articles/praise','home\ArtRankController@praise');                    //根据点赞进行排行
 Route::get('home/articles/create','home\ArticlesControlle@create');                    //前台文章发表
-Route::put('home/articles/store/{id}','home\ArticlesControlle@store');                     //前台文章发表
+Route::put('home/drafts/save/{id}','home\DraftsController@save');                     //前台文章发表
 Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
 Route::get('home/news/{id}/details','home\NewsController@details');                    //前台新闻详情
 Route::get('home/drafts/{id}/index','home\DraftsController@index');                    //草稿箱主页
