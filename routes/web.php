@@ -50,7 +50,7 @@ Route::get('/', function () {
 
 
 /*------------------------------------------------------------  zhuangyuanhui 52 ----------------------------------------------*/
-
+Route::get('home/users/sign','home\UsersController@sign');      //用户签到
 Route::resource('admin/comment','admin\CommentsController');	//评论后台管理
 Route::resource('admin/news','admin\NewsController');		//后台新闻管理
 Route::resource('admin/girls','admin\GirlsController');		//后台车模管理
@@ -163,17 +163,22 @@ Route::get('home/articles/click','home\ArtRankController@click');               
 Route::get('home/articles/time','home\ArtRankController@time');                        //根据时间进行排行
 Route::get('home/articles/praise','home\ArtRankController@praise');                    //根据点赞进行排行
 Route::get('home/articles/create','home\ArticlesControlle@create');                    //前台文章发表
-Route::put('home/drafts/save/{id}','home\DraftsController@save');                     //前台文章发表
+Route::put('home/drafts/save/{id}','home\DraftsController@save');                      //前台文章发表
 Route::get('home/articles/{id}','home\ArticlesControlle@index');                       //前台文章分类排行
 Route::get('home/news/{id}/details','home\NewsController@details');                    //前台新闻详情
 Route::get('home/drafts/{id}/index','home\DraftsController@index');                    //草稿箱主页
-
-
+Route::get('home/articles/collect/{id}','home\ArticlesControlle@collect');             //文章收藏
+Route::get('home/message/system','home\MessageController@system');                     //系统消息
+Route::get('home/message/send','home\MessageController@send');                         //发件消息
+Route::get('home/message/send_system','home\MessageController@send_system');           //发件消息
+Route::get('home/message/sdelete/{id}','home\MessageController@sdelete');              //删除收件消息
+Route::get('home/message/fdelete/{id}','home\MessageController@fdelete');              //删除发件消息
+Route::get('home/message/look/{id}','home\MessageController@look');              //删除发件消息
 
 Route::post('admin/login/check','admin\LoginController@check');                        //检查登录
 Route::post('admin/login/checkemail','admin\LoginController@checkemail');              //审查邮箱                 
-Route::post('admin/login/changepwd','admin\LoginController@changepwd');
-
+Route::post('admin/login/changepwd','admin\LoginController@changepwd');                //修改密码
+Route::post('home/message/store_system','home\MessageController@store_system');        //发件消息
 
 
 
@@ -184,10 +189,11 @@ Route::resource('admin/articles','admin\HArticlesController')->middleware('login
 Route::resource('admin/login','admin\LoginController');                                //后台登录管理
 Route::resource('home/layout','home\LayoutControlle');                                 //Layout图路由 
 Route::resource('home/drafts','home\DraftsController');                                //草稿箱路由
+Route::resource('home/message','home\MessageController');                              //用户私信
 
 
 //home
-Route::resource('home/articles','home\ArticlesControlle');                            //前台用户路由
+Route::resource('home/articles','home\ArticlesControlle');                            //前台文章路由
 
 
 

@@ -38,15 +38,55 @@
         @if($users->id == $login_id)
           <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的关注</a>
           <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的粉丝</a>
-          <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="old1">我的私信</a>
+          <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="/home/message" class="old1">我的私信</a>
         @else
           <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">关注TA</a>
-          <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="old1">发送私信</a>
+          <a id="followmod" href="javascript:;" class="old1" data-toggle="modal" data-target="#myModal">发送私信</a>
         @endif
       </a>
        </p> 
     </div> 
-   </div> 
+   </div>
+
+
+    <!-- 调用模态框方法的位置 -->
+
+     <!-- 需要引进的文件 -->
+     <link rel="stylesheet" type="text/css" href="/admin/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">发送私信</h4>
+          </div>
+            <form action="/home/message" method="post" >
+               {{ csrf_field() }}
+               <div class="modal-body">
+                 <div class="form-group">
+                  <label for="exampleInputEmail1"></label>
+                  <input type="hidden" name="id" value="{{ $users->id }}">
+                  <input type="textarea" name="content" class="form-control" id="exampleInputEmail1" placeholder="message">
+                 </div>
+                </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                 <button type="submit" class="btn btn-default">发送</button>
+               </div>
+            </form>
+
+         
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
    <div class="wp cl"> 
     <div class="space_nav cl"> 
      <ul class="tb_1 cl"> 

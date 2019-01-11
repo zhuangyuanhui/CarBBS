@@ -15,8 +15,8 @@
   <link rel="stylesheet" type="text/css" href="/home/css/styles.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_portal_index.css" /> 
-  <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" /> 
   <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" /> 
   <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
@@ -26,7 +26,6 @@
   <meta name="msapplication-task" content="name=动态;action-uri=http://quaters.cn/display/che/home.php;icon-uri=http://quaters.cn/display/che/static/image/common/home.ico" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
-  <script src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js" type="text/javascript"></script>
   <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css"/>
  
  

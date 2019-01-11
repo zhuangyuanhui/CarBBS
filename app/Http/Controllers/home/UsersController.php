@@ -99,6 +99,7 @@ class UsersController extends Controller
         $users_info->users_id = $users->id;
         $users_info->sign_number = 5;
         $users_info->sign_time = time();
+        $users_info->face = "home/personal/images/users_face.gif";
         $users_info->sign_days = 1;
         $res2 = $users_info->save();
 
@@ -207,5 +208,58 @@ class UsersController extends Controller
         $sign_users = UsersInfo::orderBy('sign_days','desc')->limit(20)->get(); 
         return $sign_users;
     }
+
+    /**
+     * 用户签到
+     */
+    public function sign()
+    {
+        //获取session用户信息
+         $login_users = session('login_users');
+         //获取用户详情
+         $users_info = UsersInfo::where('users_id',$login_users->id)->first();
+         //判断签到时间是否是今天
+         if(date('Ymd',$users_info->sign_time) == date('Ymd',time() ) ){
+            //返回值
+             echo json_encode(['msg'=>'error']);
+             exit;
+         //判断签到时间是否是昨天
+         } elseif( (int)date('Ymd',$users_info->sign_time) == ( (int)date('Ymd',time() ) ) -1 ) {
+         //连续签到天数加1
+            $users_info->sign_days = $users_info->sign_days+1;
+         //判断连续签到天数是否小于10
+            if($users_info->sign_days <= 10){
+         //积分+5
+                $num = $users_info->sign_number+5;
+         //返回值       
+                echo json_encode(['msg'=>'success','jifen'=>5]);
+         //判断连续签到天数是否大于10小于20
+            }elseif($users_info->sign_days > 10 && $users_info->sign_days <= 20){
+         //积分+10
+                 $num = $users_info->sign_number+10;
+         //返回值
+                 echo json_encode(['msg'=>'success','jifen'=>10]);
+         //大于20天的积分加15
+             }else{
+                 $num = $users_info->sign_number+15;
+                 echo json_encode(['msg'=>'success','jifen'=>15]);
+             }
+         //昨天之前的不算连续签到
+         } else {
+         //连续签到天数为1
+             $users_info->sign_days = 1;
+         //积分加5
+             $num = $users_info->sign_number+5;
+             echo json_encode(['msg'=>'success','jifen'=>5]);
+         }
+         //保存当前签到时间
+         $users_info->sign_time = time();
+         //保存签到积分
+         $users_info->sign_number = $num;
+         $users_info->save();
+
+    }
+
+
 
 }

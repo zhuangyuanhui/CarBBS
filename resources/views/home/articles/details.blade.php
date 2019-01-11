@@ -42,17 +42,23 @@
      <div class="sd"> 
       <div class="itofeedback cl"> 
        <a href="/home/articles/create" class="bluebigbutton"  title="发新帖">发新帖</a> 
-       <a href="javascript:;" id="sign"     class="greenbigbutton" title="签到" style="margin-right: 0;">签到SIGN</a> 
+       <a href="javascript:;" id="sign" class="greenbigbutton" title="签到" style="margin-right: 0;">签到SIGN</a> 
       </div> 
       <script type="text/javascript">
         $('#sign').click(function(){
-          alert($);
+          $.get('/home/users/sign',{},function(data){
+            if(data.msg == 'success'){
+              alert('签到成功,积分加'+data.jifen);
+            } else {
+              alert('今天已签到');
+            }
+          },'json');
         });
       </script>
       <div class="quater_author_info cl"> 
        <div class="quater_author_info_1 cl"> 
-        <a href="space-uid-1.html" target="_blank" class="toux"><img src="/uploads/{{ $user->getUserInfo->face }}" /></a> 
-        <p><a href="space-uid-1.html" target="_blank">{{ $user->uname }}</a> </p> 
+        <a href="/home/personal/index/{{ $user->id }}" target="_blank" class="toux"><img src="/uploads/{{ $user->getUserInfo->face }}" /></a> 
+        <p><a href="/home/personal/index/{{ $user->id }}" target="_blank">{{ $user->uname }}</a> </p> 
         <p style="margin-top: 3px;">
           <a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=1" target="_blank" style="color: #FF0000;">
              @if($user->id == 1)
@@ -174,7 +180,7 @@
              <h1> <a href="thread-10-1-1.html" onclick="return copyThreadUrl(this, '玩车达人')">{{ $article->title }}</a> </h1> 
             </div> 
             <div class="moquu_small"> 
-             <p><a href="/home/vip" class=""></a>&copy; <a href="space-uid-1.html" target="_blank">admin</a> <a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=1" target="_blank">管理员</a> &nbsp;&nbsp;/&nbsp;&nbsp;2015-9-6 13:07&nbsp;&nbsp;/&nbsp;&nbsp;<span> <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=10&amp;formhash=eaea2ab4" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖" class="k_favorite" style="padding-right: 10px;"><i></i>0 人收藏</a> <a href="javascript:void(0)" class="cc1" title="保留作者信息" style="margin-left: 10px;">保留作者信息</a> <a href="javascript:void(0)" class="cc2" title="禁止商业使用（站长自定义文字）">禁止商业使用（站长自定义文字）</a></span></p> 
+             <p><a href="/home/vip" class=""></a>&copy; <a href="space-uid-1.html" target="_blank">admin</a> <a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=1" target="_blank">管理员</a> &nbsp;&nbsp;/&nbsp;&nbsp;2015-9-6 13:07&nbsp;&nbsp;/&nbsp;&nbsp;<span> <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=10&amp;formhash=eaea2ab4" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖" class="k_favorite" style="padding-right: 10px;"><i></i>{{ $num }} 人收藏</a> <a href="javascript:void(0)" class="cc1" title="保留作者信息" style="margin-left: 10px;">保留作者信息</a> <a href="javascript:void(0)" class="cc2" title="禁止商业使用（站长自定义文字）">禁止商业使用（站长自定义文字）</a></span></p> 
             </div> 
            </div> 
           </div> 
@@ -236,7 +242,35 @@
                </div> 
                <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
                <span class="cutline" style="margin: 9px 10px 0 0;"></span> 
-               <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=10&amp;formhash=eaea2ab4" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖" class="k_favorite">收藏</a> 
+               <a href="javascript:;" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title ={{ $num }} + ' 人收藏'" title="收藏本帖" class="k_favorite"></a>
+               @if($flag ==1 )
+               <span id="collect">已收藏</span><li style="display: none;">{{ $article->id }}</li>
+               @elseif($flag == 2)
+               <span id="collect">收藏</span><li style="display: none;">{{ $article->id }}</li>
+               @elseif($flag == 3)
+               <a href="/home/login/login"><span>收藏</span></a>
+               @endif
+               <script type="text/javascript">
+                 jQuery('#collect').click(function(){
+                  var id = $(this).next().html();
+                  jQuery.get('/home/articles/collect/'+id,{'id':id},function(data){
+                    if(data.type == 'quxiao'){
+                          if(data.code == 'success'){
+                                $('#collect').html('收藏');
+                          }else{
+                              alert('取消收藏失败');
+                          }
+                    } else if(data.type == 'shoucang'){
+                          if(data.code == 'success'){
+                                $('#collect').html('已收藏');
+                          }else{
+                              alert('收藏失败');
+                          }
+                    }
+                  },'json');
+                 });
+               </script>
+              </a> 
                <div class="y" style="margin-top: 7px;"> 
                 <em> <a class="times_fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=2&amp;tid=10&amp;reppost=10&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)"><span></span>回复</a> </em> 
                </div> 
