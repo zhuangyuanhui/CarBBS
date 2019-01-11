@@ -13,9 +13,10 @@
 <div class="bm bw0">
   <div class="bm_c">
     <p class="tbmu">
-      <a href="/home/personal/users_articles/{{$login_id}}" class="a">文章</a>
-      <a href="/home/personal/users_news/{{$login_id}}" >新闻</a>
+      <a href="/home/personal/users_articles/{{$login_id}}" >文章</a>
+      <a href="/home/personal/users_news/{{$login_id}}" class="a">新闻</a>
       <a href="/home/personal/users_girls/{{$login_id}}" >车模</a>
+    </p>
     <div class="tl">
       <form method="post" autocomplete="off" name="delform" id="delform" action="" >
         <input type="hidden" name="formhash" value="0408893d">
@@ -24,31 +25,31 @@
           <tbody>
             <tr>
               <td class="icn">&nbsp;</td>
-              <td class="frm">文章标题</td>
+              <td class="frm">新闻标题</td>
               <td class="num">所属板块</td>
               <td class="by">浏览量</td>
               <td class="by">点赞量</td>
               <td class="by">发表时间</td>
             </tr>
-            @foreach($article as $key=>$value)
+            @foreach($news as $key=>$value)
             <tr>
               <td class="icn">
-                <a href="/home/articles/{{$value->id}}/edit" title="新窗口打开" target="_blank">
+                <a href="/home/news/{{$value->id}}/details" title="新窗口打开" target="_blank">
                   <img src="/home/personal/folder_new.gif"></a>
               </td>
               <th>
-                <a href="/home/articles/{{$value->id}}/edit" target="_blank">{{$value->title}}</a></th>
+                <a href="/home/news/{{$value->id}}/details" target="_blank">{{$value->title}}</a></th>
               <td>
-                <a href="/home/articles/{{$value->id}}/edit" class="xg1" target="_blank">{{$value->getCate->cname}}</a></td>
+                <a href="/home/news/{{$value->id}}/details" class="xg1" target="_blank">{{$value->getCate->cname}}</a></td>
               <td class="num">
-                <a href="/home/articles/{{$value->id}}/edit" class="xi2" target="_blank">{{$value->clicks}}</a>
+                <a href="/home/news/{{$value->id}}/details" class="xi2" target="_blank">{{$value->clicks}}</a>
                </td>
               <td class="num">
-                <a href="/home/articles/{{$value->id}}/edit" class="xi2" target="_blank">{{$value->praise}}</a>
+                <a href="/home/news/{{$value->id}}/details" class="xi2" target="_blank">{{$value->praise}}</a>
                 </td>
               <td class="by">
                 <em>
-                  <a href="/home/articles/{{$value->id}}/edit" target="_blank">
+                  <a href="/home/news/{{$value->id}}/details" target="_blank">
                     <span title="2019-1-4 18:37">{{date('Y-m-d H:i:s',$value->ctime)}}</span></a>
                 </em>
               </td>

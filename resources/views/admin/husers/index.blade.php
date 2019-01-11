@@ -31,6 +31,9 @@
                      页
                    </label>
                     </div>
+                    <div id="DataTables_Table_0_length" class="dataTables_length">
+                     <label><a style="font-size: 20px;" href="/admin/husers/messageall">群发消息</a></label>
+                    </div>
                     <div class="dataTables_filter" id="DataTables_Table_0_filter">
                      <label>搜索: 
                         <input type="text" name="search_name" value="{{$params['search_name'] or ''}}">
@@ -55,7 +58,9 @@
                                 <tr>
                                     <td>{{ $value->id }}</td>
                                     <td>{{ $value->uname }}</td>
-                                    <td></td>
+                                    <td>
+                                        <img src="/uploads/{{$value->getUserInfo->face}}" style="width:40px;height: 40px;">
+                                    </td>
                                     <td>{{ $value->tel }}</td>
                                     @if($value->status == 1)
                                     <td>已激活</td>
@@ -70,6 +75,7 @@
                                     <td>
                                         <a href="/admin/husers/{{ $value->id }}/edit" class="btn btn-warning">管理</a>
                                         <a href="#" onclick="shows({{ $value->id }})" class="btn btn-success">查看详情</a>
+                                        <a href="/admin/husers/message/{{ $value->id }}" class="btn btn-success">发送私信</a>
                                     </td>
                                 </tr>
                                 @endforeach

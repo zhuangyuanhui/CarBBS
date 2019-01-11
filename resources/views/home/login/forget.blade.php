@@ -406,11 +406,93 @@
                                                 //用户名存在,可修改密码
                                                  isUname = true;
                                                  jQuery('#users_name').parent().next().children([0]).html('');
-                                            }else{
+                                            
+                                                 //给手机输入框绑定失焦事件
+                                                jQuery('#tel_name').keyup(function(){
+                                                     var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
+                                                     var tel_val = jQuery('#tel_name').val();
+                                                     var uname_val = jQuery('#users_name').val(); 
+                                                     //正则判断手机号格式是否正确
+                                                    if(tel_preg.test(tel_val)){
+
+                                                        jQuery(this).parent().next().children([0]).html('手机号格式正确');
+                                                        jQuery(this).parent().next().children([0]).css('color','green');
+
+                                                        var tel_url = "/home/login/checktel/" + tel_val;
+
+                                                        //发送ajax检测手机号是否为该用户的绑定手机号
+                                                        jQuery.get(tel_url,{'tel':tel_val},function(data){
+                                                            if(data.code == 'success'){
+                                                                isPhone = true;
+                                                                jQuery('#tel_name').parent().next().children([0]).html('');
+
+                                                                var time = 5;
+                                                                var flag = true;   //设置点击标记，防止5内再次点击生效
+                                                                //发送验证码
+                                                                jQuery('#dyMobileButton').click(function(){
+                                                                    jQuery(this).attr("disabled",true);
+                                                                    if(flag){
+                                                                        var timer = setInterval(function () {
+                                                                            if(time == 5 && flag){
+                                                                                flag = false;
+                                                                                var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
+                                                                                 var tel = jQuery('#tel_name').val();
+                                                                                   if(!tel_preg.test(tel)){
+                                                                                    return false;
+                                                                                   }
+                                                                                    var url = '/home/login/send/'+tel;
+                                                                                jQuery.get(url,{'tel':tel},function(data){
+                                                                                    //接受短信发送结果
+                                                                                    if(data.code == 2){
+                                                                                        jQuery("#dyMobileButton").html("已发送");
+                                                                                    }else{
+                                                                                        flag = true;
+                                                                                        time = 5;
+                                                                                        clearInterval(timer);
+                                                                                    }
+                                                                               },'json');
+                                                                            }else if(time == 0){
+                                                                                jQuery("#dyMobileButton").removeAttr("disabled");
+                                                                                jQuery("#dyMobileButton").html("免费获取验证码");
+                                                                                clearInterval(timer);
+                                                                                time = 5;
+                                                                                flag = true;
+                                                                            }else {
+                                                                                jQuery("#dyMobileButton").html(time + " s 重新发送");
+                                                                                time--;
+                                                                            }
+                                                                        },1000);
+                                                                     }
+                                                                 });
+                                                            }else{
+                                                                isPhone = false;
+                                                                jQuery('#tel_name').parent().next().children([0]).html('手机号不是该用户绑定手机号');
+                                                                jQuery('#tel_name').parent().next().children([0]).css('color','red');
+                                                            }
+                                                        },'json');
+
+                                                    }else{
+                                                        isPhone = false;
+                                                        jQuery(this).parent().next().children([0]).html('手机号格式不正确');
+                                                         jQuery(this).parent().next().children([0]).css('color','red');
+                                                    }
+                                                });
+
+                                            }else if(data.code == 'error'){
+                                                if(data.time == 'error'){
                                                  //用户名不存在,改变标识符值
-                                                isUname = false;
-                                                jQuery('#users_name').parent().next().children([0]).html('该用户不存在');
-                                                jQuery('#users_name').parent().next().children([0]).css('color','green');
+                                                        isUname = false;
+                                                        jQuery('#users_name').parent().next().children([0]).html('该用户不存在');
+                                                        jQuery('#users_name').parent().next().children([0]).css('color','red');
+                                                  }else if(data.time == 'long'){
+                                                        isUname = false;
+                                                         jQuery('#users_name').parent().next().children([0]).html('该账号已被永久封号');
+                                                        jQuery('#users_name').parent().next().children([0]).css('color','red');
+                                                  }else{
+                                                      isUname = false;
+                                                      jQuery('#users_name').parent().next().children([0]).html('该账号已被临时封号,到期时间为:'+data.time);
+                                                        jQuery('#users_name').parent().next().children([0]).css('color','red');
+                                                  }
                                             }
                                         },'json');
                                     }else{
@@ -493,76 +575,7 @@
                                     }                                  
                                });
                             
-                            //给手机输入框绑定失焦事件
-                            jQuery('#tel_name').keyup(function(){
-                                 var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
-                                 var tel_val = jQuery('#tel_name').val();
-                                 var uname_val = jQuery('#users_name').val(); 
-                                 //正则判断手机号格式是否正确
-                                if(tel_preg.test(tel_val)){
-
-                                    jQuery(this).parent().next().children([0]).html('手机号格式正确');
-                                    jQuery(this).parent().next().children([0]).css('color','green');
-
-                                    var tel_url = "/home/login/checktel/" + tel_val;
-
-                                    //发送ajax检测手机号是否为该用户的绑定手机号
-                                    jQuery.get(tel_url,{'tel':tel_val},function(data){
-                                        if(data.code == 'success'){
-                                            isPhone = true;
-                                            jQuery('#tel_name').parent().next().children([0]).html('');
-
-                                            var time = 5;
-                                            var flag = true;   //设置点击标记，防止5内再次点击生效
-                                            //发送验证码
-                                            jQuery('#dyMobileButton').click(function(){
-                                                jQuery(this).attr("disabled",true);
-                                                if(flag){
-                                                    var timer = setInterval(function () {
-                                                        if(time == 5 && flag){
-                                                            flag = false;
-                                                            var tel_preg = /^1{1}[3-9]{1}[\d]{9}$/;
-                                                             var tel = jQuery('#tel_name').val();
-                                                               if(!tel_preg.test(tel)){
-                                                                return false;
-                                                               }
-                                                                var url = '/home/login/send/'+tel;
-                                                            jQuery.get(url,{'tel':tel},function(data){
-                                                                //接受短信发送结果
-                                                                if(data.code == 2){
-                                                                    jQuery("#dyMobileButton").html("已发送");
-                                                                }else{
-                                                                    flag = true;
-                                                                    time = 5;
-                                                                    clearInterval(timer);
-                                                                }
-                                                           },'json');
-                                                        }else if(time == 0){
-                                                            jQuery("#dyMobileButton").removeAttr("disabled");
-                                                            jQuery("#dyMobileButton").html("免费获取验证码");
-                                                            clearInterval(timer);
-                                                            time = 5;
-                                                            flag = true;
-                                                        }else {
-                                                            jQuery("#dyMobileButton").html(time + " s 重新发送");
-                                                            time--;
-                                                        }
-                                                    },1000);
-                                                 }
-                                             });
-                                        }else{
-                                            isPhone = false;
-                                            jQuery('#tel_name').parent().next().children([0]).html('手机号不正确');
-                                            jQuery('#tel_name').parent().next().children([0]).css('color','red');
-                                        }
-                                    },'json');
-
-                                }else{
-                                    isPhone = false;
-                                    jQuery(this).parent().next().children([0]).html('手机号格式不正确');
-                                     jQuery(this).parent().next().children([0]).css('color','red');
-                                }
-                            });
+                            
 
                             //注册按钮点击事件,当用户名,手机,密码都正确才能发送提交
                             jQuery('#registerformsubmit').click(function(){

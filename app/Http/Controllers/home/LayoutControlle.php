@@ -4,6 +4,9 @@ namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\models\home\Users;
+use App\models\home\UsersInfo;
+use App\models\home\Concern;
 
 class LayoutControlle extends Controller
 {
@@ -12,9 +15,29 @@ class LayoutControlle extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id = 0)
     {
-        return view('home.layout.index');
+        
+        
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
+
+        //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+
+        if($concerns){
+            //标识符,登陆用户已关注该业主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该业主
+            $ifconcern = false;
+        }
+
+        //获取对象id用户的信息
+        $users = Users::find($id);
+
+        return view('home.layout.personal',['title'=>'个人资料','users'=>$users,'login_id'=>$login_id,'ifconcern'=>$ifconcern]);
     }
 
     /**

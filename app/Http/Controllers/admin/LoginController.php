@@ -124,6 +124,9 @@ class LoginController extends Controller
                         if(!$user->uname){
                             return back()->with('error','该用户不存在');
                         }
+                         if($user->email != $request->email){
+                            return back()->with('error','该邮箱不属于该用户');
+                        }
                         session(['uname' => $uname]);
                         return redirect('/admin/login/reset')->with('success','验证成功,请输入新密码');
                         

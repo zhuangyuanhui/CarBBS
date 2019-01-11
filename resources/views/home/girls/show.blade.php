@@ -154,15 +154,10 @@
           </div> 
           <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
           <span class="cutline" style="margin: 9px 10px 0 0;"></span> 
-          <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=article&amp;id=31&amp;handlekey=favoritearticlehk_31" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" class="k_favorite">收藏</a> 
          </div> 
          <!--[diy=diycontentrelatetop]-->
          <div id="diycontentrelatetop" class="area"></div>
          <!--[/diy]--> 
-         <div class="pren pbm cl"> 
-          <em class="z"><span class="i_prev" title="上一篇"></span><a href="article-30-1.html" title="上一篇">美女模特宫冷馨写真 绿茶宫冷馨变身车模诱惑兰博基尼</a></em> 
-          <em class="y"><span class="i_next" title="下一篇"></span><a href="article-32-1.html" title="下一篇">女神模特徐冬冬透视装巨胸逼人 徐冬冬美胸图片曝光[图]</a></em> 
-         </div> 
          <div class="contacts cl"> 
          </div> 
         </div> 
@@ -171,50 +166,7 @@
         <!--[/diy]--> 
        </div> 
       </div> 
-      <div id="comment" class="bm cl"> 
-       <div class="comment_tit cl"> 
-        <div class="z"> 
-         <a>评论</a> 
-        </div> 
-        <div class="y"> 
-         <a>0条</a> 
-        </div> 
-       </div> 
-       <div class="comment_box cl"> 
-        <form id="cform" name="cform" action="portal.php?mod=portalcp&amp;ac=comment" method="post" autocomplete="off"> 
-         <div class="tedt" id="tedt"> 
-          <div class="area">
-           <div style="text-align: center; height: 80px; padding: 30px 0;">
-            <p style="margin-top: 15px; color: #333333; font-size: 14px;">请<a href="/home/login/login" style="color: #4ecdc4;">登录</a>后才可以发表评论，或<a href="member.php?mod=register" style="color: #4ecdc4;">免费注册</a></p>
-           </div> 
-          </div> 
-         </div> 
-        </form> 
-       </div> 
-       <script type="text/javascript">
-
-    jQuery(function(){
-
-jQuery("#tedt .pt").focus(function(){
-
-  jQuery(this).addClass("bgchange");
-
-}).blur(function(){
-
-  jQuery(this).removeClass("bgchange");
-
-});
-
-    });
-
-    </script> 
-       <div id="comment_ul"> 
-        <ul> 
-        </ul> 
-       </div> 
-      </div> 
       <!--[diy=diycontentcomment]-->
-      <div id="diycontentcomment" class="area"></div>
       <!--[/diy]--> 
      </div> 
     </div> 
