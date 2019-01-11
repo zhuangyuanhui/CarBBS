@@ -1,5 +1,8 @@
 @extends('home.layout.personal')
 @section('content')
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
 <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" />
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
@@ -53,11 +56,12 @@
         <div class="pbm mbm bbda c">
           @if($users->id == $login_id)
          <a  style="color: #f63756;" href="/home/personal/edit/{{$users->id}}">修改资料</a>
-         <div style="margin-top: 20px">
+           <div style="margin-top: 20px">
             <a  style="color: #f63756;" href="/home/personal/pass/{{$users->id}}">修改密码</a>
          </div>
          @endif
-        </div> 
+        </div>
+
         <div class="pbm mbm cl" style="margin-top: 30px; background: #FFFFFF;"> 
          <div class="tag_box cl" style="margin: 10px 0 20px 0;">
           <span class="span-mark-author" style="font-size: 16px;">活跃概况</span>

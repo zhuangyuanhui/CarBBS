@@ -1,6 +1,9 @@
 @extends('home.layout.index')
 
 @section('content')
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
   <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_forum_guide.css" /> 
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_forum_guide.css" /> 

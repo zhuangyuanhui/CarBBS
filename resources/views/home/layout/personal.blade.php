@@ -3,6 +3,9 @@
  <head> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+   <!-- 需要引进的文件 -->
+ <link rel="stylesheet" type="text/css" href="/admin/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
   <title>{{ $title }}</title> 
   <meta name="keywords" content="首页" /> 
   <meta name="description" content="首页 " /> 
@@ -463,11 +466,11 @@ jQuery('.quater_search').slideUp(300);
           </form>
        </div> 
      <h2 class="mt"> {{$users->nickname}} </h2> 
-      <p class="follow_us">
+     <p class="follow_us">
         @if($users->id == $login_id)
           <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的关注</a>
           <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的粉丝</a>
-          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="old1">我的私信</a>
+          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="/home/message" class="old1">我的私信</a>
         @else
           <a   href="javascript:;" class="new1 concern ">
             @if($ifconcern == true)
@@ -477,11 +480,37 @@ jQuery('.quater_search').slideUp(300);
             @endif
           </a>
           <input type="hidden" value="{{$users->id}}">
-          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="old1">发送私信</a>
+           <a id="followmod" href="javascript:;" class="old1" data-toggle="modal" data-target="#myModal">发送私信</a>
         @endif
-       </p>  
+       </p> 
     </div> 
-   </div> 
+   </div>
+    <!-- 调用模态框方法的位置 -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">发送私信</h4>
+          </div>
+            <form action="/home/message" method="post" >
+               {{ csrf_field() }}
+               <div class="modal-body">
+                 <div class="form-group">
+                  <label for="exampleInputEmail1"></label>
+                  <input type="hidden" name="id" value="{{ $users->id }}">
+                  <input type="textarea" name="content" class="form-control" id="exampleInputEmail1" placeholder="message">
+                 </div>
+                </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                 <button type="submit" class="btn btn-default">发送</button>
+               </div>
+            </form>
+          </div>
+        </div>
+      </div>
    <div class="wp cl"> 
     <div class="space_nav cl"> 
      <ul class="tb_1 cl"> 
@@ -491,7 +520,6 @@ jQuery('.quater_search').slideUp(300);
       <li @if($type == 4) class="a" @endif><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;关注&nbsp;&nbsp;</a></li> 
         @if($users->id == $login_id)
       <li ><a href=""><img src="/home/picture/space_doing.png" class="vm" />&nbsp;&nbsp;粉丝&nbsp;&nbsp;</a></li> 
-      <li><a href=""><img src="/home/picture/space_share.png" class="vm" />&nbsp;&nbsp;私信&nbsp;&nbsp;</a></li>
       <li class="qiandao" id="qiandao" ><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;签到&nbsp;&nbsp;</a></li>
       @else
         <li class="jubao" style="height: 40px"><a href="/home/personal/report/{{$users->id}}"><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;举报&nbsp;&nbsp;</a></li>
@@ -499,21 +527,6 @@ jQuery('.quater_search').slideUp(300);
         <style type="text/css">
           .qiandao{
             height: 51px;
-=======
-      <li class="a"><a href="#"><img src="/home/picture/space_profile.png" class="vm" />&nbsp;&nbsp;资料&nbsp;&nbsp;</a></li> 
-      <li> <a href="/home/personal/articles/{{$users->id}}"><img src="/home/picture/space_thread.png" class="vm" />&nbsp;&nbsp;文章&nbsp;&nbsp;</a></li>
-      <li><a href="/home/personal/users_articles"><img src="/home/picture/space_blog.png" class="vm" />&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li>
-      <li><a href="/home/personal/concern/{{$users->id}}"><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;关注&nbsp;&nbsp;</a></li> 
-        @if($users->id == $login_id)
-      <li><a href=""><img src="/home/picture/space_doing.png" class="vm" />&nbsp;&nbsp;粉丝&nbsp;&nbsp;</a></li> 
-      <li><a href=""><img src="/home/picture/space_share.png" class="vm" />&nbsp;&nbsp;私信&nbsp;&nbsp;</a></li>
-       @endif
- 
-        <li class="qiandao" id="qiandao" ><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;签到&nbsp;&nbsp;</a></li>
-        <style type="text/css">
-          .qiandao{
-            height: 51px; */
->>>>>>> car/jun
             border-bottom: 0;
             line-height: 50px;
             color: #333333;
@@ -522,7 +535,6 @@ jQuery('.quater_search').slideUp(300);
             margin-top: -50px;
             margin-left: 994px;
           }
-<<<<<<< HEAD
           .jubao{
             height: 20px;
             border-bottom: 0;
@@ -535,21 +547,13 @@ jQuery('.quater_search').slideUp(300);
             margin-left: 994px;
             opacity: 0.4;
           }
-=======
->>>>>>> car/jun
         </style>
      </ul> 
     </div> 
    </div> 
-<<<<<<< HEAD
   @section('content')
 
   @show
-=======
-@section('content')
-
-@show
->>>>>>> car/jun
   </div>
   <script teype="text/javascript">
   $(function(){
@@ -585,8 +589,7 @@ jQuery('.quater_search').slideUp(300);
             });
 
 
-    //关注功能发送ajax8
-<<<<<<< HEAD
+    //关注功能发送ajax
       $('.concern').click(function(){
 
             var id = $(this).next().val();
@@ -613,16 +616,6 @@ jQuery('.quater_search').slideUp(300);
             },'json');
       });
 
-=======
-      $('#concern').click(function(){
-            var id = $(this).next().val();
-
-            var url = '/home/users/concern/' + id;
-          $.get(url,{'id':id},function(data){
-
-          },'json')
-      });
->>>>>>> car/jun
   });
 </script>  
 

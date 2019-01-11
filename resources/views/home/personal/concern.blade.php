@@ -1,6 +1,9 @@
 @extends('home.layout.personal')
 
 @section('content')
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
 <div id="ct" class="ct1 wp cl" style="min-height:310px;width: 1080px;margin: 0 auto;border: 0;zoom: 1;">
 	<div class="mn" style="overflow: visible;">
 		<!--[diy=diycontenttop]-->

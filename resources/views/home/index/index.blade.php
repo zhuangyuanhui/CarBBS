@@ -1,6 +1,11 @@
 @extends('home.layout.index')
 
 @section('content')
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" /> 
+
+
 <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
 <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" />
 <div id="wp" class="wp time_wp cl"><link rel="stylesheet" type="text/css" id="time_diy" href="/home/css/portaldiy.css" />
@@ -23,13 +28,13 @@
     <div class="tempWrap" style="overflow:hidden; position:relative; width: 850px;">
       <ul>
       @foreach($slides as $k=>$v)
-	      <li style="float: left; width: 850px;">
-	     	<a href="{{$v->slides_url}}" target="_blank" title="{{$v->sname}}">
-	      	<img src="/uploads/{{$v->slides_img}}" alt="{{$v->sname}}" width="760" height="330"></a>
-        	  <div class="t_box blackbg">
-         	   <h2><a href="{{$v->slides_url}}" target="_blank">{{$v->sname}}</a></h2>
+        <li style="float: left; width: 850px;">
+        <a href="{{$v->slides_url}}" target="_blank" title="{{$v->sname}}">
+          <img src="/uploads/{{$v->slides_img}}" alt="{{$v->sname}}" width="760" height="330"></a>
+            <div class="t_box blackbg">
+             <h2><a href="{{$v->slides_url}}" target="_blank">{{$v->sname}}</a></h2>
 
-        	  </div>
+            </div>
         </li>
       @endforeach
         </ul>
@@ -45,75 +50,75 @@
     </ul>
   </div> 
   <a class="prev btn" href="javascript:;" style="border:#fff;opacity: 0.3"></a>
-  <a class="next btn" href="javascript:;" style="border:#fff;opacity: 0.3"	></a>
+  <a class="next btn" href="javascript:;" style="border:#fff;opacity: 0.3"  ></a>
 </div>
-		<script type="text/javascript">
-			$(function(){
-				var i= 1;
-				var time = null;
-				function shows(i){
-					$('.tempWrap li').hide();
-					$('.tempWrap li').eq(i).show();
+    <script type="text/javascript">
+      $(function(){
+        var i= 1;
+        var time = null;
+        function shows(i){
+          $('.tempWrap li').hide();
+          $('.tempWrap li').eq(i).show();
 
-					$('.hd li').css('background','');
-					$('.hd li').eq(i).css('background','#4ECDC4');
-				}
+          $('.hd li').css('background','');
+          $('.hd li').eq(i).css('background','#4ECDC4');
+        }
 
-				function run(){
-					if(time==null){
-						time = setInterval(function(){
-							shows(i);
-							i++;
-							if (i == $('.tempWrap li').length) {
-								i=0;
-							}
-						},2000);
-					}
-				}
-				 
-				run();
+        function run(){
+          if(time==null){
+            time = setInterval(function(){
+              shows(i);
+              i++;
+              if (i == 5) {
+                i=0;
+              }
+            },2000);
+          }
+        }
+         
+        run();
 
-				//给下方小图标绑定点击事件
-				// $('.cl .hd ul li').mouseover(function(){
-				// 	clearInterval(time);
-				// 	time = null;
+        //给下方小图标绑定点击事件
+        // $('.cl .hd ul li').mouseover(function(){
+        //  clearInterval(time);
+        //  time = null;
 
-				// 	//获取移入下标
-				// 	i= $(this).index();
-				// 	shows(i);
-				// }).mouseout(function(){
-				// 	run();
-				// });
+        //  //获取移入下标
+        //  i= $(this).index();
+        //  shows(i);
+        // }).mouseout(function(){
+        //  run();
+        // });
 
-				//给轮播图绑定移入移出事件
-				$('.focus_box').mouseover(function(){
-					clearInterval(time);
-					time = null;
-					$('.focus_box .btn').css('opacity','0.8');
-				}).mouseout(function(){
-					run();
-					$('.focus_box .btn').css('opacity','0.3');
-				})
+        //给轮播图绑定移入移出事件
+        $('.focus_box').mouseover(function(){
+          clearInterval(time);
+          time = null;
+          $('.focus_box .btn').css('opacity','0.8');
+        }).mouseout(function(){
+          run();
+          $('.focus_box .btn').css('opacity','0.3');
+        })
 
-				//左右侧 绑定前进后退 点击事件
-				$('.prev').click(function(){
-					i--;
-					if (i<0) {
-						i = $('.tempWrap li').length-1;
-					}
-					shows(i);
-				});
-				$('.next').click(function(){
-					i++;
-					if (i == $('.tempWrap li').length) {
-						i =0 ;
-					}
-					shows(i);
-				});
-			});
-		</script>
-	  </div>
-	</div>
+        //左右侧 绑定前进后退 点击事件
+        $('.prev').click(function(){
+          i--;
+          if (i<0) {
+            i = $('.tempWrap li').length-1;
+          }
+          shows(i);
+        });
+        $('.next').click(function(){
+          i++;
+          if (i == $('.tempWrap li').length) {
+            i =0 ;
+          }
+          shows(i);
+        });
+      });
+    </script>
+    </div>
+  </div>
   </div>
 </div>
 <div id="frameRwqqNn" class="frame move-span cl frame-1">
@@ -147,7 +152,7 @@
 <ul class="ui_list cl" id="itemContainer">
 @foreach($article as $k=>$v)
 <li class="ui_2_ul_li  cl border_b_gray">
-  <div class="ui_2_ul_li_imgouter  ovh position_a"> <a class="fr ds_inlineB cdg" href="/home/articles/{{$v->id}}/edit"><img src="/uploads/{{$v->cover}}" width="220" height="140" /></a> </div>
+  <div class="ui_2_ul_li_imgouter  ovh position_a"> <a class="fr ds_inlineB cdg" href="/home/articles/{{$v->id}}/edit"><img src="/uploads/{{$v->cover}}" style="width: 220px;height: 124px;" /></a> </div>
   <div class="ui_2_ul_li_con">
     <h3 class="clr"><a target="_blank" href="/home/articles/{{$v->id}}/edit" class="ui_colorG">{{$v->title}}</a></h3>
     <div class="ui_2_userinfo  clg cl">
@@ -209,11 +214,11 @@ perPage: 9
     </div>
     <hr>
       <div class="wrapper" style="margin-top: -8px;height: 197px;background-image:url('/home/images/bg1.jpg');background-repeat: no-repeat;background-size: 100% 100%;">
-    	@foreach($label as $k=>$v)  
-		<a href="/home/index/{{$v->id}}" class="tag">{{$v->lname}}</a>
+      @foreach($label as $k=>$v)  
+    <a href="/home/index/{{$v->id}}" class="tag">{{$v->lname}}</a>
 
-		@endforeach
-	</div>
+    @endforeach
+  </div>
   </div>
 </div></div></div></div></div></div><!--[/diy]-->
       <div class="tabBar cl">
@@ -318,8 +323,11 @@ perPage: 9
 </div>
 @endforeach
 </div>
-<div id="portal_block_260_content" class="dxb_bc"  style="display: none">
 
+
+
+
+<div id="portal_block_260_content" class="dxb_bc"  style="display: none">
 @foreach($rank_girls as $k=>$v)
 <div class="part">
   <div class="paddingbox">

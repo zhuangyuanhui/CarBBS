@@ -1,6 +1,9 @@
 @extends('home.layout.index')
 
 @section('content')
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>

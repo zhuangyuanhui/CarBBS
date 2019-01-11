@@ -1,5 +1,8 @@
 @extends('home.layout.index')
 @section('content')
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
   <div id="wp" class="wp time_wp cl">
    <link rel="stylesheet" type="text/css" href="/home/css/list.css" /> 
    <script src="/home/js/jquery.superslide.js" type="text/javascript"></script> 

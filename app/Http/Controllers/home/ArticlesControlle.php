@@ -10,6 +10,8 @@ use App\models\admin\Comment;
 use App\models\home\Users;
 use App\models\home\Label;
 use App\models\home\Drafts;
+use App\models\home\Concern;
+use App\models\home\users_article;
 use DB;
 use App\Http\Controllers\home\ArtRankController;
 
@@ -119,6 +121,7 @@ class ArticlesControlle extends Controller
              if($res1){
                 $count = $user->art_count+1;
                 $user->art_count = $count;
+                $user->save();
                  //成功提交事务
                 DB::commit();
                return redirect("/home/personal/articles/$user->id")->with('success','发表文章成功');
@@ -151,17 +154,33 @@ class ArticlesControlle extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
+        
         //获取文章详情
         $article   = Article::where('id',$id)->first();
+        $article->clicks = $article->clicks+1;
         //获取作者信息
         $user      = Users::where('id',$article->users_id)->first();
         //获取该作者的文章数量
         $art_count = Article::where('users_id',$article->users_id)->count();
         //获取相同类型的文章
         $cate      = Article::where('cates_id',$article->cates_id)->orderBy('clicks','desc')->limit(3)->get();
-
+        
+        //判断用户是否登录
+        if ($request->session()->exists('login_users')) {
+                //判断该文章是否被该用户收藏,设置标志符
+                $user_id  = session('login_users')->id;
+                if( users_article::where('users_id',$user_id)->where('article_id',$id)->first() ){
+                    $flag = 1;
+                } else {
+                    $flag = 2;
+                }
+        } else { 
+             $flag = 3;
+        }
+        //获取该文章被收藏量
+        $num = users_article::where('article_id',$id)->count();
         //获取文章类别
         $cates = Cates::find($article->cates_id);
         //获取云标签
@@ -170,8 +189,11 @@ class ArticlesControlle extends Controller
         foreach ($labels_id as $key => $value) {
             $labels[] = Label::where('id',$value)->first()->lname;
         }
+        $article->save();
         return view('home.articles.details',
                                            [
+                                            'flag'=>$flag,
+                                            'num'=>$num,
                                             'labels'=>$labels,
                                             'user'=>$user,
                                             'art_count'=>$art_count,
@@ -227,5 +249,36 @@ class ArticlesControlle extends Controller
         $praise_article = Article::orderBy('praise','desc')->limit(20)->get();
 
         return $praise_article;
+    }
+
+    /**
+     * 文章收藏
+     */
+    public function collect($id)
+    {
+        $user_id  = session('login_users')->id;
+
+        $shoucang = users_article::where('users_id',$user_id)->where('article_id',$id)->first();
+
+        if($shoucang){
+            $res = $shoucang->delete();
+                if($res){
+                    echo json_encode(['code'=>'success','type'=>'quxiao']);
+                }else{
+                    echo json_encode(['code'=>'error','type'=>'quxiao']);
+                }
+        } else {
+            $users_article = new users_article;
+            $users_article->users_id = $user_id;
+            $users_article->article_id = $id;
+            $users_article->ctime = time();
+            $res = $users_article->save();
+                if($res){
+                   echo json_encode(['code'=>'success','type'=>'shoucang']);
+                } else {
+                    echo json_encode(['code'=>'error','type'=>'shoucang']);
+                }
+        }
+
     }
 }

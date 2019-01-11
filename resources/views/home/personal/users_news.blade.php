@@ -1,8 +1,10 @@
 @extends('home.layout.personal')
 @section('content')
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
 <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" />
-<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
    <div id="ct" class="ct1 wp cl"> 
     <div class="mn"> 
      <!--[diy=diycontenttop]-->

@@ -144,8 +144,6 @@ class GirlsController extends Controller
             $data->save();
             echo json_encode(['code'=>'success','msg'=>'成功点赞']);
             
-        }else{ 
-            echo json_encode(['code'=>'error']);
         }else{
             echo json_encode(['code'=>'error','msg'=>'已成功点赞,请勿重复点赞']);
         }
