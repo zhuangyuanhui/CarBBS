@@ -4,6 +4,8 @@ namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\models\home\Users;
+use App\models\home\UsersInfo;
 
 class LayoutControlle extends Controller
 {
@@ -12,9 +14,21 @@ class LayoutControlle extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id = 0)
     {
-        return view('home.layout.index');
+        
+        //如果id等于当前登录id,则获取自己的信息
+        if($id == 0){
+            $id = session('login_users')->id;
+        }
+
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
+
+        //获取对象id用户的信息
+        $users = Users::find($id);
+
+        return view('home.layout.personal',['title'=>'个人资料','users'=>$users,'login_id'=>$login_id]);
     }
 
     /**

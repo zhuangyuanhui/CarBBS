@@ -115,6 +115,9 @@
         <div class="pbm mbm bbda c">
           @if($users->id == $login_id)
          <a  style="color: #f63756;" href="/home/personal/edit/{{$users->id}}">修改资料</a>
+         <div style="margin-top: 20px">
+            <a  style="color: #f63756;" href="/home/personal/pass/{{$users->id}}">修改密码</a>
+         </div>
          @endif
         </div> 
         <div class="pbm mbm cl" style="margin-top: 30px; background: #FFFFFF;"> 

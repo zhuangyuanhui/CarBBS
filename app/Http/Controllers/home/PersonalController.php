@@ -8,6 +8,8 @@ use App\models\home\Users;
 use App\models\home\UsersInfo;
 use DB;
 use App\models\home\Article;
+use App\models\home\Concern;
+use Hash;
 
 class PersonalController extends Controller
 {
@@ -152,9 +154,28 @@ class PersonalController extends Controller
     /**
      * 我的关注
      */
-    public function concern()
+    public function concern($id=0)
     {
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
 
+        $users = Users::find($id);
+
+        //关注量 
+        
+
+        // 粉丝量
+        
+        
+
+        //dump(count($fans));exit;
+        return view('home.personal.concern',[
+                                    'title'=>'我的关注',
+                                    'users'=>$users,
+                                    'login_id'=>$login_id,
+                                    'concern'=>$users->users_concern,
+                                    
+                                ]);
     }
 
     /**
@@ -164,4 +185,81 @@ class PersonalController extends Controller
     {
 
     }
+    /**
+     * 取消关注
+     */
+    public function care($id)
+    {
+         //获取当前登录用户的id
+        $login_id = session('login_users')->id;
+
+        //获取 被关注的用户
+        $data = Concern::where('users_id','=',$id)->orWhere('fans_id','=',$login_id)->first();
+
+        $res = $data->delete();
+         if($res){
+            echo json_encode($data);
+        }else{
+            echo json_encode(['code'=>'error']);
+        }
+       
+    }
+
+
+    /**
+     * 个人密码修改页面
+     */
+    public function pass($id)
+    {   
+        //获取修改用户原资料
+        $users = Users::find($id);
+
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
+
+        //加载页面,分配数据
+        return view('home.personal.pass',['title'=>'资料修改','users'=>$users,'login_id'=>$login_id]);
+    }
+
+    /**
+     * 验证原密码
+     */
+    public function hold($pass)
+    {
+        //获取当前登录用户
+        $login_id = session('login_users');
+
+        //当前用户密码 是否与输入密码相一致
+        if (Hash::check($pass,$login_id->upwd)) {
+            echo json_encode(['code'=>'success']);
+        } else {
+             echo json_encode(['code'=>'error']);
+        }
+
+    }
+
+    /**
+     * 保存 个人密码修改 
+     */
+    public function save(Request $request)
+    {
+        //获取新密码
+        $data = $request->only('repass');
+
+        //获取当前用户id
+        $login_id = session('login_users')->id;
+
+        //拿到当前用户
+        $user = Users::find($login_id);
+        $user->upwd = Hash::make($data['repass']);
+        $res = $user->save();
+        if($res){
+            // 清除缓存 重新登录
+            session(['login_users'=>null]);
+            return redirect('/home/login/login')->with('success','修改成功');
+        }else{
+            return back()->with('error','修改失败');
+        }
+    }
+
 }

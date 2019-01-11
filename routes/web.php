@@ -92,7 +92,7 @@ Route::get('home/personal/users_articles','home\PersonalController@users_article
 
 
 
-
+//Route::get('home/layout/personal/{id}','home\LayoutControlle@index');		//前台个人空间公共页面
 
 
 
@@ -110,11 +110,16 @@ Route::resource('admin/areports','admin\AreportsController');   //文章举报�
 // 未完成页面  缺少用户  无法点赞
 Route::get('home/girls/zan/{id}','home\GirlsController@zan');   //前台车模点赞  
 Route::resource('home/girls','home\GirlsController');   //前台车模列表
+Route::get('home/girls/collect/{id}','home\GirlsController@collect');   //前台车模收藏
 
 Route::get('home/index','home\IndexController@index');   //前台首页
 Route::get('/home/index/{id}','home\IndexController@index');   //前台首页
+Route::get('home/personal/concern/{id}','home\PersonalController@concern');	//前台个人关注
+Route::get('home/personal/care/{id}','home\PersonalController@care');	//取消关注 ajax
 
-
+Route::get('home/personal/pass/{id}','home\PersonalController@pass');		//前台个人密码修改
+Route::get('home/personal/hold/{pass}','home\PersonalController@hold');		//验证原密码
+Route::post('home/personal/save/{id}','home\PersonalController@save');		//前台个人密码修改确认
 
 
 
@@ -187,7 +192,7 @@ Route::resource('home/drafts','home\DraftsController');                         
 
 
 //home
-Route::resource('home/articles','home\ArticlesControlle');                            //前台用户路由
+Route::resource('home/articles','home\ArticlesControlle');                            //前台文章路由
 
 
 

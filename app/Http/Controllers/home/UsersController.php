@@ -99,6 +99,7 @@ class UsersController extends Controller
         $users_info->users_id = $users->id;
         $users_info->sign_number = 5;
         $users_info->sign_time = time();
+        $users_info->face = "home/personal/images/users_face.gif";
         $users_info->sign_days = 1;
         $res2 = $users_info->save();
 

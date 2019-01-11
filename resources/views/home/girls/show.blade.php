@@ -135,9 +135,9 @@
 	          	 var url = '/home/girls/zan/'+ id;
 	          	 $.get(url,{'id':id},function(data){
 	          	 	if(data.code != 'error'){
-                        console.log(data);
+                        // console.log(data.msg);
                         // 点赞完成后 设置成不可选
-                        //$('img').attr('readonly');
+                        $('img').attr('readonly');
                     }
 	          	 },'json');
           }
@@ -154,8 +154,34 @@
           </div> 
           <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
           <span class="cutline" style="margin: 9px 10px 0 0;"></span> 
-          <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=article&amp;id=31&amp;handlekey=favoritearticlehk_31" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" class="k_favorite">收藏</a> 
+                @if($flag ==1 )
+                <a href="javascript:;"><span id="collect">已收藏</span><li style="display: none;">{{ $girl->id }}</li></a>
+               @elseif($flag == 2)
+               <a href="javascript:;"><span id="collect">收藏</span><li style="display: none;">{{ $girl->id }}</li></a>
+               @elseif($flag == 3)
+               <a href="/home/login/login"><span>收藏</span></a>
+               @endif
          </div> 
+          <script type="text/javascript">
+                 jQuery('#collect').click(function(){
+                  var id = $(this).next().html();
+                  jQuery.get('/home/girls/collect/'+id,{'id':id},function(data){
+                    if(data.type == 'quxiao'){
+                          if(data.code == 'success'){
+                                $('#collect').html('收藏');
+                          }else{
+                              alert('取消收藏失败');
+                          }
+                    } else if(data.type == 'shoucang'){
+                          if(data.code == 'success'){
+                                $('#collect').html('已收藏');
+                          }else{
+                              alert('收藏失败');
+                          }
+                    }
+                  },'json');
+                 });
+               </script>
          <!--[diy=diycontentrelatetop]-->
          <div id="diycontentrelatetop" class="area"></div>
          <!--[/diy]--> 

@@ -33,4 +33,14 @@ class Users extends Model
     {
         return $this->belongsToMany('App\models\home\Article','users_article','users_id','article_id')->using('App\models\home\users_article');
     }
+
+    /**
+     * 获取用户的关注
+     */
+    public function users_concern()
+    {
+        return $this->belongsToMany('App\models\home\Users','Concern','fans_id','users_id')->using('App\models\home\Concern');
+    }
+
+    
 }

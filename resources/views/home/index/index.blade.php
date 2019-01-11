@@ -147,11 +147,11 @@
 <ul class="ui_list cl" id="itemContainer">
 @foreach($article as $k=>$v)
 <li class="ui_2_ul_li  cl border_b_gray">
-  <div class="ui_2_ul_li_imgouter  ovh position_a"> <a class="fr ds_inlineB cdg" href="/home/articles/{{$v->id}}/edit"><img src="/home/picture/242d5ad24b1bdca33cf2ac7a8639d39f.jpg" width="220" height="140" /></a> </div>
+  <div class="ui_2_ul_li_imgouter  ovh position_a"> <a class="fr ds_inlineB cdg" href="/home/articles/{{$v->id}}/edit"><img src="/uploads/{{$v->cover}}" width="220" height="140" /></a> </div>
   <div class="ui_2_ul_li_con">
     <h3 class="clr"><a target="_blank" href="/home/articles/{{$v->id}}/edit" class="ui_colorG">{{$v->title}}</a></h3>
     <div class="ui_2_userinfo  clg cl">
-      <span><a href="/home/articles/{{$v->id}}/edit">admin</a></span> <span>发表于</span> <em>2016-04-08 14:09</em> 
+      <span><a href="/home/articles/{{$v->id}}/edit">{{$v->getName->uname}}</a></span> <span>发表于</span> <em>{{date('Y-m-d h:i:s',$v->ctime)}}</em> 
     </div>
 {!!$v->content!!}
     <a class="fr ds_inlineB mr15 cdg" target="_blank" href="/home/articles/{{$v->id}}/edit">阅读全文</a> </div>
@@ -201,14 +201,14 @@ perPage: 9
       <!--[diy=right_top]--><div id="right_top" class="area"><div id="framesnVGpZ" class="frame move-span cl frame-1"><div id="framesnVGpZ_left" class="column frame-1-c"><div id="framesnVGpZ_left_temp" class="move-span temp"></div>
       <div id="portal_block_258" class="block move-span">
       <div id="portal_block_258_content" class="dxb_bc">
-      <div class="stickright cl" style="height: 350px;">
+      <div class="stickright cl" style="height: auto;">
   <div class="newsrecommend cl">
   <div class="imgbox cl" style="margin-bottom: -10px;"><a href="article-37-1.html"><img src="/home/images/6d2b2ccf44d90c6551f1aa47a310f574.jpg" width="300" height="161">
       
       <span>2.0L的动力卖1.5L的价格，这款全进口SUV估计不到15万！</span></a>
     </div>
     <hr>
-      <div class="wrapper" style="margin-top: -8px;height:155px; background-image:url('/home/images/bg1.jpg');background-repeat: no-repeat;background-size: 100% 100%;">
+      <div class="wrapper" style="margin-top: -8px;height: 197px;background-image:url('/home/images/bg1.jpg');background-repeat: no-repeat;background-size: 100% 100%;">
     	@foreach($label as $k=>$v)  
 		<a href="/home/index/{{$v->id}}" class="tag">{{$v->lname}}</a>
 
@@ -218,8 +218,9 @@ perPage: 9
 </div></div></div></div></div></div><!--[/diy]-->
       <div class="tabBar cl">
 <div class="hd cl">
-           <!--[diy=diy_tab]--><div id="diy_tab" class="area"><div id="frameNUNZyT" class="frame move-span cl frame-1"><div id="frameNUNZyT_left" class="column frame-1-c"><div id="frameNUNZyT_left_temp" class="move-span temp"></div><div id="portal_block_259" class="block move-span"><div id="portal_block_259_content" class="dxb_bc"><div class="portal_block_summary"><ul>
-  <li class="on">文章排行</li>
+           <!--[diy=diy_tab]--><div id="diy_tab" class="area"><div id="frameNUNZyT" class="frame move-span cl frame-1"><div id="frameNUNZyT_left" class="column frame-1-c"><div id="frameNUNZyT_left_temp" class="move-span temp"></div><div id="portal_block_259" class="block move-span"><div id="portal_block_259_content" class="dxb_bc">
+<div class="portal_block_summary"><ul>
+  <li>文章排行</li>
   <li>论坛大V</li>
   <li>性感车模</li>
 </ul></div></div></div></div></div></div><!--[/diy]-->
@@ -262,7 +263,7 @@ perPage: 9
     @else
   <div style="font-size: 16px; float: left;margin-left: 15px;">{{$k+1}}.</div>
   @endif
-    <a href="space-uid-1.html" class="author">{{$v->title}}</a></div>
+    <a href="/home/articles/{{$v->id}}/edit" class="author">{{$v->title}}</a></div>
     <div class="text"><a href="thread-20-1-1.html">
       <p><span>{!!$v->content!!}</span></p>
       </a></div>
@@ -277,7 +278,7 @@ perPage: 9
 
 
 
-<div id="portal_block_260_content" class="dxb_bc"  style="display: block">
+<div id="portal_block_260_content" class="dxb_bc"  style="display: none">
 @foreach($rank_users as $k=>$v)
 <div class="part">
   <div class="paddingbox">
@@ -321,11 +322,11 @@ perPage: 9
 
 
 
-<div id="portal_block_260_content" class="dxb_bc"  style="display: block">
+<div id="portal_block_260_content" class="dxb_bc"  style="display: none">
 @foreach($rank_girls as $k=>$v)
 <div class="part">
   <div class="paddingbox">
-    <div class="part__header">
+    <div class="part__heder">
     @if($k==0)
     <!-- <img src="/home/picture/rank_1.gif" class="loading" width="30" height="30" /> -->
     <div style="background: url(/home/picture/top1.jpg) no-repeat scroll -13px -23px;
@@ -349,12 +350,11 @@ perPage: 9
     @else
   <div style="font-size: 16px; float: left;margin-left: 15px;">{{$k+1}}.</div>
   @endif
-    <a href="space-uid-1.html" class="author">{{$v->title}}</a></div>
-    <div class="text"  style="width:30px;height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><a href="thread-20-1-1.html">
-      <p style="font-size:12px">{!!$v->content!!}</p>
-      </a></div>
+    <a href="/home/girls/{{$v->id}}" class="autor" style="font-size: 15px;margin-left: 25px;line-height: 30px;">{{$v->title}}<img src="/home/images/preview.png" class="loading" style="width: 31px;
+    margin-left: 12px;" /></a></div>
+    
     <div class="foot">
-      <p>{{date('Y-m-d h:i:s',$v->ctime)}}<span class="reply"><i style="margin-right: 10px;"><img src="/home/picture/space_share.png" class="loading" width="20" height="20";/></i>{{$v->clicks}}</span></p>
+      <span class="reply"><i style="margin-right: 10px;"><img src="/home/images/oshr.png" class="loading" width="20" height="20";/></i>{{$v->clicks}}</span>
     </div>
   </div>
 </div>
@@ -362,6 +362,23 @@ perPage: 9
 </div>
 
 </div></div></div></div><!--[/diy]-->
+<script type="text/javascript">
+      $(function(){
+        $('.hd .portal_block_summary li').mouseover(function(){
+          $(this).css('background','#FFF');
+          $(this).css('color','#4ecdc4');
+          var n = $(this).index();//获取当前下标
+          // 让div 都隐藏
+          $('.bd .dxb_bc').hide();
+          // 让指定显示
+          $('.bd .dxb_bc:eq('+n+')').show();
+        }).mouseout(function(){
+          $(this).css('background','');
+          $(this).css('color','');
+        });
+      });
+
+    </script> 
 </div>
 </div>
 </div>
