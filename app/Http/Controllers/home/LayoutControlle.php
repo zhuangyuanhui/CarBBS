@@ -11,7 +11,7 @@ use App\models\home\Concern;
 class LayoutControlle extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 前台个人中心页面公共部分
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,6 +38,18 @@ class LayoutControlle extends Controller
         $users = Users::find($id);
 
         return view('home.layout.personal',['title'=>'个人资料','users'=>$users,'login_id'=>$login_id,'ifconcern'=>$ifconcern]);
+        //如果id等于当前登录id,则获取自己的信息
+        if($id == 0){
+            $id = session('login_users')->id;
+        }
+
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
+
+        //获取对象id用户的信息
+        $users = Users::find($id);
+
+        return view('home.layout.personal',['title'=>'个人资料','users'=>$users,'login_id'=>$login_id]);
     }
 
     /**

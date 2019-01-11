@@ -872,7 +872,7 @@ a.xrkt:hover .mask_video {display: block;}
 	height: 19px;
     margin-right: 2px;
     position: relative;
-    top: 2px;
+    top: -2px;
 }
 .newsrecommend .newbox .ffot .right > span i.icon-eye { background: url(../images/eyex.png) no-repeat left 6px}
 .newsrecommend .newbox .ffot .right > span i.icon-like, .foot .reply i.icon-reply { background: url(../images/eyex1.png) no-repeat left 6px}
