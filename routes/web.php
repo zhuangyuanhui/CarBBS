@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 
 
-
+ 
 
 
 
@@ -50,7 +50,11 @@ Route::get('/', function () {
 
 
 /*------------------------------------------------------------  zhuangyuanhui 52 ----------------------------------------------*/
-
+Route::get('home/users/sign','home\UsersController@sign');      //用户签到
+Route::get('admin/husers/message/{id}','admin\HUsersController@message');     	//后台给前台发送私信
+Route::get('admin/husers/messageall','admin\HUsersController@messageall');			//后台管理群发私信页面
+Route::post('admin/husers/sendall','admin\HUsersController@sendall');			//执行后台管理群发私信
+Route::post('admin/husers/store','admin\HUsersController@store');     	//执行发送私信
 Route::resource('admin/comment','admin\CommentsController');	//评论后台管理
 Route::resource('admin/news','admin\NewsController');		//后台新闻管理
 Route::resource('admin/girls','admin\GirlsController');		//后台车模管理
@@ -79,27 +83,23 @@ Route::get('home/news/index/{id}','home\NewsController@index');        //前台�
 Route::get('home/rank/index/{type}','home\RankController@index');			//前台用户排行页面
 Route::get('home/rank/news/{type}','home\RankController@news');			//前台新闻排行页面
 Route::get('home/rank/articles/{type}','home\RankController@articles');			//前台文章排行页面
-
 Route::get('home/rank/girls/{type}','home\RankController@girls');			//前台车模排行页面
-
 Route::get('home/personal/index/{id}','home\PersonalController@index');			//前台个人首页
 Route::post('home/personal/image','home\PersonalController@image');			//前台个人资料修改头像
 Route::post('home/personal/store/{id}','home\PersonalController@store');			//前台个人资料提交修改
 Route::get('home/personal/edit/{id}','home\PersonalController@edit');		//前台个人首页
 Route::get('home/personal/articles/{id}','home\PersonalController@articles');	//前台个人文章
-Route::get('home/personal/users_articles','home\PersonalController@users_articles');	//前台个人文章
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('home/personal/users_articles/{id}','home\PersonalController@users_articles');	//前台个人文章收藏
+Route::get('home/personal/users_news/{id}','home\PersonalController@users_news');	//前台个人新闻收藏
+Route::get('home/personal/users_girls/{id}','home\PersonalController@users_girls');	//前台个人车模收藏
+Route::get('home/personal/report/{id}','home\PersonalController@report');	//前台用户举报页面
+Route::post('home/personal/report_store','home\PersonalController@report_store'); //执行举报写入数据库
+Route::get('home/users/concern/{id}','home\UsersController@concern');     //前台用户关注l
+Route::get('home/layout/personal/{id}','home\LayoutControlle@index');		//前台个人空间公共页面
+Route::post('home/news/news_comment','home\NewsController@news_comment');      //前台新闻评论
+Route::post('home/news/news_reply','home\NewsController@news_reply');      //前台新闻回复
+Route::get('home/news/deletecomment/{id}','home\NewsController@deletecomment');  //前台新闻评论回复ajax删除
+Route::get('home/news/collect/{id}','home\NewsController@collect');			//前台新闻收藏功能ajax
 
 /*------------------------------------------------------------  zhangjianjun 104 ----------------------------------------------*/
 
@@ -115,7 +115,7 @@ Route::get('home/index','home\IndexController@index');   //前台首页
 Route::get('/home/index/{id}','home\IndexController@index');   //前台首页
 
 
-
+Route::get('home/personal/concern/{id}','home\PersonalController@concern');	//前台个人关注
 
 
 

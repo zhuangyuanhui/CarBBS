@@ -3,8 +3,7 @@
  <head> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-  <title>{{ $title }}</title>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{{ $title }}</title> 
   <meta name="keywords" content="首页" /> 
   <meta name="description" content="首页 " /> 
   <meta name="generator" content="Discuz! X3.2" /> 
@@ -16,9 +15,9 @@
   <link rel="stylesheet" type="text/css" href="/home/css/styles.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_portal_index.css" /> 
+  <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" /> 
   <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-  <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" /> 
   <meta name="application-name" content="玩车达人" /> 
   <meta name="msapplication-tooltip" content="玩车达人" /> 
   <meta name="msapplication-task" content="name=首页;action-uri=http://quaters.cn/display/che/portal.php;icon-uri=http://quaters.cn/display/che/static/image/common/portal.ico" /> 
@@ -430,10 +429,168 @@ jQuery('.quater_search').slideUp(300);
   <script type="text/javascript">
     
   </script>
+<link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" />
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+
+<div id="wp" class="wp time_wp cl">
+   <div id="pt" class="bm cl"> 
+    <div class="z"> 
+     <a href="./" class="nvhm" title="首页">玩车达人</a> 
+     <em>›</em> 
+     <a href="space-uid-6.html">{{$users->nickname}}</a> 
+     <em>›</em> 个人资料 
+    </div> 
+   </div> 
+   <style id="diy_style" type="text/css"></style> 
+   <div class="wp"> 
+    <!--[diy=diy1]-->
+    <div id="diy1" class="area"></div>
+    <!--[/diy]--> 
+   </div>
+   <link rel="stylesheet" type="text/css" href="/home/css/home.css" /> 
+  </div> 
+  <div style="width: 1080px; margin: 0 auto; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); border-radius: 0; overflow: hidden; background: #FFFFFF;"> 
+   <div id="uhd"> 
+    <div class="space_h cl"> 
+       <div class="icn cl">
+          <label for="profile">
+            <img id="face_users" src="/uploads/{{$users->getUserInfo->face}}" title="点击图片更换头像" style="border-radius: 50%;width: 90px;height: 90px">
+          </label>
+          <form style="display: none;" id="info_file" action="upload_file.php" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            更换头像： <input type="file" name="profile" value="" id="profile">
+          </form>
+       </div> 
+     <h2 class="mt"> {{$users->nickname}} </h2> 
+     <p class="follow_us">
+        @if($users->id == $login_id)
+          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的关注</a>
+          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的粉丝</a>
+          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="old1">我的私信</a>
+        @else
+          <a   href="javascript:;" class="new1 concern ">
+            @if($ifconcern == true)
+              取消关注
+            @else
+             关注TA
+            @endif
+          </a>
+          <input type="hidden" value="{{$users->id}}">
+          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="old1">发送私信</a>
+        @endif
+       </p> 
+    </div> 
+   </div> 
+   <div class="wp cl"> 
+    <div class="space_nav cl"> 
+     <ul class="tb_1 cl"> 
+      <li @if($type == 1) class="a" @endif><a href="/home/personal/index/{{$users->id}}"><img src="/home/picture/space_profile.png" class="vm" />&nbsp;&nbsp;资料&nbsp;&nbsp;</a></li> 
+      <li @if($type == 2) class="a" @endif> <a href="/home/personal/articles/{{$users->id}}"><img src="/home/picture/space_thread.png" class="vm" />&nbsp;&nbsp;文章&nbsp;&nbsp;</a></li>
+      <li @if($type == 3) class="a" @endif><a href="/home/personal/users_articles/{{$users->id}}"><img src="/home/picture/space_blog.png" class="vm" />&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li>
+      <li @if($type == 4) class="a" @endif><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;关注&nbsp;&nbsp;</a></li> 
+        @if($users->id == $login_id)
+      <li ><a href=""><img src="/home/picture/space_doing.png" class="vm" />&nbsp;&nbsp;粉丝&nbsp;&nbsp;</a></li> 
+      <li><a href=""><img src="/home/picture/space_share.png" class="vm" />&nbsp;&nbsp;私信&nbsp;&nbsp;</a></li>
+      <li class="qiandao" id="qiandao" ><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;签到&nbsp;&nbsp;</a></li>
+      @else
+        <li class="jubao" style="height: 40px"><a href="/home/personal/report/{{$users->id}}"><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;举报&nbsp;&nbsp;</a></li>
+       @endif
+        <style type="text/css">
+          .qiandao{
+            height: 51px;
+            border-bottom: 0;
+            line-height: 50px;
+            color: #333333;
+            font-weight: 400;
+            background: #6ec4e0;
+            margin-top: -50px;
+            margin-left: 994px;
+          }
+          .jubao{
+            height: 20px;
+            border-bottom: 0;
+            font-color: black;
+            line-height: 50px;
+            color: blue;
+            font-weight: 400;
+            background: #333;
+            margin-top: -290px;
+            margin-left: 994px;
+            opacity: 0.4;
+          }
+        </style>
+     </ul> 
+    </div> 
+   </div> 
   @section('content')
 
-   
   @show
+  </div>
+  <script teype="text/javascript">
+  $(function(){
+    //无刷新更换头像,ajax
+    $('#profile').change(function(){
+      $.ajax({
+        url:'/home/personal/image',
+        type:'post',
+        data:new FormData($('#info_file')[0]), //创建表单数据
+        processData:false, //不限定格式
+        contentType:false, //不进行特定格式编码
+        dataType:'json',
+        success:function(obj){
+          console.log(obj);
+          if(obj.msg == 'success'){
+            $('#face_users').attr('src','/uploads/'+obj.path);
+          }else{
+            alert('头像修改失败');
+          }
+        }
+      });
+    });
+
+    //签到功能js发送ajax
+    $('#qiandao').click(function(){
+              $.get('/home/users/sign',{},function(data){
+                if(data.msg == 'success'){
+                  alert('签到成功,积分加'+data.jifen);
+                } else {
+                  alert('今天已签到');
+                }
+              },'json');
+            });
+
+
+    //关注功能发送ajax8
+      $('.concern').click(function(){
+
+            var id = $(this).next().val();
+            var url = '/home/users/concern/' + id;
+
+            jQuery.get(url,{'id':id},function(data){
+              //判断是取消还是关注
+               if(data.type == 'quxiao'){
+                //判断取消是否成功
+                  if(data.code == 'success'){
+                      $('.concern').html('关注TA');
+                  }else{
+                       alert('取消关注失败');
+                  }
+                  
+                } else if(data.type == 'guanzhu') {
+                    //判断关注是否成功
+                    if(data.code == 'success'){
+                        $('.concern').html('取消关注');
+                    }else{
+                         alert('关注失败');
+                    }
+                }
+            },'json');
+      });
+
+  });
+</script>  
+
   <div id="footer" class="footer cl"> 
    <div class="footer_top cl"> 
     <div class="wp main"> 

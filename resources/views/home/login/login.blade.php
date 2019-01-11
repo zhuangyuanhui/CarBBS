@@ -103,7 +103,7 @@
                       <a href="/home/login/forget"  title="找回密码" style="float: right; padding: 9px 0 0 3px; color: #BBBBBB; font-size: 12px;">忘记登录密码</a></div>
                     <div class="rfm bw0 cl">
                       <div class="login_btn cl" style="float: left; margin: 10px 0;">
-                        <button class="pn pnc" type="submit" name="loginsubmit" value="true" tabindex="1">提交</button></div>
+                        <button class="pn pnc" type="submit" id="loginsubmit"  tabindex="1">提交</button></div>
                       <div style="display: none;">
                         <a href="javascript:;" onclick="ajaxget('member.php?mod=clearcookies&formhash=dfa1e3c8', 'returnmessage_LTh70', 'returnmessage_LTh70');return false;" title="清除痕迹" class="y">清除痕迹</a></div>
                     </div>
@@ -134,44 +134,6 @@
                   <em id="returnmessage3_LTh70">找回密码</em>
                   <span></span>
                 </h3>
-                <form method="post" autocomplete="off" id="lostpwform_LTh70" class="cl" onsubmit="ajaxpost('lostpwform_LTh70', 'returnmessage3_LTh70', 'returnmessage3_LTh70', 'onerror');return false;" action="member.php?mod=lostpasswd&amp;lostpwsubmit=yes&amp;infloat=yes">
-                  <div class="c cl">
-                    <input type="hidden" name="formhash" value="dfa1e3c8" />
-                    <input type="hidden" name="handlekey" value="lostpwform" />
-                    <div class="rfm">
-                      <table>
-                        <tr title="Email/邮箱">
-                          <th>
-                            <span class="rq">*</span>
-                            <label for="lostpw_email">Email:</label></th>
-                          <td>
-                            <input type="text" name="email" id="lostpw_email" size="30" value="" tabindex="1" class="px p_fre" placeholder="Email/邮箱" /></td>
-                        </tr>
-                      </table>
-                    </div>
-                    <div class="rfm">
-                      <table>
-                        <tr title="用户名">
-                          <th>
-                            <label for="lostpw_username">用户名:</label></th>
-                          <td>
-                            <input type="text" name="username" id="lostpw_username" size="30" value="" tabindex="1" class="px p_fre" placeholder="用户名" /></td>
-                        </tr>
-                      </table>
-                    </div>
-                    <div class="rfm mbw bw0">
-                      <table>
-                        <tr>
-                          <th></th>
-                          <td>
-                            <button class="pn pnc" type="submit" name="lostpwsubmit" value="true" tabindex="100">
-                              <span>提交</span></button>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </form>
               </div>
             </div>
             <div id="layer_message_LTh70" class="f_c blr nfl" style="display: none;">
@@ -190,7 +152,7 @@
   </div>
 </div>
 <script type="text/javascript">
-    var isUname,isUpwd = false;
+    var isUname= false;
   //给手机号框绑定失焦事件
     $('#username_LTh70').blur(function(){
         var phone = $(this).val();
@@ -202,9 +164,20 @@
          if(tel_preg.test(phone) || uname_preg.test(phone)){
               $.get(url,{'phone':phone},function(data){
                     if(data.code == 'error'){
-                      isUname = false;
-                      $('#checkname').html('手机号或用户名不存在');
-                      $('#checkname').css('color','red');
+                       if(data.time == 'error'){
+                            isUname = false;
+                            $('#checkname').html('手机号或用户名不存在');
+                            $('#checkname').css('color','red');
+                      }else if(data.time == 'long'){
+                            isUname = false;
+                            $('#checkname').html('该账号已被永久封号');
+                            $('#checkname').css('color','red');
+                      }else{
+                          isUname = false;
+                          $('#checkname').html('该账号已被临时封号,到期时间为:'+data.time);
+                          $('#checkname').css('color','red');
+                      }
+                      
                     }else{
                       isUname = true;
                     }
@@ -218,12 +191,12 @@
         $('#checkname').html('&nbsp;');
       });
 
-      $('#lostpwsubmit').click(function(){
-        if(isUname && isUpwd){
-          return true;
-        }else{
-          return false;
-        }
+      $('#loginsubmit').click(function(){
+          if(isUname){ 
+            return true; 
+          }else{
+            return false;
+          }
       })
 </script>
 @endsection

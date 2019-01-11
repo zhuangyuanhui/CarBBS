@@ -24,10 +24,13 @@ class LoginController extends Controller
      */
     public function dologin(Request $request)
     {
+        //接收表单的内容
         $data = $request->only('phone','upwd');
 
+        //查询数据库判断用户输入密码是否正确
         $users = Users::where('tel','=',$data['phone'])->orWhere('uname','=',$data['phone'])->first();
 
+        //判断密码是否正确,返回结果
         if(Hash::check($data['upwd'],$users->upwd)){
             session(['login_users'=>$users]);
             return redirect('/home/index')->with('success','登陆成功');
@@ -44,11 +47,22 @@ class LoginController extends Controller
     {
         $res = Users::where('tel','=',$phone)->orWhere('uname','=',$phone)->first();
 
-        if(isset($res)){
-            echo json_encode(['code'=>'success']);
+        if($res){
+             $seal_time = date('Y-m-d H:i:s',$res->seal_time);
+
+              if($res->status == 1){
+                    echo json_encode(['code'=>'success']);
+                }else if($res->status == 2){
+                    echo json_encode(['code'=>'error','time'=>'long']);
+                }else if($res->status == 3){
+                    echo json_encode(['code'=>'error','time'=>$seal_time]);
+                }
+                
         }else{
-            echo json_encode(['code'=>'error']);
+             echo json_encode(['code'=>'error','time'=>'error']);
         }
+
+
     }
 
 
@@ -62,20 +76,28 @@ class LoginController extends Controller
 
 
     /**
-     * 
+     * 找回密码页面检测账户是否存在
      */
     public function checkname($name)
     {
         $res = Users::where('uname','=',$name)->first();
 
         if($res){
-            session(['forget_name'=>$name]);
-            echo json_encode(['code'=>'success']);
+             $seal_time = date('Y-m-d H:i:s',$res->seal_time);
+
+              if($res->status == 1){
+                 session(['forget_name'=>$name]);
+                    echo json_encode(['code'=>'success']);
+                }else if($res->status == 2){
+                    echo json_encode(['code'=>'error','time'=>'long']);
+                }else if($res->status == 3){
+                    echo json_encode(['code'=>'error','time'=>$seal_time]);
+                }
+                
         }else{
-            echo json_encode(['code'=>'error']);
+             echo json_encode(['code'=>'error','time'=>'error']);
         }
     }
-
 
     /**
      * 检测用户找回密码手机号是否属实
@@ -115,7 +137,7 @@ class LoginController extends Controller
         $res = $user->update();
 
         if(isset($res)){
-            return redirect('admin/login/login')->with('success','修改成功');
+            return redirect('home/login/login')->with('success','修改成功');
         }else{
             return back()->with('error','修改失败');
         }

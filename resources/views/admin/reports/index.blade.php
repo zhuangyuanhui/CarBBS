@@ -57,27 +57,27 @@
                                     <td>{{ $v->content }}</td>
                                      @switch($v->type)
                                             @case(1)
-                                                <td>其它</td>
+                                                <td>其它违规</td>
                                                 @break
 
                                             @case(2)
-                                                <td>个人资料</td>
+                                                <td>个人资料违规</td>
                                                 @break
 
                                             @case(3)
-                                                <td>文章</td>
+                                                <td>文章违规</td>
                                                 @break
 
                                             @case(4)
-                                                <td>评论</td>
+                                                <td>评论违规</td>
                                                 @break
 
                                             @case(5)
-                                                <td>私信</td>
+                                                <td>私信违规</td>
                                         @endswitch
                                     <td>{{ $v->ctime }}</td>
                                     @if($v->status == 1)
-                                    <td>未审核</td>
+                                    <td>待审核</td>
                                     @elseif($v->status == 2)
                                     <td>已同意</td>
                                     @elseif($v->status == 3)

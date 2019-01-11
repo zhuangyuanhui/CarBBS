@@ -98,7 +98,7 @@ class GirlsController extends Controller
     }
 
     /**
-     * 
+     * 车模点赞功能
      */
     public function zan($id)
     {
@@ -122,7 +122,7 @@ class GirlsController extends Controller
             
             echo json_encode($data);
             
-        }else{
+        }else{ 
             echo json_encode(['code'=>'error']);
         }
     }

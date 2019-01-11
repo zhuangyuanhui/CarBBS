@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\models\home\Users;
 use App\models\home\UsersInfo;
 use App\models\admin\InformUsers;
+use App\models\admin\Outbox;
+use App\models\admin\Inbox;
 use DB;
 
 class HUsersController extends Controller
@@ -25,38 +27,85 @@ class HUsersController extends Controller
         $search_count = $request->input('search_count',5);
 
         $data = Users::where('uname','like','%'.$search_name.'%')->paginate($search_count);
-        return view('admin.husers.index',['title'=>'前台用户管理','data'=>$data,'params'=>$params]);
+        return view('admin.husers.index',['title'=>'前台用户管理','data'=>$data,'params'=>$params]); 
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * 官方发送私信方法
+     * 接受者id , 私信内容
      */
-    public function create()
+    static function send($users_id,$content)
     {
-        //
+        //开启事务
+        DB::beginTransaction();
+
+        //获取后台管理员id
+        $admin_id = session('users')->id;
+
+        //将私信内容存进发件箱
+        $outbox = new Outbox;
+        $outbox->sender_id = $admin_id;
+        $outbox->receiver_id = $users_id;
+        //1为官方发送私信类型
+        $outbox->message_type = 1;
+        $outbox->message_content = $content;
+        $outbox->send_time = time();
+        $outbox->status = 1;
+        $res1 = $outbox->save();
+
+
+        //讲私信内容存进收件箱
+        $inbox = new Inbox;
+        $inbox->sender_id = $admin_id;
+        $inbox->receiver_id = $users_id;
+        //1为官方发送私信类型
+        $inbox->message_type = 1;
+        $inbox->message_content = $content;
+        $inbox->send_time = time();
+        $inbox->status = 1;
+        $res2 = $inbox->save();
+
+        if($res1 && $res2){
+            DB::commit();
+            return 'success';
+        }else{
+            DB::rollBack();
+            return 'error';
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param 给用户发送私信
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        //接收表单的内容
+        $data = $request->only('users','message_content');
+
+        //调用发送私信方法
+        $res = HUsersController::send($data['users'],$data['message_content']);
+
+        if($res == 'success'){
+            DB::commit();
+            return redirect('/admin/husers')->with('success','私信发送成功');
+        }else{
+            DB::rollBack();
+            return back()->with('error','私信发送失败');
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  模态框显示详细信息
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+
         $husers = Users::find($id);
 
         $husers->info = UsersInfo::where('users_id','=',$id)->first();
@@ -100,7 +149,7 @@ class HUsersController extends Controller
         //修改用户表
         $huser = Users::find($id);
         $huser->status = $data['status'];
-        //解封或永久封号,修改封号道奇时间
+        //解封或永久封号,修改封号到期时间
          if($data['status'] == 1 || $data['status'] == 2){
             $huser->seal_time == time();
         }
@@ -118,6 +167,21 @@ class HUsersController extends Controller
             }
         }
         $res2 = $huser->update();
+
+        if($data['status'] == 2){
+                 //拼接发送语句
+                $str = '经官方核实,您近期存在严重违规现象,官方处理已将您的账号永久冻结,如需申诉请致电1008611';
+                 //调用发送私信方法
+                $res3 = HUsersController::send($id,$str);
+
+        }else if($data['status'] == 3){
+            //拼接发送语句
+             $str = '经官方核实,您近期存在违规现象,官方处理已将您的账号冻结,到期时间为'.date('Y-m-d H:i:s',$huser->seal_time).'.如需申诉请致电1008611';
+             //调用发送私信方法
+              $res3 = HUsersController::send($id,$str);
+        }
+        
+      
 
         if($res1 && $res2){
             DB::commit();
@@ -137,5 +201,44 @@ class HUsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 后台管理单发私信
+     */
+    public function message($id)
+    {
+        $users = Users::find($id);
+        return view('admin.husers.message',['title'=>'发送私信','users'=>$users]);
+    }
+
+    /**
+     * 后台群发私信页面
+     */
+    public function messageall()
+    {
+        return view('admin.husers.messageall',['title'=>'发送私信']);
+    }
+
+    /**
+     * 后台管理群发私信
+     */
+    public function sendall(Request $request)
+    {   
+        //接收表单私信内容
+        $data = $request->only('content');
+        //获取后台管理员id
+        $admin_id = session('users')->id;
+        //获取所有用户信息
+        $users = Users::all();
+
+        //遍历发送私信
+        foreach ($users as $key => $value) {
+            //调用发送私信方法
+            HUsersController::send($value->id,$data['content']);
+        }
+
+        return redirect('/admin/husers')->with('success','私信群发成功');
+
     }
 }

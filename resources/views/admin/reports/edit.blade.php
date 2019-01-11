@@ -22,7 +22,8 @@
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">举报人</label>
                                         <div class="mws-form-item">
-                                             <input type="text" class="small" name="users_id" disabled required value="{{$data->getUsers->uname}}">
+                                             <input type="text" class="small" name="" disabled required value="{{$data->getUsers->uname}}">
+                                             <input type="hidden" name="users_id" value="{{$data->getUsers->id}}" >
                                         </div>
                                    </div>
                                 </div>
@@ -30,7 +31,8 @@
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">被举报人</label>
                                         <div class="mws-form-item">
-                                             <input type="text" class="small" name="inform_user" disabled required value="{{$data->getInformUsers->uname}}">
+                                             <input type="text" class="small" name="inform_name" disabled required value="{{$data->getInformUsers->uname}}">
+                                             <input type="hidden" name="inform_user" value="{{$data->getInformUsers->id}}" >
                                         </div>
                                    </div>
                               </div>

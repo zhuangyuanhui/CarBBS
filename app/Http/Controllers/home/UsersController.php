@@ -209,4 +209,120 @@ class UsersController extends Controller
         return $sign_users;
     }
 
+
+    /**
+     * 用户签到
+     */
+    public function sign()
+    {
+        //获取session用户信息
+         $login_users = session('login_users');
+         //获取用户详情
+         $users_info = UsersInfo::where('users_id',$login_users->id)->first();
+         //判断签到时间是否是今天
+         if(date('Ymd',$users_info->sign_time) == date('Ymd',time() ) ){
+            //返回值
+             echo json_encode(['msg'=>'error']);
+             exit;
+         //判断签到时间是否是昨天
+         } elseif( (int)date('Ymd',$users_info->sign_time) == ( (int)date('Ymd',time() ) ) -1 ) {
+         //连续签到天数加1
+            $users_info->sign_days = $users_info->sign_days+1;
+         //判断连续签到天数是否小于10
+            if($users_info->sign_days <= 10){
+         //积分+5
+                $num = $users_info->sign_number+5;
+         //返回值       
+                echo json_encode(['msg'=>'success','jifen'=>5]);
+         //判断连续签到天数是否大于10小于20
+            }elseif($users_info->sign_days > 10 && $users_info->sign_days <= 20){
+         //积分+10
+                 $num = $users_info->sign_number+10;
+         //返回值
+                 echo json_encode(['msg'=>'success','jifen'=>10]);
+         //大于20天的积分加15
+             }else{
+                 $num = $users_info->sign_number+15;
+                 echo json_encode(['msg'=>'success','jifen'=>15]);
+             }
+         //昨天之前的不算连续签到
+         } else {
+         //连续签到天数为1
+             $users_info->sign_days = 1;
+         //积分加5
+             $num = $users_info->sign_number+5;
+             echo json_encode(['msg'=>'success','jifen'=>5]);
+         }
+         //保存当前签到时间
+         $users_info->sign_time = time();
+         //保存签到积分
+         $users_info->sign_number = $num;
+         $users_info->save();
+
+    }
+
+
+    /**
+     * 用户关注
+     */
+    public function concern($id)
+    {   
+        //获取登录用户id
+         $login_users = session('login_users');
+
+        //判断当前页主用户与当前登录用户是否为关注
+        $concern = Concern::where('users_id','=',$id)->where('fans_id','=',$login_users->id)->first();
+
+        if($concern){
+            //标识符,登陆用户已关注该业主
+            $ifconcern = true;
+            //开启事务
+                    DB::beginTransaction();
+
+                    //删除关注表中的相应记录
+                    $res1 = $concern->delete();
+
+                    //将被关注人的粉丝量减1
+                    $user = Users::find($id);
+                    $user->fans_count = $user->fans_count - 1;
+                    $res2 = $user->update();
+
+                    if($res1 && $res2){
+                         DB::commit();
+                         echo json_encode(['code'=>'success','type'=>'quxiao']);
+                     }else{
+                         DB::rollBack();
+                         echo json_encode(['code'=>'error','type'=>'quxiao']);
+                     }
+        }else{
+                //标识符,登陆用户未关注该业主
+                $ifconcern = false;
+
+                //开启事务
+                    DB::beginTransaction();
+
+                    //往关注表插入关注记录
+                    $concern = new Concern;
+                    $concern->fans_id = $login_users->id;
+                    $concern->users_id = $id;
+                    $concern->ctime = time();
+                    $res1 = $concern->save();
+
+                    //将被关注人的粉丝量加一
+                    $user = Users::find($id);
+                    $user->fans_count = $user->fans_count + 1;
+                    $res2 = $user->update();
+
+                    if($res1 && $res2){
+                         DB::commit();
+                         echo json_encode(['code'=>'success','type'=>'guanzhu']);
+                     }else{
+                         DB::rollBack();
+                         echo json_encode(['code'=>'error','type'=>'guanzhu']);
+                     }
+        }
+   
+     }
+
+
 }

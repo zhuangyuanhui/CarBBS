@@ -6,17 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\home\Users;
 use App\models\home\UsersInfo;
+use App\models\home\Concern;
 use DB;
 use App\models\home\Article;
+use App\models\home\Inform_Users;
+use App\models\home\users_models;
+use App\models\home\Users_News;
 
 class PersonalController extends Controller
-{
+{ 
     /**
      * 个人资料首页
      */
     public function index($id=0)
     {	 
-
         //如果id等于当前登录id,则获取自己的信息
     	if($id == 0){
     		$id = session('login_users')->id;
@@ -24,10 +27,22 @@ class PersonalController extends Controller
     	//获取当前登录用户的id
 	    $login_id = session('login_users')->id;
 
+        //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+
+        if($concerns){
+            //标识符,登陆用户已关注该业主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该业主
+            $ifconcern = false;
+        }
         //获取对象id用户的信息
 	    $users = Users::find($id);
 
-    	return view('home.personal.index',['title'=>'个人资料','users'=>$users,'login_id'=>$login_id]);
+
+    	return view('home.personal.index',['title'=>'个人资料','users'=>$users,'login_id'=>$login_id,'ifconcern'=>$ifconcern,'type'=>1]);
     }
 
     /**
@@ -76,12 +91,24 @@ class PersonalController extends Controller
     	//获取当前登录用户的id
 	    $login_id = session('login_users')->id;
 
+         //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+        if($concerns){
+            //标识符,登陆用户已关注该业主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该业主
+            $ifconcern = false;
+        }
+
         //加载页面,分配数据
-    	return view('home.personal.edit',['title'=>'资料修改','users'=>$users,'login_id'=>$login_id]);
+    	return view('home.personal.edit',['title'=>'资料修改','users'=>$users,'login_id'=>$login_id,'ifconcern'=>$ifconcern,'type'=>1]);
     }
 
     /**
      * 个人资料提交修改
+     
      */
     public function store(Request $request,$id)
     {     
@@ -128,40 +155,181 @@ class PersonalController extends Controller
         //获取当前登录用户的id
         $login_id = session('login_users')->id;
 
+         //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+
+        if($concerns){
+            //标识符,登陆用户已关注该页主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该页主
+            $ifconcern = false;
+        }
+
         //获取个人的所有文章
         $articles = Article::where('users_id','=',$id)->get();
         //加载页面,分配数据
-        return view('home.personal.article',['title'=>'个人文章','users'=>$users,'login_id'=>$login_id,'articles'=>$articles]);
+        return view('home.personal.article',['title'=>'个人文章','users'=>$users,'login_id'=>$login_id,'articles'=>$articles,'ifconcern'=>$ifconcern,'type'=>2]);
     }
 
     /**
      * 个人空间收藏文章页面
      */
-    public function users_articles()
+    public function users_articles($id = 0)
     {   
         
         //获取当前登录用户的id
         $login_id = session('login_users')->id;
-        //获取个人的所有文章
-        $users = Users::where('id','=',$login_id)->first();
+
+        //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+
+        if($concerns){
+            //标识符,登陆用户已关注该页主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该页主
+            $ifconcern = false;
+        }
+
+        //获取个人的所有信息
+        $users = Users::where('id','=',$id)->first();
+
+        //加载页面,分配数据 type用于判断被选中类a ,
+        return view('home.personal.users_articles',['title'=>'个人文章','users'=>$users,'login_id'=>$login_id,'article'=>$users->article,'ifconcern'=>$ifconcern,'type'=>3]);
+    }
+
+    /**
+     * 个人空间收藏新闻页面
+     */
+    public function users_news($id = 0)
+    {   
+        
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
+
+        //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+
+        if($concerns){
+            //标识符,登陆用户已关注该页主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该页主
+            $ifconcern = false;
+        }
+
+        //获取个人的所有信息
+        $users = Users::where('id','=',$id)->first();
 
         //加载页面,分配数据
-        return view('home.personal.users_articles',['title'=>'个人文章','users'=>$users,'login_id'=>$login_id,'article'=>$users->article]);
+        return view('home.personal.users_news',['title'=>'个人文章','users'=>$users,'login_id'=>$login_id,'news'=>$users->news,'ifconcern'=>$ifconcern,'type'=>3]);
+    }
+
+    /**
+     * 个人空间收藏车模页面
+     */
+    public function users_girls($id = 0)
+    {   
+        
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
+
+        //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+
+        if($concerns){
+            //标识符,登陆用户已关注该页主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该页主
+            $ifconcern = false;
+        }
+
+        //获取个人的所有信息
+        $users = Users::where('id','=',$id)->first();
+
+        //加载页面,分配数据
+        return view('home.personal.users_girls',['title'=>'个人文章','users'=>$users,'login_id'=>$login_id,'girls'=>$users->girls,'ifconcern'=>$ifconcern,'type'=>3]);
     }
 
     /**
      * 我的关注
      */
-    public function concern()
+    public function concern($id=0)
     {
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
 
+         //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+
+        if($concerns){
+            //标识符,登陆用户已关注该页主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该页主
+            $ifconcern = false;
+        }
+
+        $users = Users::find($id);
+        return view('home.personal.concern',['title'=>'我的关注','users'=>$users,'login_id'=>$login_id,'concern'=>$users->users_concern,'ifconcern'=>$ifconcern,'type'=>4]);
     }
 
-    /**
-     * 我的粉丝
-     */
-    public function fans()
-    {
 
+    /**
+     * 用户举报页面
+     */
+    public function report($id)
+    {   
+        //获取当前登录用户的id
+        $login_id = session('login_users')->id;
+
+         //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+        if($concerns){
+            //标识符,登陆用户已关注该业主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该业主
+            $ifconcern = false;
+        }
+
+        $users = Users::find($id);
+        return view('home.personal.report',['title'=>'我的关注','users'=>$users,'login_id'=>$login_id,'ifconcern'=>$ifconcern,'type'=>1]);
+    }
+
+
+    /**
+     * 将用户举报信息写入数据库
+     */
+    public function report_store(Request $request)
+    {
+        //接收表单数据
+        $data = $request->only('users_id','type','content');
+
+        //获取当前登录用户id
+        $login_id = session('login_users')->id;
+        //添加举报表记录
+        $inform_users = new Inform_Users;
+        $inform_users->users_id = $login_id;
+        $inform_users->inform_user = $data['users_id'];
+        $inform_users->type = $data['type'];
+        $inform_users->content = $data['content'];
+        $inform_users->ctime = time();
+        $inform_users->status = 1;
+        $res = $inform_users->save();
+
+        if($res){
+            return redirect("home/personal/index/".$inform_users->inform_user)->with('success','举报成功');
+        }else{
+            return back()->with('error','举报失败');
+        }
     }
 }

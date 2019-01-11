@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\admin\Comment;
 use App\models\admin\Reply;
+use App\models\home\News_Comment;
 
 class CommentsController extends Controller
 {
@@ -20,11 +21,26 @@ class CommentsController extends Controller
         //搜索分页功能
         $search_count = $request->input('search_count',5);
         $search_name = $request->input('search_name','');
+        $search_type = $request->input('search_type',0);
 
-        //获取评论数据
-        $comment = Comment::where('content','like','%'.$search_name.'%')->paginate($search_count);
+        if($search_type == 1){
+            //获取文章评论数据
+            $comment = Comment::where('content','like','%'.$search_name.'%')->paginate($search_count);
+             $new_comment = News_Comment::where('content','like','%#$%###@$@$')->paginate($search_count);
+        }else if($search_type == 2){
+             //获取新闻评论数据
+            $new_comment = News_Comment::where('content','like','%'.$search_name.'%')->paginate($search_count);
+            $comment = Comment::where('content','like','%#$%###@$@$')->paginate($search_count);
+        }else{
+            //获取文章评论数据
+            $comment = Comment::where('content','like','%'.$search_name.'%')->paginate($search_count);
+            //获取新闻评论数据
+            $new_comment = News_Comment::where('content','like','%'.$search_name.'%')->paginate($search_count);
+        }
+
        
-        return view('admin.comment.index',['title'=>'后台评论管理','comment'=>$comment,'params'=>$params]);
+       
+        return view('admin.comment.index',['title'=>'后台评论管理','comment'=>$comment,'new_comment'=>$new_comment,'params'=>$params]);
     }
 
     /**
