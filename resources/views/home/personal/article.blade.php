@@ -51,8 +51,8 @@
     <div class="space_nav cl"> 
      <ul class="tb_1 cl"> 
       <li ><a href="/home/personal/index/{{$users->id}}"><img src="/home/picture/space_profile.png" class="vm" />&nbsp;&nbsp;资料&nbsp;&nbsp;</a></li> 
-      <li class="a"><a href=""><img src="/home/picture/space_thread.png" class="vm" />&nbsp;&nbsp;文章&nbsp;&nbsp;</a></li> 
-      <li><a href=""><img src="/home/picture/space_blog.png" class="vm" />&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li> 
+      <li class="a"><a href="#"><img src="/home/picture/space_thread.png" class="vm" />&nbsp;&nbsp;文章&nbsp;&nbsp;</a></li> 
+      <li><a href="/home/personal/users_articles"><img src="/home/picture/space_blog.png" class="vm" />&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li> 
       <li><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;关注&nbsp;&nbsp;</a></li> 
       <li><a href=""><img src="/home/picture/space_doing.png" class="vm" />&nbsp;&nbsp;粉丝&nbsp;&nbsp;</a></li> 
       <li><a href=""><img src="/home/picture/space_share.png" class="vm" />&nbsp;&nbsp;私信&nbsp;&nbsp;</a></li> 

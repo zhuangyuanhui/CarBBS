@@ -319,8 +319,6 @@ perPage: 9
 </div>
 
 
-
-
 <div id="portal_block_260_content" class="dxb_bc"  style="display: block">
 @foreach($rank_girls as $k=>$v)
 <div class="part">
