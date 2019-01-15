@@ -1,7 +1,6 @@
 @extends('home.layout.index')
 @section('content')
 <!-- 需要引进的文件 -->
-<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
   <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
 
@@ -31,7 +30,7 @@
                 <dl id="pmlist_1" class="bbda cur1 cl">                                 
                     <dd class="m avt">
                         <div class="o">
-                            <input type="checkbox" name="deletepm_deluid[]" id="a_delete_1" class="pc" value="2">
+                            <input type="checkbox" name="deletepm_deluid[]" id="a_delete_1" class="pc" value="{{ $v->id }}">
                         </div>
                         <div class="newpm_avt" title="有未读消息"></div>
                         <a href="/home/personal/index/{{ $v->user->id }}" target="_blank"><img src="/uploads/{{ $v->user->getUserInfo->face }}"></a>
@@ -67,7 +66,7 @@
                 <dl id="pmlist_1" class="bbda cur1 cl">                                 
                     <dd class="m avt">
                         <div class="o">
-                            <input type="checkbox" name="deletepm_deluid[]" id="a_delete_1" class="pc" value="2">
+                            <input type="checkbox" name="deletepm_deluid[]" id="a_delete_1" class="pc" value="{{ $v->id }}">
                         </div>
                         <a href="/home/personal/index/{{ $v->user->id }}" target="_blank"><img src="/uploads/{{ $v->user->getUserInfo->face or 'aaa' }}"></a>
                     </dd>
@@ -104,7 +103,7 @@
                         <div class="xld xlda">
                             <div class="nts">
                                  <div class="o">
-                            <input type="checkbox" name="deletepm_deluid[]" id="a_delete_1" class="pc" value="2">
+                            <input type="checkbox" name="deletepm_deluid[]" id="a_delete_1" class="pc checkbox_check" value="{{ $v->id }}">
                         </div>
                                
                                 <dl class="cl " notice="122">
@@ -153,7 +152,7 @@
                         <div class="xld xlda">
                             <div class="nts">
                                  <div class="o">
-                            <input type="checkbox" name="deletepm_deluid[]" id="a_delete_1" class="pc" value="2">
+                            <input type="checkbox" name="deletepm_deluid[]" id="a_delete_1" class="pc" value="{{ $v->id }}">
                         </div>
                                
                                 <dl class="cl " notice="122">
@@ -243,7 +242,7 @@
         $.get(url,{'id':msg_id},function(data){
              console.log(data);
             if(data.msg == 'success'){
-                if( type == 1 || type == 3 && status == 1 ){
+                if( type == 1 && status == 1 || type == 3 && status == 1 ){
                     $(obj).parent().parent().parent().prepend('<span style="margin-left: 745px;color: #ccc">已读</span> ');
                 }
             } 
@@ -263,6 +262,21 @@
 
     }
 
+    //全选
+    function checkall(obj){
+        $('input:checkbox').attr('checked',true);
+    }
+
+    function unchkall(obj){
+           // 获取所有被选中的input
+            var che = $('input[class=checkbox_check][checked]');
+            // 让所有的input 都选中
+            $('input[class=checkbox_check][type=checkbox]').attr('checked',true);
+            // 让之前选中的反选
+            che.attr('checked',false);
+            console.log(che);
+    }
+
    
 </script>
 
@@ -270,7 +284,8 @@
 
 
 <div class="pgs pbm cl pm_op">
-<label for="delete_all" onclick="checkall(this.form, 'deletepm_');"><input type="checkbox" name="chkall" id="delete_all" class="pc">全选</label> &nbsp; 
+<label for="delete_all" onclick="checkall(this);">全选</label> &nbsp; 
+<label for="delete_all" onclick="unchkall(this);">反选</label> &nbsp; 
 <button class="pn" type="submit" name="deletepmsubmit_btn" value="true"><strong>删除</strong></button>
 <button class="pn" type="button" name="markreadpm_btn" value="true" onclick="setpmstatus(this.form);"><strong>标记已读</strong></button>
 </div>
@@ -337,10 +352,7 @@
                  <button type="submit" class="btn btn-default">发送</button>
                </div>
             </form>
-
-         
           </div>
-
         </div>
       </div>
     </div>

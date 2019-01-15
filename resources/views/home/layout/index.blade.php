@@ -197,6 +197,7 @@
        <li class="z" style="margin-right: 0;">
         <a href="" class="log1">登录/</a>
         <a href="" class="reg1">注册</a>
+
         </li> 
       </ul> 
      </div> 

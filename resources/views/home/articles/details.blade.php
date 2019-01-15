@@ -1,8 +1,6 @@
 @extends('home.layout.index')
 @section('content')
-<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
+
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_forum_viewthread.css" /> 
   <div id="wp" class="wp time_wp cl">
@@ -74,7 +72,7 @@
         <div class="time_thread_stat cl"> 
          <ul> 
           <li><a>{{ $user->getUserInfo->sign_number }}</a><p>积分</p></li> 
-          <li><a>{{ $user->art_count }}</a><p>帖子</p></li> 
+          <li><a>{{ $art_count }}</a><p>帖子</p></li> 
           <li style="border-right: 0;"><a>3</a><p>精华</p></li> 
          </ul> 
         </div> 
@@ -183,13 +181,71 @@
              <h1> <a href="thread-10-1-1.html" onclick="return copyThreadUrl(this, '玩车达人')">{{ $article->title }}</a> </h1> 
             </div> 
             <div class="moquu_small"> 
-             <p><a href="/home/vip" class=""></a>&copy; <a href="space-uid-1.html" target="_blank">admin</a> <a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=1" target="_blank">管理员</a> &nbsp;&nbsp;/&nbsp;&nbsp;2015-9-6 13:07&nbsp;&nbsp;/&nbsp;&nbsp;<span> <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=10&amp;formhash=eaea2ab4" id="k_favorite"  onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖" class="k_favorite" style="padding-right: 10px;"><i></i>{{ $num }} 人收藏</a> <a href="javascript:void(0)" class="cc1" title="保留作者信息" style="margin-left: 10px;">保留作者信息</a> <a href="javascript:void(0)" class="cc2" title="禁止商业使用（站长自定义文字）">禁止商业使用（站长自定义文字）</a></span></p> 
+             <p><a href="javascript:;" class=""></a>&copy; <a href="javascript:;" target="_blank">admin</a> <a>管理员</a> &nbsp;&nbsp;/&nbsp;&nbsp;2015-9-6 13:07&nbsp;&nbsp;/&nbsp;&nbsp;<span> <a href="javascript:;" id="k_favorite"  onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖" class="k_favorite" style="padding-right: 10px;"><i></i>{{ $num }} 人收藏</a> <a href="javascript:void(0)" class="cc1" title="保留作者信息" style="margin-left: 10px;">保留作者信息</a> <a href="javascript:void(0)" class="cc2" title="禁止商业使用（站长自定义文字）">禁止商业使用（站长自定义文字）</a></span></p>
+             <a href="javascript:;">
+              <span  onclick="report(this)"style="margin-left: 670px;margin-top: -10px;">举报</span>
+              <span style="display: none;">{{ $article->id }}</span> 
+              <span style="display: none;">{{ $login_users->id }}</span> 
+            </a>
             </div> 
            </div> 
           </div> 
          </div> 
         </div> 
-       </div> 
+       </div>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
+        <!-- 文章举报 -->
+       <script type="text/javascript">
+         report = function(obj){
+           var article_id = $(obj).next().html();
+           $('#article_id').attr('value',article_id);
+
+           var users_id   = $(obj).next().next().html();
+           $('#users_id').attr('value',users_id);
+
+           $('#myModal').modal('show');
+         }
+       </script>
+       <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">文章举报</h4>
+          </div>
+          <div class="modal-body">
+            <form action="/home/articles/report" method="post">
+              {{ csrf_field() }}
+              <input type="hidden" name="article_id" id="article_id">
+              <input type="hidden" name="users_id" id="users_id">
+            <div class="form-group">
+              <label for="exampleInputEmail1">举报类型</label>
+              <select class="form-control" name="type">
+                <option value="1"> 其他 </option>
+                <option value="2">低俗色情</option>
+                <option value="3">政治敏感</option>
+                <option value="4">内容重复</option>
+                <option value="5">攻击歧视</option>
+                <option value="6">血腥暴力</option>
+              </select>
+            </div>
+             <div class="form-group">
+              <label for="disabledTextInput">举报原因</label>
+              <input type="textarea" style="width:569px;height: 100px; " name="content" id="disabledTextInput" class="form-control" placeholder="举报原因">
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="submit" class="btn btn-primary">举报</button>
+            </div>
+           </form>
+        </div>
+      </div>
+    </div>
+    <!-- 结束 -->
        <div id="postlist" class="pl bm" style="padding: 25px 0 0 0;"> 
         <div id="post_10"> 
          <table id="pid10" class="plhin" summary="pid10" cellspacing="0" cellpadding="0"> 
@@ -211,13 +267,6 @@
                   </tr>
                  </tbody>
                 </table> 
-                <div class="attach_nopermission attach_tips"> 
-                 <div> 
-                  <h3><strong>本帖子中包含更多资源</strong></h3> 
-                  <p>您需要 <a href="member.php?mod=logging&amp;action=login" onclick="showWindow('login', this.href);return false;">登录</a> 才可以下载或查看，没有帐号？<a href="member.php?mod=register" title="注册帐号">立即注册</a> </p> 
-                 </div> 
-                 <span class="atips_close" onclick="this.parentNode.style.display='none'">x</span> 
-                </div> 
                </div> 
                <div id="comment_10" class="cm"> 
                </div> 
@@ -227,13 +276,6 @@
            </tr> 
            <tr>
             <td class="plc plm"> 
-             <div id="p_btn" class="mtw hm cl" style="margin-bottom: 30px;"> 
-              <a class="followp" href="home.php?mod=spacecp&amp;ac=follow&amp;op=relay&amp;tid=10&amp;from=forum" onclick="showWindow('relaythread', this.href, 'get', 0);" title="转播求扩散"><i><img src="/home/picture/zhuanbo.png" alt="转播" />转播</i></a> 
-              <a class="sharep" href="home.php?mod=spacecp&amp;ac=share&amp;type=thread&amp;id=10" onclick="showWindow('sharethread', this.href, 'get', 0);" title="分享推精华"><i><img src="/home/picture/favorite.png" alt="分享" />分享</i></a> 
-              <a href="forum.php?mod=collection&amp;action=edit&amp;op=addthread&amp;tid=10" id="k_collect" onclick="showWindow(this.id, this.href);return false;" onmouseover="this.title = $('collectionnumber').innerHTML + ' 人淘帖'" title="淘好帖进专辑"><i><img src="/home/picture/taotie.png" alt="分享" />淘帖<span id="collectionnumber" style="display:none">0</span></i></a> 
-              <a id="recommend_add"> <img src="/home/picture/zan.png" alt="支持" style="margin-top: 3px;" /></a> 
-              <a id="recommend_subtract" href="forum.php?mod=misc&amp;action=recommend&amp;do=subtract&amp;tid=10&amp;hash=eaea2ab4" onclick="showWindow('login', this.href)" onmouseover="this.title = $('recommendv_subtract').innerHTML + ' 人反对'" title="踩一下"><i><img src="/home/picture/rec_subtract.png" alt="反对" />反对<span id="recommendv_subtract" style="display:none">0</span></i></a> 
-             </div> 
              <div id="viewthread_foot cl"> 
               <div class="viewthread_foot cl" style="margin-bottom: 0; border-bottom: 0;"> 
                <div class="bdsharebuttonbox cl" style="padding: 0 5px 20px 0;"> 
@@ -245,16 +287,18 @@
                </div> 
                <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
                <span class="cutline" style="margin: 9px 10px 0 0;"></span> 
+               <!-- 文章收藏 -->
                <a href="javascript:;" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title ={{ $num }} + ' 人收藏'" title="收藏本帖" class="k_favorite">
-               @if($flag ==1 )
-               <span id="collect">已收藏</span><li style="display: none;">{{ $article->id }}</li>
-               @elseif($flag == 2)
-               <span id="collect">收藏</span><li style="display: none;">{{ $article->id }}</li>
-               @elseif($flag == 3)
-               <a href="/home/login/login"><span>收藏</span></a>
-               @endif
+                 @if($flag ==1 )
+                 <span id="collect">已收藏</span><li style="display: none;">{{ $article->id }}</li>
+                 @elseif($flag == 2)
+                 <span id="collect">收藏</span><li style="display: none;">{{ $article->id }}</li>
+                 @elseif($flag == 3)
+                 <a href="/home/login/login"><span>收藏</span></a>
+                 @endif
                </a>
-               <script type="text/javascript">
+               <!-- 文章收藏js代码 -->
+              <script type="text/javascript">
                  jQuery('#collect').click(function(){
                   var id = $(this).next().html();
                   jQuery.get('/home/articles/collect/'+id,{'id':id},function(data){
@@ -274,7 +318,86 @@
                   },'json');
                  });
                </script>
-              </a> 
+               <!-- 文章点赞点踩 -->
+               <!-- type = 1用户登录并且已点赞 -->
+               @if($praise_trample==1)
+                   <a href="javascript:;" style="margin-left: 340px;" onmouseover="this.title ={{ $article->praise }} + ' 人点赞'" title="收藏本帖">
+                      <span onclick="tags(this)" ><img src="/home/picture/praised.png" style="width: 28px;height: 28px;"></span>
+                      <span style="display: none;">{{ $article->id }}</span>
+                   </a>
+                   <a href="javascript:;" style="margin-left: 10px;"  onmouseover="this.title ={{ $article->trample }} + ' 人点踩'" title="收藏本帖">
+                    <span><img src="/home/picture/trample.png" style="width: 28px;height: 28px;"></span>
+                    <span style="display: none;">{{ $article->id }}</span>
+                   </a>
+              <!-- type = 2用户登录并且已点踩 -->
+               @elseif($praise_trample==2)
+                   <a href="javascript:;" style="margin-left: 340px;" onmouseover="this.title ={{ $article->praise }} + ' 人点赞'" title="收藏本帖">
+                      <span><img src="/home/picture/praise.png" style="width: 28px;height: 28px;"></span>
+                      <span style="display: none;">{{ $article->id }}</span>
+                   </a>
+                   <a href="javascript:;" style="margin-left: 10px;"  onmouseover="this.title ={{ $article->trample }} + ' 人点踩'" title="收藏本帖">
+                    <span onclick="trample(this)" ><img src="/home/picture/trampled.png" style="width: 28px;height: 28px;"></span>
+                    <span style="display: none;">{{ $article->id }}</span>
+                   </a>
+              <!-- type = 3用户登录并未点赞未点踩 -->
+               @elseif($praise_trample==3)
+                   <a href="javascript:;" style="margin-left: 340px;" onmouseover="this.title ={{ $article->praise }} + ' 人点赞'" title="收藏本帖">
+                      <span onclick="tags(this)" ><img src="/home/picture/praise.png" style="width: 28px;height: 28px;"></span>
+                      <span  style="display: none;">{{ $article->id }}</span>
+                   </a>
+                   <a href="javascript:;" style="margin-left: 10px;"  onmouseover="this.title ={{ $article->trample }} + ' 人点踩'" title="收藏本帖">
+                    <span onclick="trample(this)"><img src="/home/picture/trample.png" style="width: 28px;height: 28px;"></span>
+                    <span style="display: none;">{{ $article->id }}</span>
+                   </a>
+                @elseif($praise_trample==4)
+                   <a onclick="return confirm('请先登录')" href="/home/login/login" style="margin-left: 340px;" onmouseover="this.title ={{ $article->praise }} + ' 人点赞'" title="收藏本帖">
+                      <span><img src="/home/picture/praise.png" style="width: 28px;height: 28px;"></span>
+                   </a>
+                   <a onclick="return confirm('请先登录')" href="/home/login/login" style="margin-left: 10px;"  onmouseover="this.title ={{ $article->trample }} + ' 人点踩'" title="收藏本帖">
+                    <span><img src="/home/picture/trample.png" style="width: 28px;height: 28px;"></span>
+                   </a>
+               @endif
+                
+
+               <script type="text/javascript">
+                 tags = function(obj){
+                  var article_id = $(obj).next().html();
+                  var url = '/home/articles/tags/'+article_id;
+                  $.get(url,{},function(data){
+                    if(data.type == 'untags'){
+                      if(data.code == 'success'){
+                         $(obj).children(1).attr('src','/home/picture/praise.png');
+                         $(obj).parent().next().children().attr('onclick','trample(this)');
+                      }1
+                    } else {
+                      if(data.code == 'success'){
+                         $(obj).children(1).attr('src','/home/picture/praised.png');
+                         $(obj).parent().next().children().attr('onclick','');
+                      }
+                    }
+                   
+                  },'json');
+                 }
+
+                 function trample(obj){
+                   var article_id = $(obj).next().html();
+                   var url = '/home/articles/trample/'+article_id;
+                   $.get(url,{},function(data){
+                    if(data.type=='untrample'){
+                      if(data.code == 'success'){
+                        $(obj).children(1).attr('src','/home/picture/trample.png');
+                        $(obj).parent().prev().children().attr('onclick','tags(this)');
+                      }
+                    } else {
+                      if(data.code == 'success'){
+                         $(obj).children(1).attr('src','/home/picture/trampled.png');
+                         $(obj).parent().prev().children().attr('onclick','');
+                      }
+                    }
+                   },'json');
+                 }
+               </script>
+
                <div class="y" style="margin-top: 7px;"> 
                 <em> <a class="times_fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=2&amp;tid=10&amp;reppost=10&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)"><span></span>回复</a> </em> 
                </div> 
@@ -301,7 +424,6 @@
        </div> 
        <div id="postlist" class="pl bm postlist_reply"> 
         <div class="reply_tit cl"> 
-         <h2><strong>0</strong> 个回复</h2> 
         </div> 
         <div id="postlistreply" class="pl">
          <div id="post_new" class="viewthread_table" style="display: none;"></div>
@@ -350,7 +472,6 @@
        <script type="text/javascript">
 new lazyload();
 </script> 
-       <script type="text/javascript">document.onkeyup = function(e){keyPageScroll(e, 0, 0, 'forum.php?mod=viewthread&tid=10', 1);}</script> 
       </div> 
       <!--[diy=diy_like1]-->
       <div id="diy_like1" class="area">
@@ -389,45 +510,320 @@ var disablepostctrl = parseInt('0');
 
 </script> 
       <div id="f_pst" class="pl bm bmw"> 
-       <form method="post" autocomplete="off" id="fastpostform" action="forum.php?mod=post&amp;action=reply&amp;fid=2&amp;tid=10&amp;extra=page%3D1&amp;replysubmit=yes&amp;infloat=yes&amp;handlekey=fastpost" onsubmit="return fastpostvalidate(this)"> 
         <table cellspacing="0" cellpadding="0"> 
          <tbody>
           <tr> 
            <td class="plc"> <span id="fastpostreturn"></span> 
             <div class="cl"> 
-             <div id="fastposteditor"> 
-              <div class="tedt mtn"> 
-               <div class="bar"> 
-                <span class="y"> <a href="forum.php?mod=post&amp;action=reply&amp;fid=2&amp;tid=10" onclick="return switchAdvanceMode(this.href)">高级模式</a> </span>
-                <script src="/home/js/seditor.js" type="text/javascript"></script> 
-                <div class="fpd"> 
-                 <a href="javascript:;" title="文字加粗" class="fbld">B</a> 
-                 <a href="javascript:;" title="设置文字颜色" class="fclr" id="fastpostforecolor">Color</a> 
-                 <a id="fastpostimg" href="javascript:;" title="图片" class="fmg">Image</a> 
-                 <a id="fastposturl" href="javascript:;" title="添加链接" class="flnk">Link</a> 
-                 <a id="fastpostquote" href="javascript:;" title="引用" class="fqt">Quote</a> 
-                 <a id="fastpostcode" href="javascript:;" title="代码" class="fcd">Code</a> 
-                 <a href="javascript:;" class="fsml" id="fastpostsml">Smilies</a> 
-                </div>
-               </div> 
-               <div class="area"> 
-                <div class="pt hm">
-                  您需要登录后才可以回帖 
-                 <a href="/home/login/login" class="xi2">登录</a> | 
-                 <a href="/home/users/create" class="xi2">立即注册</a> 
+             <div id="fastposteditor">
+ <!-- 评论填写框 -->
+             <div class="comment_box cl"> 
+              <form id="cform" name="cform" action="javascript:;" method="post" autocomplete="off">
+                {{csrf_field()}}
+               <div id="tedt"> 
+                <div class="area">
+                  <input type="hidden" name="article_id" value="{{$article->id}}">
+                  <textarea @if(isset($user)) @else disabled="disabled" @endif style=" width: 710px; height: 150px; padding: 30px 0;" id="newscontent" name="art_comment_content">
+                    @if(isset($user))
+
+                  @else
+                   请登录才可以发表评论, 或者免费注册
+                  @endif
+                  </textarea>
+                  <p></p>
+                  <button type="submit"  name="commentsubmit_btn" id="commentsubmit_btn" value="true" class="pn y">发表评论</button>
+                  <style type="text/css" >
+                    .pn{
+                      float: right;
+                      font-family: "Microsoft Yahei";
+                      height: 40px;
+                      line-height: 40px;
+                      width: 114px;
+                      margin: 0;
+                      color: #FFFFFF;
+                      font-size: 16px;
+                      font-weight: 400;
+                      border: 0;
+                      border-radius: 0;
+                      overflow: hidden;
+                      box-shadow: none;
+                      background-color: #f2953b !important;
+                      border-bottom: 3px solid #da8635;
+                    }
+                  </style>
                 </div> 
                </div> 
-              </div> 
+              </form> 
+             </div>
+             <!-- 评论填写框结束 -->
+            <!-- 回复填写框开始 -->
+            <div id="fwin_reply" class="fwinmask" style="position: fixed; z-index: 201; left: 595px; top: 323.5px;width: 422px;height: 200px;display: none">
+              <table cellpadding="0" cellspacing="0" class="fwin" style="width: 422px;height: 200px;">
+                <tbody style="width: 422px;height: 200px;">
+                  <tr>
+                    <td class="m_l" >&nbsp;&nbsp;</td>
+                    <td class="m_c " id="fwin_content_reply " fwin="reply " style=" ">
+                      <h3 class="flb " id="fctrl_reply " style="cursor: move; ">
+                        <em id="return_reply " fwin="reply ">参与/回复主题</em>
+                        <span>
+                          <a href="javascript:; " class="flbc " title="关闭 ">关闭</a>
+                        </span>
+                      </h3>
+                      <br>
+                    <form method="post " autocomplete="off " id="postform ">
+                      {{ csrf_field() }}
+                      <div class="c " id="floatlayout_reply " fwin="reply ">
+                        <div class="p_c ">
+                          <div class="tedt" style="width: 400px;height: 80px;">
+                            <textarea style="width: 400px;height: 80px;" id="huifu_content">
+                              @if(isset($user))
+
+                              @else
+                                  请登录才可以发表回复
+                              @endif
+                            </textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="o pns " id="moreconf " fwin="reply ">
+                        <a style="width: 80px;height: 35px;" onclick="postsubmit(this)" id="postsubmit " class="pn pnc z "  name="replysubmit " href="javascript:;">回复</a>
+                      </div>
+                    </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- 回复填写框结束 -->
+             <div id="comment" class="bm cl commentcomment" >
+
+              <!-- 文章详情评论回复克隆模板开始 -->
+              <div>
+                 <div id="comment_ul" class="comment_ul" style="display: none;height: 140px"> 
+                  <ul style="height: 140px"> 
+                   <li style="height: 140px"> <a name="comment_anchor_10"></a> 
+                    <dl id="comment_10_li" class="ptm pbm cl"> 
+                     <dt class="top_in cl" style="position: relative; line-height: 20px; margin: 0 0 13px 0; color: #BBBBBB;"> 
+                      <div class="portrait"> 
+                       <a href="/home/personal/index/" c="1"><img src="/home/picture/avatar.php" style="width: 50px;height: 50px;border-radius: 25px;" /></a> 
+                      </div> 
+                      <span class="z "> <a href="space-uid-1.html" class="username">admin</a> </span> 
+                      <span class="cutline"></span> 
+                      <span class="z shijian">2016-5-6 11:43</span> 
+                      <span class="y" style="padding: 0 0 0 10px;"> </span> 
+                     </dt> 
+                     <dd class="pinglun">
+                      现在很多品牌定位都在向年轻 化靠拢，例如雷克萨斯、本田、大众、日产等等......
+                     </dd> 
+                     <dd class="cl" style="padding-top: 18px;">
+                        <div class="reply1 y" style="height: 17px; line-height: 17px;">
+                         <a href="javascript:;"  style="color: #BBBBBB; font-size: 14px;" onclick="deletecomment(this)">
+                           删除</a>
+                          </div>
+                     </dd> 
+                    </dl> </li> 
+                  </ul> 
+                 </div> 
+               </div>
+               <!-- 文章详情评论回复克隆模板结束 -->
+ 
              </div> 
             </div> <input type="hidden" name="formhash" value="eaea2ab4" /> <input type="hidden" name="usesig" value="" /> <input type="hidden" name="subject" value="  " /> 
-            <div class="pnpost cl" style="padding-top: 10px;"> 
-             <button type="button" onclick="showWindow('login', 'member.php?mod=logging&amp;action=login&amp;guestmessage=yes')" onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" name="replysubmit" id="fastpostsubmit" class="pn pnc vm" value="replysubmit" tabindex="5" style="float: right; padding: 0; height: 40px; line-height: 40px;"><strong style="padding: 0 25px; font-size: 16px; font-weight: 400;">提交评论</strong></button> 
+            <div class="pnpost cl" style="padding-top: 10px;> 
              <em style="float: right; margin: 2px 0 0 0;"> </em> 
-            </div> </td> 
+
+             
+            </div> 
+                   @foreach($art_comment as $key=>$value)
+                       <div id="comment_ul" class="comment_ul" style="height: 140px" > 
+                        <ul style="height: 140px"> 
+                         <li style="height: 140px"> <a name="comment_anchor_10"></a> 
+                          <dl id="comment_10_li" class="ptm pbm cl"> 
+                           <dt class="top_in cl" style="position: relative; line-height: 20px; margin: 0 0 13px 0; color: #BBBBBB;"> 
+                            <div class="portrait"> 
+                             <a href="/home/personal/index/{{$value->from_uid}}" c="1"><img src="/uploads/{{$value->usersinfo->face}}" style="width: 50px;height: 50px;border-radius: 25px;" /></a> 
+                            </div> 
+                            <span class="z "> <a href="/home/personal/index/{{$value->from_uid}}" class="username">{{$value->users->uname}}</a> </span> 
+                            <span class="cutline"></span> 
+                            <span class="z shijian">{{date('Y-m-d H:i:s',$value->ctime)}}</span>
+                            <span class="y" style="padding: 0 0 0 10px;"> </span> 
+                           </dt> 
+                           <dd class="pinglun">
+                           {{$value->content}}
+                           </dd> 
+                           <dd class="cl" style="padding-top: 18px;">
+                            <div class="reply1 y" style="height: 17px; line-height: 17px;">
+                              @if($value->users->id == $login_users->id)
+                               <a href="javascript:;"  style="color: #BBBBBB; font-size: 14px;" onclick="deletecomment(this)">
+                                 删除</a>
+                              @else
+                             <a href="javascript:;"  style="color: #BBBBBB; font-size: 14px;" onclick="replyshow(this)">
+                              <span class="s_reply"></span>回复</a>
+                              @endif
+                              <input type="hidden" name="pid" class="pid" value="{{$value->id}}">
+                              <input type="hidden" name="new_id" value="{{$article->id}}">
+                            </div> 
+                           </dd> 
+                          </dl> </li> 
+                        </ul> 
+                       </div> 
+                      @foreach($value->sub as $kk=>$vv)
+                            <div  id="rely_content_ul">
+                             <div id="comment_ul" class="comment_ul" style="height: 100px"> 
+                              <ul style="height: 100px"> 
+                               <li style="margin-left: 70px;height: 100px"> <a name="comment_anchor_10"></a> 
+                                  <dl id="comment_10_li" class="ptm pbm cl"> 
+                                   <dt class="top_in cl" style="position: relative; line-height: 20px; margin: 0 0 13px 0; color: #BBBBBB;"> 
+                                    <div class="portrait"> 
+                                     <a href="/home/personal/index/{{$vv->from_uid}}" c="1"><img src="/uploads/{{$vv->usersinfo->face}}" style="width: 35px;height: 35px;border-radius: 17px;" /></a> 
+                                    </div> 
+                                    <span class="z "> <a href="/home/personal/index/{{$vv->from_uid}}" class="username">{{$vv->users->uname}}</a> </span> 
+                                    <span class="cutline"></span> 
+                                    <span class="z shijian">{{date('Y-m-d H:i:s',$vv->ctime)}}</span>
+                                    <span class="y" style="padding: 0 0 0 10px;"> </span> 
+                                   </dt> 
+                                   <dd class="pinglun">
+                                   {{$vv->content}}
+                                   </dd>
+                                   <dd class="cl reply88" style="padding-top: -100px;">
+                                        <div class="reply1 y" style="height: 10px; line-height: 10px;">
+                                          @if($vv->users->id == $login_users->id)
+                                           <a href="javascript:;" class="reply66"  style="color: #BBBBBB; font-size: 10px;" onclick="deletecomment(this)">
+                                             删除</a>
+                                          @endif
+                                          <input type="hidden" name="pid" class="pid" value="{{$vv->id}}">
+                                        </div> 
+                                       </dd> 
+                                  </dl>
+                                </li> 
+                              </ul> 
+                             </div> 
+                           </div>
+                      @endforeach
+              @endforeach
+            </div>
+              <script type="text/javascript">
+                          $(function(){
+                              //发送文章评论的ajax
+                              $('#commentsubmit_btn').click(function(){
+                                 var art_comment = $('#newscontent').val();
+                                     art_comment = art_comment.trim();
+                                  if(art_comment){
+                                       $.ajax({
+                                        url:'/home/articles/art_comment',
+                                        type:'post',
+                                        data:new FormData($('#cform')[0]), //创建表单数据
+                                        processData:false, //不限定格式
+                                        contentType:false, //不进行特定格式编码
+                                        dataType:'json',
+                                        success:function(data){
+                                          if(data.code == 'success'){
+                                          //克隆一个评论div
+                                          var comment = $('#comment_ul').eq(0).clone(true);
+                                          comment.find('.username').html(data.user.uname);
+                                          var face = '/uploads/'+data.user_info.face;
+                                          var href = '/home/personal/index/' + data.user.id;
+                                          comment.find('.portrait img').attr('src',face);
+                                          comment.find('.portrait a').attr('href',href);
+                                          comment.find('.username').attr('href',href);
+                                          comment.find('.pinglun').html(data.comment.content);
+                                          comment.find('.shijian').html(data.comment.created_at);
+                                          //追加
+                                          $('.commentcomment').prepend(comment);
+                                          comment.css('display','block');
+                                          $('#newscontent').val('');
+
+                                        }else{  
+                                           alert('评论失败');
+                                        }
+                                      }
+                                    });
+                                }
+                                     
+                                });
+                              //给评论回复按钮绑定事件
+                              replyshow = function(obj){
+
+                                //获取父级id和新闻id
+                                pid = $(obj).next().val();
+                                article_id = $(obj).next().next().val();
+                                //显示回复框
+                                $('#fwin_reply').css('display','block');
+                                      //给回复发表按钮绑定事件
+                                      postsubmit = function(object){
+                                        //接收并处理回复内容
+                                        var str = $('#huifu_content').val();
+                                         str = str.trim();
+                                         //准备url地址
+                                         var url = '/home/articles/art_comment';
+                                        $.ajaxSetup({
+                                                      headers: {
+                                                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                      }
+                                                  });
+                                        
+                                        $.post(url,{'pid':pid,'article_id':article_id,'art_comment_content':str},function(data){
+                                              if(data.code == 'success'){
+                                                 //关闭回复框
+                                                   $('#fwin_reply').css('display','none');
+                                                  //克隆一个评论div
+                                                  var comment = $('#comment_ul').eq(0).clone(true);
+                                                  //给克隆的回复框赋值并修改大小
+                                                  comment.find('.username').html(data.user.uname);
+                                                  var face = '/uploads/'+data.user_info.face;
+                                                  var href = '/home/personal/index/' + data.user.id;
+                                                  comment.find('.portrait img').attr('src',face);
+                                                  comment.find('.portrait img').attr('style',"width: 35px;height: 35px");
+                                                  comment.find('li').attr('style','margin-left: 70px;height: 100px');
+
+                                                  comment.find('.reply1').attr('style','height: 10px; line-height: 10px;');
+                                                  comment.find('.reply66').attr('style','color: #BBBBBB; font-size: 10px;');
+                                                  comment.find('.reply88').attr('style','padding-top: -100px;');
+
+                                                  comment.find('.reply66').attr('onclick','deletecomment(this)');
+                                                  comment.find('.portrait a').attr('href',href);
+                                                  comment.find('.username').attr('href',href);
+                                                  comment.find('.pinglun').html(data.comment.content);
+                                                  comment.find('.shijian').html(data.comment.created_at);
+                                                  $('#huifu_content').val('');
+
+                                                  //追加到响应位置
+                                                  $(obj).parent().parent().parent().parent().parent().parent().after(comment);
+
+                                                  comment.css('display','block');
+                                                 
+                                            }else{  
+                                               alert('回复失败');
+                                            }
+
+                                        },'json')
+                                         
+                                        };
+                              } 
+                                
+                                //关闭回复框功能
+                                  $('.flbc').click(function(){
+                                            $('#fwin_reply').css('display','none');
+                                  })
+
+                                  //删除评论回复功能
+                                  deletecomment = function (obje){
+                                      var id = $(obje).next().val();
+                                      var url = '/home/articles/art_comment_delete/'+id;
+                                      $.get(url,{'id':id},function(data){
+                                        if(data.code == 'success'){
+                                          $(obje).parent().parent().parent().parent().parent().parent().remove();
+                                        }else{
+                                          alert('删除失败');
+                                        }
+                                      },'json')
+                                  } 
+                        });
+              </script>
+          </td> 
           </tr> 
          </tbody>
-        </table> 
-       </form> 
+        </table>
       </div> 
      </div> 
     </div> 

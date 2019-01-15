@@ -112,7 +112,7 @@ Route::resource('home/girls','home\GirlsController');   //前台车模列表
 Route::get('home/girls/collect/{id}','home\GirlsController@collect');   //前台车模收藏
 
 
-Route::get('home/index','home\IndexController@index');   //前台首页
+Route::get('home/index','home\IndexController@index')->middleware('login_users');   //前台首页
 Route::get('/home/index/{id}','home\IndexController@index');   //前台首页
 Route::get('home/personal/concern/{id}','home\PersonalController@concern');	//前台个人关注
 Route::get('home/personal/care/{id}','home\PersonalController@care');	//取消关注 ajax
@@ -170,16 +170,22 @@ Route::get('home/drafts/{id}/index','home\DraftsController@index');             
 Route::get('home/articles/collect/{id}','home\ArticlesControlle@collect');             //文章收藏
 Route::get('home/message/system','home\MessageController@system');                     //系统消息
 Route::get('home/message/send','home\MessageController@send');                         //发件消息
-Route::get('home/message/send_system','home\MessageController@send_system');           //发件消息
+Route::get('home/message/send_system','home\MessageController@send_system');           //发件系统消息
 Route::get('home/message/sdelete/{id}','home\MessageController@sdelete');              //删除收件消息
 Route::get('home/message/fdelete/{id}','home\MessageController@fdelete');              //删除发件消息
-Route::get('home/message/look/{id}','home\MessageController@look');              //删除发件消息
+Route::get('home/message/look/{id}','home\MessageController@look');                    //查看私信
+Route::get('home/articles/art_comment_delete/{id}','home\ArticlesControlle@art_comment_delete');         //文章评论回复删除
+Route::get('home/articles/tags/{id}','home\ArticlesControlle@tags');                   //文章点赞
+Route::get('home/articles/trample/{id}','home\ArticlesControlle@trample');             //文章点踩
 
 
 Route::post('admin/login/check','admin\LoginController@check');                        //检查登录
 Route::post('admin/login/checkemail','admin\LoginController@checkemail');              //审查邮箱                 
 Route::post('admin/login/changepwd','admin\LoginController@changepwd');                //修改密码
 Route::post('home/message/store_system','home\MessageController@store_system');        //发件消息
+Route::post('home/articles/art_comment','home\ArticlesControlle@art_comment');         //文章评论或回复
+Route::post('home/articles/report','home\ArticlesControlle@report');                   //文章举报
+
 
 
 

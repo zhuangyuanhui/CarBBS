@@ -12,6 +12,8 @@ use App\models\home\Label;
 use App\models\home\Drafts;
 use App\models\home\Concern;
 use App\models\home\users_article;
+use App\models\home\UsersInfo;
+use App\models\home\inform_article;
 use DB;
 use App\Http\Controllers\home\ArtRankController;
 
@@ -111,7 +113,9 @@ class ArticlesControlle extends Controller
              $login_users = session('login_users');
              $user = Users::where('uname',$login_users->uname)->first();
              $Article->users_id = $user->id; 
-             $Article->labels_id = implode($request->input('labels'),',');
+             if($request->input('labels')){
+                $Article->labels_id = implode($request->input('labels'),',');
+             }
              $Article->article_status = 1; 
              $Article->title = $request->input('title'); 
              $Article->cates_id = $request->input('cates_id'); 
@@ -176,22 +180,51 @@ class ArticlesControlle extends Controller
                 } else {
                     $flag = 2;
                 }
+
+                //判断文章是否被该用户点赞
+                $inpraise = explode(',', $article->inpraise);
+                if(in_array(session('login_users')->id, $inpraise)){
+                    //登录并且点赞$praise_trample = 1;
+                    $praise_trample = 1;
+                } else {
+                    //判断文章是否被点踩
+                    $intrample = explode(',', $article->intrample);
+                    if(in_array((session('login_users')->id),$intrample)){
+                        //登录并且点踩$praise_trample = 2;
+                        $praise_trample = 2;
+                    } else {
+                        //登录并且没点赞没点踩$praise_trample = 3;
+                        $praise_trample = 3;
+                    }
+                }
+                
         } else { 
              $flag = 3;
+             //没登录$praise_trample = 4
+             $praise_trample = 4;
         }
         //获取该文章被收藏量
         $num = users_article::where('article_id',$id)->count();
         //获取文章类别
         $cates = Cates::find($article->cates_id);
         //获取云标签
-        $Article = Article::where('id',$id)->first();
-        $labels_id = explode(',',$Article->labels_id); 
-        foreach ($labels_id as $key => $value) {
-            $labels[] = Label::where('id',$value)->first()->lname;
+        if($article->labels_id){
+            $labels_id = explode(',',$article->labels_id); 
+            foreach ($labels_id as $key => $value) {
+                $labels[] = Label::where('id',$value)->first()->lname;
+            }
+        } else {
+            $labels = [];
         }
         $article->save();
+        //获取评论
+        $art_comment = ArticlesControlle::getArtComment();
+        //获取登录用户信息
+         $login_users  = session('login_users');
+         
         return view('home.articles.details',
                                            [
+                                            'praise_trample'=>$praise_trample,
                                             'flag'=>$flag,
                                             'num'=>$num,
                                             'labels'=>$labels,
@@ -200,7 +233,9 @@ class ArticlesControlle extends Controller
                                             'cate'=>$cate,
                                             'cates'=>$cates,
                                             'article'=>$article,
+                                            'login_users'=>$login_users,
                                             'title'=>'文章详情',
+                                            'art_comment'=>$art_comment,
                                             'click'=> ArtRankController::click()
                                            ]
                                     );
@@ -281,4 +316,170 @@ class ArticlesControlle extends Controller
         }
 
     }
+
+    /**
+     * 文章举报
+     */
+    public function report(Request $request)
+    {
+        $inform_article = new inform_article;
+        $inform_article->users_id = $request->input('users_id');
+        $inform_article->article_id = $request->input('article_id');
+        $inform_article->type = $request->input('type');
+        $inform_article->content = $request->input('content');
+        $inform_article->ctime = time();
+        $inform_article->status = 1;
+        $res = $inform_article->save();
+        if($res){
+            return back()->with('success','举报成功');
+        } else {
+            return back()->with('error','举报失败');
+        }
+
+
+    }
+
+    /**
+     * 获取文章评论或回复
+     */
+    public static function getArtComment($id=0){
+        $data = Comment::where('pid',$id)->orderBy('ctime','desc')->get();
+
+        foreach ($data as $key => $value) {
+            $value->users = Users::find($value->from_uid);
+            $value->usersinfo = UsersInfo::where('users_id',$value->from_uid)->first();
+            // 获取所有下一级 子分类
+            $temp = self::getArtComment($value->id);
+            $value->sub = $temp;
+        }
+        return $data;
+    }
+
+    /**
+     * 文章评论回复
+     */
+    public function art_comment(Request $request,$pid=0)
+    {
+        if($request->input('pid')){
+             $pid =$request->input('pid');
+        } else {
+            $pid = 0;
+        }
+        $id = session('login_users')->id;
+        $art_comments = new Comment;
+        $art_comments->pid = $pid;
+        $art_comments->from_uid = $id;
+        $art_comments->article_id = $request->input('article_id');
+        $art_comments->content = $request->input('art_comment_content');
+        $art_comments->ctime = time();
+        $res = $art_comments->save();
+
+        $user = Users::find($id);
+        $user_info = UsersInfo::where('users_id',$id)->first();
+
+        if($res){
+            echo json_encode(['user'=>$user,'user_info'=>$user_info,'code'=>'success','comment'=>$art_comments]);
+        } else {
+            echo json_encode(['code'=>'error']);
+        }
+
+    }
+
+    /**
+     * 文章评论回复删除
+     */
+     public function art_comment_delete($id)
+    {
+        $res = Comment::where('id',$id)->delete();
+        if($res){
+            echo json_encode(['code'=>'success']);
+        }else{
+            echo json_encode(['code'=>'error']);
+        }
+    }
+
+    /**
+     * 文章点赞
+     */
+
+    public function tags($id)
+    {
+        $user_id  = session('login_users')->id;
+
+        $article = Article::where('users_id',$user_id)->where('id',$id)->first();
+         
+        $inpraise = explode(',', trim($article->inpraise,','));
+
+        if(in_array($user_id, $inpraise)){
+            foreach ($inpraise as $key => $value) {
+                if($user_id == $value){
+                    unset($inpraise[$key]);
+                }
+            }
+            $article->praise = $article->praise-1;
+            $article->inpraise = trim(implode($inpraise, ','),',');
+            $res = $article->save();
+            if($res){
+                echo json_encode(['code'=>'success','type'=>'untags']);
+            } else {
+                echo json_encode(['code'=>'error']);
+            }
+        } else {
+            array_push($inpraise, $user_id);
+            $article->praise = $article->praise+1;
+            $article->inpraise = trim(implode($inpraise, ','),',');
+            $res = $article->save();
+            if($res){
+                echo json_encode(['code'=>'success','type'=>'tags']);
+            } else {
+                echo json_encode(['code'=>'error']);
+            }
+
+        }
+
+    } 
+
+    /**
+     * 文章点踩
+     */
+
+    public function trample($id)
+    {
+        $user_id  = session('login_users')->id;
+
+        $article = Article::where('users_id',$user_id)->where('id',$id)->first();
+         
+        $intrample = explode(',', trim($article->intrample,','));
+        //判断给用户是否点踩
+        if(in_array($user_id, $intrample)){
+            foreach ($intrample as $key => $value) {
+                if($user_id == $value){
+                    unset($intrample[$key]);
+                }
+            }
+            $article->trample = $article->trample-1;
+            $article->intrample = trim(implode($intrample, ','),',');
+
+            $res = $article->save();
+            if($res){
+                echo json_encode(['code'=>'success','type'=>'untrample']);
+            } else {
+                echo json_encode(['code'=>'error']);
+            }
+        } else {
+            $article->trample = $article->trample+1;
+            array_push($intrample, $user_id);
+            $article->intrample = trim(implode($intrample, ','),',');
+            $res = $article->save();
+            if($res){
+                echo json_encode(['code'=>'success','type'=>'trample']);
+            } else {
+                echo json_encode(['code'=>'error']);
+            }
+        }
+
+        
+    }
+
+
 }
