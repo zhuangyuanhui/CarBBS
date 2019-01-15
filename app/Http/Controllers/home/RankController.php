@@ -46,8 +46,11 @@ class RankController extends Controller
         //     }
         // }
 
-
-        $self = session('login_users')->id;
+        if(session('login_users')){
+              $self = session('login_users')->id;
+        }else{
+              $self = null;
+        }
 
     	return view('home.rank.index',['title'=>'用户排行榜','data'=>$data,'type'=>$type,'self'=>$self]);
     }

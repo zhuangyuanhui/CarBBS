@@ -111,7 +111,7 @@
           <table cellpadding="0" cellspacing="0" class="vwtb"> 
            <tbody>
             <tr> 
-             <td id="article_content"> <p align="center"><a href="/uploads/{{$girl->car_pic}}" target="_blank"><img src="/uploads/{{$girl->car_pic}}" /></a></p><p><span style="font-family:微软雅黑, 'microsoft yahei';font-size:18px;line-height:2em;text-indent:2em;"> {!! $girl->content !!}</span></p><p><br /><a href="/uploads/{{$girl->car_pic}}" target="_blank"></a></p> </td> 
+             <td id="article_content"> <p align="center"><a href="/uploads/{{$girl->car_pic}}" target="_blank"></a></p><p><span style="font-family:微软雅黑, 'microsoft yahei';font-size:18px;line-height:2em;text-indent:2em;"> {!! $girl->content !!}</span></p><p><br /><a href="/uploads/{{$girl->car_pic}}" target="_blank"></a></p> </td> 
             </tr> 
            </tbody>
           </table> 

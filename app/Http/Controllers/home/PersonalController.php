@@ -12,6 +12,8 @@ use App\models\home\Article;
 use App\models\home\Inform_Users;
 use App\models\home\users_models;
 use App\models\home\Users_News;
+use App\models\admin\Comment;
+use App\models\home\users_article;
 use Hash;
 
 class PersonalController extends Controller
@@ -21,19 +23,20 @@ class PersonalController extends Controller
      */
     public function index($id=0)
     {	 
-        //如果id等于当前登录id,则获取自己的信息
-    	if($id == 0){
-    		$id = session('login_users')->id;
-    	}
+    	
     	//获取当前登录用户的id
-	    $login_id = session('login_users')->id;
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
         //判断当前页主用户与当前登录用户是否为关注
         $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
 
 
         if($concerns){
-            //标识符,登陆用户已关注该业主
+            //标识符,登陆用户已关注该页主
             $ifconcern = true;
         }else{
             //标识符,登陆用户未关注该业主
@@ -41,7 +44,6 @@ class PersonalController extends Controller
         }
         //获取对象id用户的信息
 	    $users = Users::find($id);
-
 
     	return view('home.personal.index',['title'=>'个人资料','users'=>$users,'login_id'=>$login_id,'ifconcern'=>$ifconcern,'type'=>1]);
     }
@@ -89,8 +91,12 @@ class PersonalController extends Controller
     	//获取修改用户原资料
     	$users = Users::find($id);
 
-    	//获取当前登录用户的id
-	    $login_id = session('login_users')->id;
+        //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
          //判断当前页主用户与当前登录用户是否为关注
         $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
@@ -153,8 +159,13 @@ class PersonalController extends Controller
         //获取修改用户原资料
         $users = Users::find($id);
 
-        //获取当前登录用户的id
-        $login_id = session('login_users')->id;
+         //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
+
 
          //判断当前页主用户与当前登录用户是否为关注
         $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
@@ -168,10 +179,37 @@ class PersonalController extends Controller
             $ifconcern = false;
         }
 
+
         //获取个人的所有文章
         $articles = Article::where('users_id','=',$id)->get();
         //加载页面,分配数据
         return view('home.personal.article',['title'=>'个人文章','users'=>$users,'login_id'=>$login_id,'articles'=>$articles,'ifconcern'=>$ifconcern,'type'=>2]);
+    }
+
+    /**
+     * 个人空间文章删除功能
+     */
+    public function deleted($id)
+    {
+       $article = Article::find($id);
+       $res = $article->delete();
+
+      //同时删除相应的评论和收藏
+      $comment = Comment::where('article_id','=',$id)->get();
+      foreach ($comment as $k=>$v) {
+           $v->delete();
+      }
+      $shouc = users_article::where('article_id','=',$id)->get();
+      foreach ($shouc as $key => $value) {
+          $value->delete();
+      }
+
+
+       if($res){
+            echo json_encode(['code'=>'success']);
+       }else{
+            echo json_encode(['code'=>'error']);
+       }
     }
 
     /**
@@ -180,10 +218,15 @@ class PersonalController extends Controller
     public function users_articles($id = 0)
     {   
         
-        //获取当前登录用户的id
-        $login_id = session('login_users')->id;
+          //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
         //判断当前页主用户与当前登录用户是否为关注
+
         $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
 
 
@@ -208,12 +251,15 @@ class PersonalController extends Controller
     public function users_news($id = 0)
     {   
         
-        //获取当前登录用户的id
-        $login_id = session('login_users')->id;
+         //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
         //判断当前页主用户与当前登录用户是否为关注
         $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
-
 
         if($concerns){
             //标识符,登陆用户已关注该页主
@@ -236,8 +282,12 @@ class PersonalController extends Controller
     public function users_girls($id = 0)
     {   
         
-        //获取当前登录用户的id
-        $login_id = session('login_users')->id;
+          //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
         //判断当前页主用户与当前登录用户是否为关注
         $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
@@ -263,23 +313,53 @@ class PersonalController extends Controller
      */
     public function concern($id=0)
     {
-        //获取当前登录用户的id
-        $login_id = session('login_users')->id;
+          //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
          //判断当前页主用户与当前登录用户是否为关注
         $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
-
 
         if($concerns){
             //标识符,登陆用户已关注该页主
             $ifconcern = true;
         }else{
-            //标识符,登陆用户未关注该页主
+            //标识符,登陆用户未关注该页主 
             $ifconcern = false;
         }
 
         $users = Users::find($id);
         return view('home.personal.concern',['title'=>'我的关注','users'=>$users,'login_id'=>$login_id,'concern'=>$users->users_concern,'ifconcern'=>$ifconcern,'type'=>4]);
+    }
+
+    /**
+     * 我的粉丝
+     */
+    public function fans($id=0)
+    {
+          //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
+
+         //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+        if($concerns){
+            //标识符,登陆用户已关注该页主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该页主 
+            $ifconcern = false;
+        }
+
+        $users = Users::find($id);
+        return view('home.personal.fans',['title'=>'我的粉丝','users'=>$users,'login_id'=>$login_id,'fans'=>$users->users_fans,'ifconcern'=>$ifconcern,'type'=>5]);
     }
 
 
@@ -288,8 +368,12 @@ class PersonalController extends Controller
      */
     public function report($id)
     {   
-        //获取当前登录用户的id
-        $login_id = session('login_users')->id;
+         //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
          //判断当前页主用户与当前登录用户是否为关注
         $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
@@ -332,8 +416,12 @@ class PersonalController extends Controller
         //接收表单数据
         $data = $request->only('users_id','type','content');
 
-        //获取当前登录用户id
-        $login_id = session('login_users')->id;
+          //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
         //添加举报表记录
         $inform_users = new Inform_Users;
         $inform_users->users_id = $login_id;
@@ -355,8 +443,12 @@ class PersonalController extends Controller
      */
     public function care($id)
     {
-         //获取当前登录用户的id
-        $login_id = session('login_users')->id;
+           //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
         //获取 被关注的用户
         $data = Concern::where('users_id','=',$id)->orWhere('fans_id','=',$login_id)->first();
@@ -379,8 +471,12 @@ class PersonalController extends Controller
         //获取修改用户原资料
         $users = Users::find($id);
 
-        //获取当前登录用户的id
-        $login_id = session('login_users')->id;
+          //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
         //加载页面,分配数据
         return view('home.personal.pass',['title'=>'资料修改','users'=>$users,'login_id'=>$login_id]);
@@ -391,8 +487,12 @@ class PersonalController extends Controller
      */
     public function hold($pass)
     {
-        //获取当前登录用户
-        $login_id = session('login_users');
+          //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
         //当前用户密码 是否与输入密码相一致
         if (Hash::check($pass,$login_id->upwd)) {
@@ -411,8 +511,12 @@ class PersonalController extends Controller
         //获取新密码
         $data = $request->only('repass');
 
-        //获取当前用户id
-        $login_id = session('login_users')->id;
+         //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
 
         //拿到当前用户
         $user = Users::find($login_id);

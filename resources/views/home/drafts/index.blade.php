@@ -4,6 +4,8 @@
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -88,10 +90,14 @@
    <div id="uhd"> 
     <div class="space_h cl"> 
      <div class="icn cl">
-      <a href="space-uid-6.html"><img src="picture/avatar.php" /></a>
+      <a href="#"><img src="/uploads/{{$users->getUserInfo->face}}" /></a>
      </div> 
-     <h2 class="mt"> 方希 </h2> 
-     <p class="follow_us"> <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="home.php?mod=spacecp&amp;ac=follow&amp;op=add&amp;hash=71293015&amp;fuid=6" class="new1">收听TA</a> <a href="home.php?mod=spacecp&amp;ac=friend&amp;op=add&amp;uid=6&amp;handlekey=addfriendhk_6" id="a_friend_li_6" onclick="showWindow(this.id, this.href, 'get', 0);" class="xi2 new1">加为好友</a> <a href="home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_6&amp;touid=6&amp;pmid=0&amp;daterange=2" id="a_sendpm_6" onclick="showWindow('showMsgBox', this.href, 'get', 0)" title="发送消息" class="old1">发送消息</a> <script type="text/javascript">
+     <h2 class="mt"> {{$users->nickname}} </h2> 
+     <p class="follow_us"> 
+      <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="#" class="new1">我的关注</a>
+      <a href="#" id="a_friend_li_6" onclick="showWindow(this.id, this.href, 'get', 0);" class="xi2 new1">我的粉丝</a>
+      <a href="/home/message" id="a_sendpm_6" onclick="showWindow('showMsgBox', this.href, 'get', 0)" title="发送消息" class="old1">我的私信</a>
+      <script type="text/javascript">
 
       function succeedhandle_followmod(url, msg, values) {
 

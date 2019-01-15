@@ -42,9 +42,14 @@ class ArticlesControlle extends Controller
                  $flag = 3;
                 break;
              case 4:
-                 $login_users = session('login_users');
-                 $user = Users::where('uname',$login_users->uname)->first();
-                 $data = Article::where('users_id',$user->id)->get();
+                if(session('login_users')){
+                        $login_users = session('login_users');
+                     $user = Users::where('uname',$login_users->uname)->first();
+                     $data = Article::where('users_id',$user->id)->get();
+                }else{
+                    $data = null;
+                }
+                 
                  $flag = 4;
                  break;
         }
@@ -68,6 +73,7 @@ class ArticlesControlle extends Controller
      */
     public function create()
     {
+            
          $login_users = session('login_users');
          $user = Users::where('uname',$login_users->uname)->first();
          $id = $user->id; 
@@ -168,7 +174,7 @@ class ArticlesControlle extends Controller
         $cate      = Article::where('cates_id',$article->cates_id)->orderBy('clicks','desc')->limit(3)->get();
         
         //判断用户是否登录
-        if ($request->session()->exists('login_users')) {
+        if (session('login_users')) {
                 //判断该文章是否被该用户收藏,设置标志符
                 $user_id  = session('login_users')->id;
                 if( users_article::where('users_id',$user_id)->where('article_id',$id)->first() ){

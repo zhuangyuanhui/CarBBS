@@ -69,6 +69,7 @@
                                     	<form action="/admin/comment/{{$v->id}}" method="post" style="display: inline-block;" >
                                     		{{ csrf_field() }}
                                     		{{ method_field('DELETE') }}
+                                            <input type="hidden" name="type" value="article">
                                     		<input type="submit" value="删除" onclick="return confirm('确定要删除吗?')" class="btn btn-danger">
                                     	</form>
                                         <a href="/admin/husers/{{$v->getUsers->id}}/edit" class="btn btn-warning">管理用户</a>
@@ -79,7 +80,7 @@
                                 <tr>
                                     <td>{{ $v->id }}</td>
                                     <td>{{ $v->getUsers->uname }}</td>
-                                    <td>{{ $v->getNews->title }}</td>
+                                    <td>{{ $v->getNews->title }}</td> 
                                     <td>新闻</td>
                                     <td>{{ $v->content }}</td>
                                     <td>{{date('Y-m-d H:i:s',$v->ctime)}}</td>
@@ -87,6 +88,7 @@
                                         <form action="/admin/comment/{{$v->id}}" method="post" style="display: inline-block;" >
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
+                                            <input type="hidden" name="type" value="news">
                                             <input type="submit" value="删除" onclick="return confirm('确定要删除吗?')" class="btn btn-danger">
                                         </form>
                                          <a href="/admin/husers/{{$v->getUsers->id}}/edit" class="btn btn-warning">管理用户</a>

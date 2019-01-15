@@ -35,6 +35,7 @@
               <td class="by">浏览量</td>
               <td class="by">点赞量</td>
               <td class="by">发表时间</td>
+              <td class="by">操作</td>
             </tr>
             @foreach($articles as $key=>$value)
             <tr>
@@ -58,6 +59,10 @@
                     <span title="2019-1-4 18:37">{{date('Y-m-d H:i:s',$value->ctime)}}</span></a>
                 </em>
               </td>
+              <td>
+                <a href="javascript:;" onclick="deleted(this)">删除</a>
+                <input type="hidden" name="article_id" value="{{$value->id}}">
+              </td>
             </tr>
             @endforeach
           </tbody>
@@ -68,8 +73,19 @@
     <div id="diycontentbottom" class="area"></div>
     <!--[/diy]--></div>
 </div>
-
-
     </div> 
    </div> 
+   <script type="text/javascript">
+     deleted = function (obj){
+        var id = $(obj).next().val();
+        var url = '/home/personal/articles/deleted/'+id;
+        $.get(url,{'id':id},function(data){
+            if(data.code == 'success'){
+              $(obj).parent().parent().remove();
+            }else{
+              alert('删除失败');
+            }
+        },'json');
+     }
+   </script>
     @endsection

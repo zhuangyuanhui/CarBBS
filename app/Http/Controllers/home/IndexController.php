@@ -11,6 +11,7 @@ use App\models\admin\Girls;
 use App\models\home\Article;
 use App\models\home\Users;
 use App\models\home\UsersInfo;
+use App\models\home\Links;
 
 class IndexController extends Controller
 {
@@ -19,7 +20,15 @@ class IndexController extends Controller
 	 * @return [type] [description]
 	 */
     public function index($id=0)
-    {
+    {   
+        //判断当前用户是否登录,并取其id值
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
+
+
     	//引入轮播图  已下架的不进行轮播
     	$slides = Slides::where('slides_status',1)->get();
 
@@ -37,13 +46,37 @@ class IndexController extends Controller
     		$article = Article::all();
     	} else {
     		$article = Article::where('cates_id','=',$id)->orWhere('labels_id','=',$id)->get();
+        }
 
-    	}
+        //对文章内容的p标签和img标签进行处理
+        foreach($article as $k=>$v){
+
+            // 2.正则表达式 s让.可以匹配换行符
+            $ptn = '/<img.*?src="(.*?)".*?>/s'; 
+            $ptn2 = '/<p>(.*?)<\/p>/s';
+            //正则替换去除img标签
+            $v->content = preg_replace($ptn, '', $v->content); 
+            $v->content = preg_replace($ptn2, '$1', $v->content); 
+    	} 
 
     	//排行   文章点赞量  用户积分量  车模浏览量
     	$rank_article = Article::orderBy('praise','desc')->limit(10)->get();
+
+         foreach($rank_article as $k=>$v){
+
+            // 2.正则表达式 s让.可以匹配换行符
+            $ptn = '/<img.*?src="(.*?)".*?>/s'; 
+            $ptn2 = '/<p>(.*?)<\/p>/s';
+            //正则替换去除img标签
+            $v->content = preg_replace($ptn, '', $v->content); 
+            $v->content = preg_replace($ptn2, '$1', $v->content); 
+        }
+
     	$rank_users = UsersInfo::orderBy('sign_number','desc')->limit(10)->get();
     	$rank_girls = Girls::orderBy('clicks','desc')->limit(10)->get();
+
+        //获取友情链接
+        $links = Links::all();
 
     	// 引入用户
     	$users = Users::all();
@@ -58,6 +91,7 @@ class IndexController extends Controller
 	    								'rank_article'=>$rank_article,
 	    								'rank_users'=>$rank_users,
 	    								'rank_girls'=>$rank_girls,
+                                        'links' => $links
     								]);
     }
 
@@ -74,5 +108,13 @@ class IndexController extends Controller
      		
      	}
     	echo $arr;
+    }
+
+    /**
+     * 关于我们页面
+     */
+    public function andme()
+    {
+        return view('home.index.andme',['title'=>'关于我们']);
     }
 }

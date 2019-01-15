@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\admin\InformArticle;
 use App\models\home\Article;
+use App\models\admin\Comment;
+use App\models\home\users_article;
 class AreportsController extends Controller
 {
     /**
@@ -92,11 +94,20 @@ class AreportsController extends Controller
             $report->type = $data['type'];
             //删除文章
             $article->delete();
-
+            //同时删除相应的评论和收藏
+            $comment = Comment::where('article_id','=',$report->article_id)->get();
+            foreach ($comment as $k=>$v) {
+                 $v->delete();
+            }
+            $shouc = users_article::where('article_id','=',$report->article_id)->get();
+            foreach ($shouc as $key => $value) {
+                $value->delete();
+            }
+ 
         } else {
 
              $report->status = 3;
-        }
+        }   
         $res = $report->save();
         if ($res) {
             return redirect('admin/areports')->with('success','处理成功');

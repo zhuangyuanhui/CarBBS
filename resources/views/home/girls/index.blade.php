@@ -4,6 +4,8 @@
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
 	<div id="wp" class="wp time_wp cl">
    <!--[name]quater_6_che - 车模[/name]-->
    <link rel="stylesheet" type="text/css" href="/home/css/chemo.css" /> 

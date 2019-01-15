@@ -43,9 +43,23 @@
    <div id="ct" class="wp ct2 cl"> 
     <div class="cl"> 
      <div class="sd"> 
-      <div class="itofeedback cl"> 
-       <a href="/home/articles/create" class="bluebigbutton"  title="发新帖">发新帖</a> 
-       <a href="javascript:;" id="sign" class="greenbigbutton" title="签到" style="margin-right: 0;">签到SIGN</a> 
+      <div class="itofeedback cl">
+
+       <a 
+       @if(session('login_users'))
+         href="/home/articles/create" 
+        @else
+          onclick="alert('请先登录!')"
+       @endif
+      
+       class="bluebigbutton"  title="发新帖">发新帖</a> 
+       <a href="javascript:;" 
+       @if(session('login_users'))
+       
+        @else
+          onclick="alert('请先登录!')"
+       @endif
+       id="sign" class="greenbigbutton" title="签到" style="margin-right: 0;">签到SIGN</a> 
       </div> 
       <script type="text/javascript">
         $('#sign').click(function(){
@@ -183,7 +197,7 @@
              <h1> <a href="thread-10-1-1.html" onclick="return copyThreadUrl(this, '玩车达人')">{{ $article->title }}</a> </h1> 
             </div> 
             <div class="moquu_small"> 
-             <p><a href="/home/vip" class=""></a>&copy; <a href="space-uid-1.html" target="_blank">admin</a> <a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=1" target="_blank">管理员</a> &nbsp;&nbsp;/&nbsp;&nbsp;2015-9-6 13:07&nbsp;&nbsp;/&nbsp;&nbsp;<span> <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=10&amp;formhash=eaea2ab4" id="k_favorite"  onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖" class="k_favorite" style="padding-right: 10px;"><i></i>{{ $num }} 人收藏</a> <a href="javascript:void(0)" class="cc1" title="保留作者信息" style="margin-left: 10px;">保留作者信息</a> <a href="javascript:void(0)" class="cc2" title="禁止商业使用（站长自定义文字）">禁止商业使用（站长自定义文字）</a></span></p> 
+             <p>&nbsp;&nbsp;/&nbsp;&nbsp;2015-9-6 13:07&nbsp;&nbsp;/&nbsp;&nbsp;<span> <a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=10&amp;formhash=eaea2ab4" id="k_favorite"  onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖" class="k_favorite" style="padding-right: 10px;"><i></i>{{ $num }} 人收藏</a> 
             </div> 
            </div> 
           </div> 
@@ -211,14 +225,6 @@
                   </tr>
                  </tbody>
                 </table> 
-                <div class="attach_nopermission attach_tips"> 
-                 <div> 
-                  <h3><strong>本帖子中包含更多资源</strong></h3> 
-                  <p>您需要 <a href="member.php?mod=logging&amp;action=login" onclick="showWindow('login', this.href);return false;">登录</a> 才可以下载或查看，没有帐号？<a href="member.php?mod=register" title="注册帐号">立即注册</a> </p> 
-                 </div> 
-                 <span class="atips_close" onclick="this.parentNode.style.display='none'">x</span> 
-                </div> 
-               </div> 
                <div id="comment_10" class="cm"> 
                </div> 
                <div id="post_rate_div_10"></div> 
@@ -244,16 +250,19 @@
                 <a href="#" class="bds_more" data-cmd="more"></a>
                </div> 
                <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
-               <span class="cutline" style="margin: 9px 10px 0 0;"></span> 
-               <a href="javascript:;" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title ={{ $num }} + ' 人收藏'" title="收藏本帖" class="k_favorite">
-               @if($flag ==1 )
-               <span id="collect">已收藏</span><li style="display: none;">{{ $article->id }}</li>
-               @elseif($flag == 2)
-               <span id="collect">收藏</span><li style="display: none;">{{ $article->id }}</li>
-               @elseif($flag == 3)
-               <a href="/home/login/login"><span>收藏</span></a>
+               <span class="cutline" style="margin: 9px 10px 0 0;"></span>
+               @if(session('login_users'))
+                   <a href="javascript:;" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title ={{ $num }} + ' 人收藏'" title="收藏本帖" class="k_favorite">
+                   @if($flag ==1 )
+                   <span id="collect">已收藏</span><li style="display: none;">{{ $article->id }}</li>
+                   @elseif($flag == 2)
+                   <span id="collect">收藏</span><li style="display: none;">{{ $article->id }}</li>
+                   @elseif($flag == 3)
+                   <a href="/home/login/login"><span>收藏</span></a>
+                   @endif
+                    </a>
                @endif
-               </a>
+              
                <script type="text/javascript">
                  jQuery('#collect').click(function(){
                   var id = $(this).next().html();

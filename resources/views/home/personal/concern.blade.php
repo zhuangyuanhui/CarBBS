@@ -15,17 +15,19 @@
 				<ul class="flw_ulist">
 				@foreach($concern as $k=>$v)
 				<li class="cl " style=" padding: 10px 0 10px 100px; border-bottom: 1px solid #DBDBDB; ">
-				<a href="space-uid-4.html" title="Scientist " id="edit_avt " class="flw_avt
-				" shref="home.php?mod=space&amp;uid=4 " style=" float: left; margin: 0 0 0 -80px;
-				width: 80px; ">
-				<img src="/uploads/{{$v->
+					<a href="/home/personal/index/{{$v->id}}" title="Scientist " id="edit_avt " class="flw_avt
+					" shref="home.php?mod=space&amp;uid=4 " style=" float: left; margin: 0 0 0 -80px;
+					width: 80px; ">
+					<img src="/uploads/{{$v->
 					getUserInfo->face}}" style="float: left; margin-left: 15px; width: 48px;">
 					</a>
-					<a class="guan" onclick="care({{$v->id}})" href="javascript:;" style="float:right;width: 70px;height: 21px;background: url(/home/images/flw_btn_unfo_s.png) no-repeat 0 0;text-indent: -9999px;overflow: hidden;">
-						
+					  @if($users->id == $login_id)
+					<a class="guan" onclick="care(this)" href="javascript:;" style="float:right;width: 70px;height: 21px;background: url(/home/images/flw_btn_unfo_s.png) no-repeat 0 0;text-indent: -9999px;overflow: hidden;">
 					</a>
+					<input type="hidden" name="users_id" value="{{$v->id}}">
+					@endif
 					<h6 class="pbn xs2" style="padding-bottom: 5px !important;font-size: 14px !important; font-weight: normal;">
-						<a href="space-uid-4.html" title="Scientist" class="xi2" c="1" shref="home.php?mod=space&amp;uid=4"
+						<a href="/home/personal/index/{{$v->id}}" title="Scientist" class="xi2" c="1" shref="home.php?mod=space&amp;uid=4"
 						mid="card_5979">
 							{{$v->nickname}}
 						</a>
@@ -33,19 +35,6 @@
 						<span id="followbkame_4" class="xg1 xs1 xw0" style="font-weight: 400;color: #999 !important;font-size: 12px !important;">
 						</span>
 					</h6>
-					<p class="ptm xg1" style="padding-top: 10px !important;color: #999 !important;">
-						粉丝:
-						<a href="home.php?mod=follow&amp;do=follower&amp;uid=4" style="color: #999 !important;">
-							<strong class="xi2" id="followernum_4">
-							</strong>
-						</a>
-						人 &nbsp; 关注:
-						<a href="home.php?mod=follow&amp;do=following&amp;uid=4">
-							<strong class="xi2" style="color: #999 !important;">
-							</strong>
-						</a>
-						人 &nbsp;
-					</p>
 					</li>
 					@endforeach
 				</ul>
@@ -61,29 +50,31 @@
 <script>
 	$(function(){
 		
-		care =  function(id){
-			var url = '/home/personal/care/'+id;
-			$.get(url,{'id':id},function(msg){
-				if(msg.code = 'error'){
+		care =  function(obj){
+
+			var id = $(obj).next().val();
+			 var url = '/home/users/concern/' + id;
+			jQuery.get(url,{'id':id},function(data){
+
+				//判断是取消还是关注
+               if(data.type == 'quxiao'){
+                //判断取消是否成功
+                  if(data.code == 'success'){
+                    	$(obj).parent().remove();
+                  }else{
+                       alert('取消关注失败');
+                  }
+                  
+                } else if(data.type == 'guanzhu') {
+                    //判断关注是否成功
+                    if(data.code == 'success'){
+                    	
+                    }else{
+                         alert('关注失败');
+                    }
+                }
+			},'json');
                     //移除所在 属性
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-				};
-			});
 		}
 		
 	});

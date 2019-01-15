@@ -83,7 +83,7 @@
               <script type="text/javascript">
                   var ue = UE.getEditor('container',{toolbars: [
                                        ['fullscreen', 'source', 'undo', 'redo'],
-                                       ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist','insertunorderedlist', 'selectall', 'cleardoc']
+                                       ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist','insertunorderedlist', 'selectall', 'simpleupload','cleardoc']
                                    ]});
 
                   上传前图片预览

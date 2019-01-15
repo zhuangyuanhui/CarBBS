@@ -47,59 +47,64 @@ Route::get('/', function () {
 
 
 
-
+Route::get('/home/index/andme','home\IndexController@andme');   //前台首页关于我们页面
 
 /*------------------------------------------------------------  zhuangyuanhui 52 ----------------------------------------------*/
-Route::get('home/users/sign','home\UsersController@sign');      //用户签到
-Route::get('admin/husers/message/{id}','admin\HUsersController@message');     	//后台给前台发送私信
+Route::get('home/users/sign','home\UsersController@sign');     					    //用户签到
+Route::get('admin/husers/message/{id}','admin\HUsersController@message');     		//后台给前台发送私信
 Route::get('admin/husers/messageall','admin\HUsersController@messageall');			//后台管理群发私信页面
-Route::post('admin/husers/sendall','admin\HUsersController@sendall');			//执行后台管理群发私信
-Route::post('admin/husers/store','admin\HUsersController@store');     	//执行发送私信
-Route::resource('admin/comment','admin\CommentsController');	//评论后台管理
-Route::resource('admin/news','admin\NewsController');		//后台新闻管理
-Route::resource('admin/girls','admin\GirlsController');		//后台车模管理
-Route::resource('admin/label','admin\LabelController');		//后台云标签管理
-Route::resource('admin/husers','admin\HUsersController');     	//前台用户后台管理
-Route::resource('admin/reports','admin\ReportsController');		//用户举报后台管理
+Route::post('admin/husers/sendall','admin\HUsersController@sendall');				//执行后台管理群发私信
+Route::post('admin/husers/store','admin\HUsersController@store');     				//执行发送私信
+Route::resource('admin/comment','admin\CommentsController');						//评论后台管理
+Route::resource('admin/news','admin\NewsController');								//后台新闻管理
+Route::resource('admin/girls','admin\GirlsController');								//后台车模管理
+Route::resource('admin/label','admin\LabelController');								//后台云标签管理
+Route::resource('admin/husers','admin\HUsersController');     						//前台用户后台管理
+Route::resource('admin/reports','admin\ReportsController');							//用户举报后台管理
 
 
-Route::get('home/users/send/{tel}','home\UsersController@sendTelCode');     //发送手机号验证码
-Route::get('home/users/checkname/{name}','home\UsersController@checkname');     //注册页面ajax检测用户是否存在
-Route::get('home/users/checktel/{tel}','home\UsersController@checktel');     //注册页面ajax检测手机号是否已注册
-Route::resource('home/users','home\UsersController');		//前台用户页面
+Route::get('home/users/send/{tel}','home\UsersController@sendTelCode');     		//发送手机号验证码
+Route::get('home/users/checkname/{name}','home\UsersController@checkname');   	    //注册页面ajax检测用户是否存在
+Route::get('home/users/checktel/{tel}','home\UsersController@checktel');    		//注册页面ajax检测手机号是否已注册
+Route::resource('home/users','home\UsersController');								//前台用户页面
+Route::get('home/login/login','home\LoginController@login');						//前台用户登录
+Route::get('home/login/checkphone/{phone}','home\LoginController@checkphone');		//登陆检测用户是否存在
+Route::post('home/login/dologin','home\LoginController@dologin');					//前台用户提交登陆
+Route::get('home/login/loginout','home\LoginController@loginout');					//前台退出登录
+Route::get('home/login/forget','home\LoginController@forget');						//用户忘记密码修改页面
+Route::get('home/login/checkname/{name}','home\LoginController@checkname');			//前台用户忘记密码检测用户是否存在
+Route::get('home/login/checktel/{tel}','home\LoginController@checktel');			//前台用户忘记密码检测手机号是否正确
+Route::get('home/login/send/{tel}','home\LoginController@sendTelCode');   		    //发送手机号验证码
+Route::post('home/login/alert','home\LoginController@alert');						//修改用户密码
 
-Route::get('home/login/login','home\LoginController@login');	//前台用户登录
-Route::get('home/login/checkphone/{phone}','home\LoginController@checkphone');	//登陆检测用户是否存在
-Route::post('home/login/dologin','home\LoginController@dologin');		//前台用户提交登陆
+Route::get('home/rank/index/{type}','home\RankController@index');					//前台用户排行页面
+Route::get('home/rank/news/{type}','home\RankController@news');						//前台新闻排行页面
+Route::get('home/rank/articles/{type}','home\RankController@articles');				//前台文章排行页面
+Route::get('home/rank/girls/{type}','home\RankController@girls');					//前台车模排行页面
 
-Route::get('home/login/forget','home\LoginController@forget');		//用户忘记密码修改页面
-Route::get('home/login/checkname/{name}','home\LoginController@checkname');	//前台用户忘记密码检测用户是否存在
-Route::get('home/login/checktel/{tel}','home\LoginController@checktel');	//前台用户忘记密码检测手机号是否正确
-Route::get('home/login/send/{tel}','home\LoginController@sendTelCode');     //发送手机号验证码
-Route::post('home/login/alert','home\LoginController@alert');		//修改用户密码
-
-Route::get('home/news/index/{id}','home\NewsController@index');        //前台页面新闻列表
-
-Route::get('home/rank/index/{type}','home\RankController@index');			//前台用户排行页面
-Route::get('home/rank/news/{type}','home\RankController@news');			//前台新闻排行页面
-Route::get('home/rank/articles/{type}','home\RankController@articles');			//前台文章排行页面
-Route::get('home/rank/girls/{type}','home\RankController@girls');			//前台车模排行页面
-Route::get('home/personal/index/{id}','home\PersonalController@index');			//前台个人首页
-Route::post('home/personal/image','home\PersonalController@image');			//前台个人资料修改头像
+Route::get('home/personal/index/{id}','home\PersonalController@index');				//前台个人首页
+Route::post('home/personal/image','home\PersonalController@image');					//前台个人资料修改头像
 Route::post('home/personal/store/{id}','home\PersonalController@store');			//前台个人资料提交修改
-Route::get('home/personal/edit/{id}','home\PersonalController@edit');		//前台个人首页
-Route::get('home/personal/articles/{id}','home\PersonalController@articles');	//前台个人文章
-Route::get('home/personal/users_articles/{id}','home\PersonalController@users_articles');	//前台个人文章收藏
-Route::get('home/personal/users_news/{id}','home\PersonalController@users_news');	//前台个人新闻收藏
-Route::get('home/personal/users_girls/{id}','home\PersonalController@users_girls');	//前台个人车模收藏
-Route::get('home/personal/report/{id}','home\PersonalController@report');	//前台用户举报页面
-Route::post('home/personal/report_store','home\PersonalController@report_store'); //执行举报写入数据库
-Route::get('home/users/concern/{id}','home\UsersController@concern');     //前台用户关注l
-Route::get('home/layout/personal/{id}','home\LayoutControlle@index');		//前台个人空间公共页面
-Route::post('home/news/news_comment','home\NewsController@news_comment');      //前台新闻评论
-Route::post('home/news/news_reply','home\NewsController@news_reply');      //前台新闻回复
-Route::get('home/news/deletecomment/{id}','home\NewsController@deletecomment');  //前台新闻评论回复ajax删除
-Route::get('home/news/collect/{id}','home\NewsController@collect');			//前台新闻收藏功能ajax
+Route::get('home/personal/edit/{id}','home\PersonalController@edit');				//前台个人首页
+Route::get('home/personal/articles/{id}','home\PersonalController@articles');		//前台个人文章
+
+Route::get('home/personal/articles/deleted/{id}','home\PersonalController@deleted');		//前台个人文章删除功能
+
+Route::get('home/personal/users_articles/{id}','home\PersonalController@users_articles');	//前台个人文章收藏页面
+Route::get('home/personal/users_news/{id}','home\PersonalController@users_news');			//前台个人新闻收藏页面
+Route::get('home/personal/users_girls/{id}','home\PersonalController@users_girls');	//前台个人车模收藏页面
+Route::get('home/personal/report/{id}','home\PersonalController@report');			//前台用户举报页面
+Route::post('home/personal/report_store','home\PersonalController@report_store');   //执行举报写入数据库
+Route::get('home/users/concern/{id}','home\UsersController@concern');    		    //前台用户关注
+Route::get('home/layout/personal/{id}','home\LayoutControlle@index');				//前台个人空间公共页面
+
+Route::get('home/news/index/{id}','home\NewsController@index');       				//前台页面新闻列表
+Route::post('home/news/news_comment','home\NewsController@news_comment');      		//前台新闻评论
+Route::post('home/news/news_reply','home\NewsController@news_reply');      			//前台新闻回复
+Route::get('home/news/deletecomment/{id}','home\NewsController@deletecomment');  	//前台新闻评论回复ajax删除
+Route::get('home/news/collect/{id}','home\NewsController@collect');					//前台新闻收藏功能ajax
+Route::get('home/news/praise/{id}','home\NewsController@praise');						//前台新闻点赞功能ajax
+Route::get('home/news/trample/{id}','home\NewsController@trample');						//前台新闻点踩功能ajax
 
 /*------------------------------------------------------------  zhangjianjun 104 ----------------------------------------------*/
 Route::resource('admin/cates','admin\CatesController');   //后台类别管理
@@ -114,7 +119,9 @@ Route::get('home/girls/collect/{id}','home\GirlsController@collect');   //前台
 
 Route::get('home/index','home\IndexController@index');   //前台首页
 Route::get('/home/index/{id}','home\IndexController@index');   //前台首页
+
 Route::get('home/personal/concern/{id}','home\PersonalController@concern');	//前台个人关注
+Route::get('home/personal/fans/{id}','home\PersonalController@fans');	//前台个人粉丝
 Route::get('home/personal/care/{id}','home\PersonalController@care');	//取消关注 ajax
 
 

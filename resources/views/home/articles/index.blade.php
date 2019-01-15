@@ -6,7 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
   <link rel="stylesheet" id="css_widthauto" type="text/css" href="/home/css/style_6_widthauto.css" />
   <link rel="stylesheet" type="text/css" href="/home/css/style_6_forum_guide.css" /> 
-  <link rel="stylesheet" type="text/css" href="/home/css/style_6_forum_guide.css" /> 
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
   <div class="mus_box cl"> 
    <div id="mus" class="wp cl"> 
    </div> 

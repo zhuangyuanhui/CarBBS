@@ -79,7 +79,7 @@
                     <a href="forum-2-1.html" class="xg1" target="_blank">{{$value->getCate->cname}}</a></td>
                   <td class="by">
                     <cite>
-                      <a href="space-uid-1.html" target="_blank">{{$value->getName->uname}}</a></cite>
+                      <a href="space-uid-1.html" target="_blank">{{$value->getName->nickname}}</a></cite>
                     <em></em></td>
                   <td>
                     <a href="thread-12-1-1.html" class="xi2" target="_blank">{{date('m-d',$value->ctime)}}</a></td>

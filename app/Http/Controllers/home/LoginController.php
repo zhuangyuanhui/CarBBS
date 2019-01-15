@@ -173,4 +173,14 @@ class LoginController extends Controller
        // //关闭curl
        // curl_close($ch);
     }
+
+    /**
+     * 退出登录方法
+     */
+    public function loginout()
+    {   
+        //清除session
+        session(['login_users'=>null]);
+        return back()->with('success','退出登录成功');
+    }
 }

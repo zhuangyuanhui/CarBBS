@@ -33,7 +33,7 @@
               <a href="article-40-1.html" target="_blank"><img src="/uploads/{{$value->news_pic}}" style="width:223px;height: 130px" />
              </a> 
              <h3 style="width: 195px;height: 30px"><a href="article-40-1.html">{{$value->title}}</a></h3> 
-             {!!$value->content!!} 
+              <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{!!$value->content!!}</p>
               </li>
              @endforeach
             </ul> 

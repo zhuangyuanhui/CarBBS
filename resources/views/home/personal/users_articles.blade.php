@@ -16,9 +16,9 @@
 <div class="bm bw0">
   <div class="bm_c">
     <p class="tbmu">
-      <a href="/home/personal/users_articles/{{$login_id}}" class="a">文章</a>
-      <a href="/home/personal/users_news/{{$login_id}}" >新闻</a>
-      <a href="/home/personal/users_girls/{{$login_id}}" >车模</a>
+      <a href="/home/personal/users_articles/{{$users->id}}" class="a">文章</a>
+      <a href="/home/personal/users_news/{{$users->id}}" >新闻</a>
+      <a href="/home/personal/users_girls/{{$users->id}}" >车模</a>
     <div class="tl">
       <form method="post" autocomplete="off" name="delform" id="delform" action="" >
         <input type="hidden" name="formhash" value="0408893d">

@@ -4,6 +4,8 @@
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -29,7 +31,7 @@
   <ul class="p_pop h_pop" id="plugin_menu" style="display: none"> 
    <li><a href="dsu_paulsign-sign.html" id="mn_plink_sign">每日签到</a></li> 
   </ul> 
-  <!-- 二级导航 --> 
+  <!-- 二级导航 -->   
   <div class="sub_nav"> 
    <ul class="p_pop h_pop" id="mn_P1_menu" style="display: none">
     <li><a href="http://quaters.cn/display/che/portal.php?mod=list&amp;catid=3" hidefocus="true">二手车</a></li>
@@ -88,13 +90,13 @@
    <div id="uhd"> 
     <div class="space_h cl"> 
      <div class="icn cl">
-      <a href="space-uid-6.html"><img src="/uploads/{{$user->getUserInfo->face}}" /></a>
+      <a href="#"><img src="/uploads/{{$user->getUserInfo->face}}" /></a>
      </div> 
      <h2 class="mt"> {{$user->nickname}} </h2> 
      <p class="follow_us"> 
       <a id="followmod" onclick="showWindow(this.id, this.href, 'get', 0);" href="#" class="new1">我的关注</a>
       <a href="#" id="a_friend_li_6" onclick="showWindow(this.id, this.href, 'get', 0);" class="xi2 new1">我的粉丝</a>
-      <a href="#" id="a_sendpm_6" onclick="showWindow('showMsgBox', this.href, 'get', 0)" title="发送消息" class="old1">我的私信</a>
+      <a href="/home/message" id="a_sendpm_6" onclick="showWindow('showMsgBox', this.href, 'get', 0)" title="发送消息" class="old1">我的私信</a>
       <script type="text/javascript">
 
       function succeedhandle_followmod(url, msg, values) {
@@ -226,9 +228,9 @@
               <script type="text/javascript" src="/home/utf8-php/ueditor.all.js"></script>
               <!-- 实例化编辑器 -->
               <script type="text/javascript">
-                  var ue = UE.getEditor('container',{toolbars: [
+                   var ue = UE.getEditor('container',{toolbars: [
                                        ['fullscreen', 'source', 'undo', 'redo'],
-                                       ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist','insertunorderedlist', 'selectall', 'cleardoc']
+                                       ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist','insertunorderedlist', 'selectall', 'simpleupload','cleardoc']
                                    ]});
 
                   //上传前图片预览

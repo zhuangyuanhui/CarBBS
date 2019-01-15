@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\admin\News;
 use App\models\admin\Cates;
+use App\models\home\Users_News;
+use App\models\home\News_Comment;
+use DB;
+use Illuminate\Support\Facades\Storage;
 class NewsController extends Controller
 {
     /**
@@ -160,19 +164,47 @@ class NewsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 后台新闻删除操作
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+
+         //开启事务
+        DB::beginTransaction();
+
         //获取要删除的数据
         $data = News::find($id);
-        $res = $data->delete();
-        if($res){
+         $res1 = $data->delete();
+
+        //查找是否有收藏,并删除
+        if(Users_News::where('news_id','=',$id)->first()){
+            $users_news = Users_News::where('news_id','=',$id)->first();
+            $res2 = $users_news->delete();
+        }else{
+            //如果没有收藏该新闻的记录,给标识符为true
+            $res2 = true;
+        }
+
+        //查找是否有评论,并删除
+        if(News_Comment::where('news_id','=',$id)->first()){
+            $news_comment = News_Comment::where('news_id','=',$id)->first();
+            $res3 = $news_comment->delete();
+        }else{
+            //如果该新闻没有评论的记录,给标识符为true
+            $res3 = true;
+        }
+
+
+        //当全部删除成功,则提交
+        if($res1 && $res2 && $res3){
+             Storage::delete($data->news_pic);
+             DB::commit();
             return redirect('admin/news')->with('success', '删除成功');
         }else{
+             DB::rollBack();
             return back()->with('error', '删除失败');
         }
     }

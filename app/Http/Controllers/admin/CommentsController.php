@@ -104,11 +104,37 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    { 
-        $comment = Comment::find($id);
-        $res = $comment->delete();
-        if($res){
+    public function destroy(Request $request,$id)
+    {    
+        $type = $request->only('type');
+
+        //当点击删除的是文章评论
+        if($type == 'article'){
+          $comment = Comment::find($id);
+            if(Comment::find($comment->pid)){
+               $reply =  Comment::find($comment->pid);
+               $res2 = $reply->delete();
+            }else{
+               $res2 = true;
+            }
+          $res1 = $comment->delete();
+        }
+
+        //当点击删除的是新闻评论
+        if($type == 'news'){
+            $news_comment = News_Comment::find($id);
+            if(News_Comment::find($news_comment->pid)){
+               $reply =  News_Comment::find($news_comment->pid);
+               $res2 = $reply->delete();
+            }else{
+               $res2 = true;
+            }
+          $res1 = $comment->delete();
+        }
+
+
+
+        if($res1 && $res2){
             return redirect('/admin/comment')->with('success','删除成功');
         }else{
             return back()->with('error','删除失败');

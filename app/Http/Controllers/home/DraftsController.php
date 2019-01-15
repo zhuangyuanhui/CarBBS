@@ -10,6 +10,7 @@ use App\models\admin\Cates;
 use App\models\home\Article;
 use App\models\admin\Comment;
 use App\models\home\Label;
+use App\models\home\Concern;
 use App\Http\Controllers\home\ArtRankController;
 
 class DraftsController extends Controller
@@ -21,8 +22,29 @@ class DraftsController extends Controller
      */
     public function index($id)
     {
+          //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
+
+          //获取个人的所有信息
+        $users = Users::where('id','=',$id)->first();
+
+         //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$id)->where('fans_id','=',$login_id)->first();
+
+         if($concerns){
+            //标识符,登陆用户已关注该页主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该页主
+            $ifconcern = false;
+        }
+
         $drafts = Drafts::where('users_id',$id)->get();
-        return view('home.drafts.index',['title'=>'草稿箱','drafts'=>$drafts]);
+        return view('home.drafts.index',['title'=>'草稿箱','users'=>$users,'drafts'=>$drafts,'login_id'=>$login_id,'type'=>2,'ifconcern'=>$ifconcern]);
     }
 
     /**
@@ -160,6 +182,26 @@ class DraftsController extends Controller
 
          $Cates  = Cates::all();
          $Labels = Label::all(); 
+           //获取当前登录用户的id
+        if(session('login_users')){
+              $login_id = session('login_users')->id;
+        }else{
+              $login_id = null;
+        }
+        
+          //获取个人的所有信息
+        $users = Users::where('id','=',$uid)->first();
+
+         //判断当前页主用户与当前登录用户是否为关注
+        $concerns = Concern::where('users_id','=',$uid)->where('fans_id','=',$login_id)->first();
+
+         if($concerns){
+            //标识符,登陆用户已关注该页主
+            $ifconcern = true;
+        }else{
+            //标识符,登陆用户未关注该页主
+            $ifconcern = false;
+        }
          return view('home.drafts.edit',[
                                          'Cates'=>$Cates,
                                          'id'=>$id,
@@ -167,7 +209,11 @@ class DraftsController extends Controller
                                          'Labels'=>$Labels,
                                          'uid'=>$uid,
                                          'title'=>'草稿箱',
-                                         'draft'=>$draft
+                                         'draft'=>$draft,
+                                         'login_id'=>$login_id,
+                                         'ifconcern'=>$ifconcern,
+                                         'users'=>$users,
+                                         'type'=>2
                                      ]);
 
     }

@@ -23,13 +23,13 @@ class Users extends Model
      */
     public function users_fans()
     {
-    	return $this->hasMany('App\models\home\Concern','users_id');
+        return $this->belongsToMany('App\models\home\Users','Concern','users_id','fans_id')->using('App\models\home\Concern');
     }
 
     /**
      * 多对多模型关联,收藏文章
      */
-    public function article()
+    public function article()   
     {
         return $this->belongsToMany('App\models\home\Article','users_article','users_id','article_id')->using('App\models\home\users_article');
     }

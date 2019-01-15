@@ -57,7 +57,7 @@
                    <img src="/home/picture/rank_2.gif" alt="2" />
                     @elseif($key == 2)
                    <img src="/home/picture/rank_3.gif" alt="3" />
-                   @else
+                   @else 
                    {{$key + 1}}
                    @endif
                   </dd> 
@@ -75,24 +75,33 @@
                     @if($value->id == $self)
 
                     @else
-                       <p class="xw0"><a href="" target="_blank">串个门</a></p> 
-                       <p class="xw0"><a href="" id="a_sendpm_4" >发私信</a></p> 
-                       <p class="xw0"><a href="" id="a_friend_4" title="加为好友"></a></p>
+                         @if($type == 0)
+                            <p><a href="/home/personal/index/{{$value->users_id}}" target="_blank">串个门</a></p>
+                            <p><a href="/home/personal/index/{{$value->users_id}}" target="_blank">发私信</a></p>
+                          @elseif($type == 1)
+                            <p><a href="/home/personal/index/{{$value->id}}" target="_blank">串个门</a></p>
+                            <p><a href="/home/personal/index/{{$value->id}}" target="_blank">发私信</a></p>
+                          @elseif($type == 2)
+                            <p><a href="/home/personal/index/{{$value->id}}" target="_blank">串个门</a></p>
+                            <p><a href="/home/personal/index/{{$value->id}}" target="_blank">发私信</a></p>
+                         @else
+                            <p><a href="/home/personal/index/{{$value->users_id}}" target="_blank">串个门</a></p>
+                            <p><a href="/home/personal/index/{{$value->users_id}}" target="_blank">发私信</a></p>
+                         @endif
                     @endif
                    
                   </dt> 
                   <dt>
-                   <a href="space-uid-4.html" target="_blank">
                           @if($type == 0)
-                            {{$value->getUsers->uname}}
+                            <a href="/home/personal/index/{{$value->users_id}}" target="_blank">{{$value->getUsers->nickname}}</a>
                           @elseif($type == 1)
-                            {{$value->uname}}
+                            <a href="/home/personal/index/{{$value->id}}" target="_blank">{{$value->nickname}}</a>
                           @elseif($type == 2)
-                            {{$value->uname}}
+                            <a href="/home/personal/index/{{$value->id}}" target="_blank">{{$value->nickname}}</a>
                          @else
-                            {{$value->getUsers->uname}}
+                            <a href="/home/personal/index/{{$value->users_id}}" target="_blank">{{$value->getUsers->nickname}}</a>
                          @endif
-                    </a> 
+                     
                   </dt> 
                   <dd> 
                    <p> </p> 

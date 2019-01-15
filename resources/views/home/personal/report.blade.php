@@ -40,5 +40,6 @@
           <button type="submit"  style="width: 770px;" class="btn btn-success">确认举报</button>
 
         </form>
-
+      </div>
+</div>
 @endsection

@@ -180,7 +180,7 @@
        <li id="mn_forum_2"><a href="forum.php" hidefocus="true" title="BBS">论坛<span>BBS</span></a> </li> 
        <li  id="mn_N708e" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a href="/home/articles" hidefocus="true">文章</a> </li> 
        <li id="mn_P5"><a href="/home/rank/index/0" hidefocus="true">排行榜</a> </li> 
-       <li id="mn_N9175"><a href="#" hidefocus="true" target="_blank">关于</a> </li> 
+       <li id="mn_N9175"><a href="/home/index/andme" hidefocus="true" target="_blank">关于</a> </li> 
       </ul>
       <script type="text/javascript">
         $(function(){
@@ -192,16 +192,48 @@
               });
         })
       </script>
-     </div> 
-     <!-- 用户信息 --> 
-     <div class="Quater_user lg_box" style="width: 150px; margin-right: 50px;"> 
-      <ul> 
-       <li class="z" style="margin-right: 0;">
-        <a href="" class="log1">登录/</a>
-        <a href="" class="reg1">注册</a>
-        </li> 
-      </ul> 
-     </div> 
+     </div>
+
+
+     @if(session('login_users'))
+        <div class="Quater_user " style="width: 150px; margin-right: 50px;"> 
+          <ul>
+            <li></li>
+           <li class="z" style="margin-right: 0;"><a href="/home/personal/index/{{session('login_users')->id}}">
+              <img src="/uploads/{{session('login_users')->getUserInfo->face}}" style="width:28px;height: 28px;margin-top: 22px; border-radius: 20px;margin-left: 40px;">
+            </a>
+            </li>
+          </ul>
+
+            <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+          <!-- Split button -->
+          <div class="btn-group" style="width: 150px; margin-left: 100px;margin-top: -27px;opacity: 0.8;z-index: 100;">
+            <button type="button" class="btn btn-default"><a href="/home/personal/index/{{session('login_users')->id}}" >{{session('login_users')->uname}}</a></button>
+            <button type="button" style="height: 32px;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" style="width: 150px;" >
+              <li style="width: 150px;"><a href="/home/personal/index/{{session('login_users')->id}}">&nbsp;&nbsp;主页&nbsp;&nbsp;</a></li>
+              <li style="width: 150px;"><a href="/home/personal/users_articles/{{session('login_users')->id}}">&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li>
+              <li style="width: 150px;"><a href="/home/login/loginout">&nbsp;&nbsp;退出&nbsp;&nbsp;</a></li>
+            </ul>
+          </div>
+
+
+       </div>
+    @else
+           <!-- 用户信息 --> 
+           <div class="Quater_user lg_box" style="width: 150px; margin-right: 50px;"> 
+            <ul> 
+             <li class="z" style="margin-right: 0;">
+              <a href="/home/login/login" class="log1">登录/</a>
+              <a href="/home/users/create" class="reg1">注册</a>
+              </li> 
+            </ul> 
+           </div>
+    @endif 
      <div style="display:none"> 
       <form method="post" autocomplete="off" id="lsform" action="member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes" onsubmit="return lsSubmit();"> 
        <div class="fastlg cl"> 
@@ -441,7 +473,7 @@ jQuery('.quater_search').slideUp(300);
     <div class="z"> 
      <a href="./" class="nvhm" title="首页">玩车达人</a> 
      <em>›</em> 
-     <a href="space-uid-6.html">{{$users->nickname}}</a> 
+     <a href="#">{{$users->nickname}}</a> 
      <em>›</em> 个人资料 
     </div> 
    </div> 
@@ -468,19 +500,27 @@ jQuery('.quater_search').slideUp(300);
      <h2 class="mt"> {{$users->nickname}} </h2> 
      <p class="follow_us">
         @if($users->id == $login_id)
-          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的关注</a>
-          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="" class="new1">我的粉丝</a>
+          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="/home/personal/concern/{{$users->id}}" class="new1">我的关注</a>
+          <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="/home/personal/fans/{{$users->id}}" class="new1">我的粉丝</a>
           <a  onclick="showWindow(this.id, this.href, 'get', 0);" href="/home/message" class="old1">我的私信</a>
         @else
-          <a   href="javascript:;" class="new1 concern ">
+          <a   href="javascript:;"
+               @if(session('login_users'))
+
+                @else
+                  onclick="alert('请先登录')";
+                @endif
+           class="new1 concern ">
             @if($ifconcern == true)
               取消关注
             @else
+
+
              关注TA
             @endif
           </a>
           <input type="hidden" value="{{$users->id}}">
-           <a id="followmod" href="javascript:;" class="old1" data-toggle="modal" data-target="#myModal">发送私信</a>
+           <a id="followmod"  @if(session('login_users')) data-toggle="modal" data-target="#myModal"  @else onclick="alert('请先登录')";  @endif  href="javascript:;" class="old1" >发送私信</a>
         @endif
        </p> 
     </div> 
@@ -517,12 +557,16 @@ jQuery('.quater_search').slideUp(300);
       <li @if($type == 1) class="a" @endif><a href="/home/personal/index/{{$users->id}}"><img src="/home/picture/space_profile.png" class="vm" />&nbsp;&nbsp;资料&nbsp;&nbsp;</a></li> 
       <li @if($type == 2) class="a" @endif> <a href="/home/personal/articles/{{$users->id}}"><img src="/home/picture/space_thread.png" class="vm" />&nbsp;&nbsp;文章&nbsp;&nbsp;</a></li>
       <li @if($type == 3) class="a" @endif><a href="/home/personal/users_articles/{{$users->id}}"><img src="/home/picture/space_blog.png" class="vm" />&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li>
-      <li @if($type == 4) class="a" @endif><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;关注&nbsp;&nbsp;</a></li> 
+      <li @if($type == 4) class="a" @endif><a href="/home/personal/concern/{{$users->id}}"><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;关注&nbsp;&nbsp;</a></li> 
         @if($users->id == $login_id)
-      <li ><a href=""><img src="/home/picture/space_doing.png" class="vm" />&nbsp;&nbsp;粉丝&nbsp;&nbsp;</a></li> 
+      <li @if($type == 5) class="a" @endif><a href="/home/personal/fans/{{$users->id}}"><img src="/home/picture/space_doing.png" class="vm" />&nbsp;&nbsp;粉丝&nbsp;&nbsp;</a></li> 
       <li class="qiandao" id="qiandao" ><a href=""><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;签到&nbsp;&nbsp;</a></li>
       @else
-        <li class="jubao" style="height: 40px"><a href="/home/personal/report/{{$users->id}}"><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;举报&nbsp;&nbsp;</a></li>
+        <li class="jubao" style="height: 40px"><a   @if(session('login_users'))
+                                href="/home/personal/report/{{$users->id}}"
+                @else
+                  onclick="alert('请先登录')";
+                @endif ><img src="/home/picture/space_album.png" class="vm" />&nbsp;&nbsp;举报&nbsp;&nbsp;</a></li>
        @endif
         <style type="text/css">
           .qiandao{
@@ -622,13 +666,14 @@ jQuery('.quater_search').slideUp(300);
   <div id="footer" class="footer cl"> 
    <div class="footer_top cl"> 
     <div class="wp main"> 
+
      <div class="part"> 
       <div class="smtitle">
-       购车帮助
+       玩车帮助
       </div> 
       <div class="sm">
-       <a class="" href="#"> <p>购车流程</p> </a>
-       <a class="" href="#"> <p>商务合作</p> </a>
+       <a class="" href="{{$links[0]->links_url}}"> <p>{{$links[0]->links_name}}</p> </a>
+       <a class="" href="{{$links[1]->links_url}}"> <p>{{$links[1]->links_name}}</p> </a>
       </div> 
      </div> 
      <div class="part"> 
@@ -636,8 +681,8 @@ jQuery('.quater_search').slideUp(300);
        联系我们
       </div> 
       <div class="sm">
-       <a class="" href="#"> <p>关注我们</p> </a>
-       <a class="" href="#"> <p>意见反馈</p> </a>
+       <a class="" href="{{$links[2]->links_url}}"> <p>{{$links[2]->links_name}}</p> </a>
+       <a class="" href="{{$links[3]->links_url}}"> <p>{{$links[3]->links_name}}</p> </a>
       </div> 
      </div> 
      <div class="part"> 
@@ -645,8 +690,8 @@ jQuery('.quater_search').slideUp(300);
        关注我们
       </div> 
       <div class="sm">
-       <a class="" href="#"> <p>关于我们</p> </a>
-       <a class="" href="#"> <p>媒体报道</p> </a>
+       <a class="" href="{{$links[4]->links_url}}"> <p>{{$links[4]->links_name}}</p> </a>
+       <a class="" href="{{$links[5]->links_url}}"> <p>{{$links[5]->links_name}}</p> </a>
       </div> 
      </div> 
      <div class="part"> 
@@ -654,10 +699,11 @@ jQuery('.quater_search').slideUp(300);
        加入我们
       </div> 
       <div class="sm">
-       <a class="" href="#"> <p>招聘专页</p> </a>
-       <a class="" href="#"> <p>职位一览</p> </a>
+       <a class="" href="{{$links[6]->links_url}}"> <p>{{$links[6]->links_name}}</p> </a>
+       <a class="" href="{{$links[7]->links_url}}"> <p>{{$links[7]->links_name}}</p> </a>
       </div> 
      </div> 
+
      <div class="scan">
       <img src="/home/picture/w1.png" class="loaded" width="100" /> 
       <p>扫码查看手机版</p> 
@@ -667,7 +713,7 @@ jQuery('.quater_search').slideUp(300);
       <p>手机版演示站</p> 
      </div> 
     </div> 
-   </div> 
+   </div>  
    <div id="ft" class="wp cl"> 
     <div class="footer-left cl">
      &copy; 2001-2018 

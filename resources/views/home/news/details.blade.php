@@ -3,6 +3,8 @@
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <link rel="stylesheet" type="text/css" href="/home/bootstrap-3.3.7-dist/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_common.css" />
+  <link rel="stylesheet" type="text/css" href="/home/css/style_6_misc_ranklist.css" /> 
   <div id="wp" class="wp time_wp cl">
    <link rel="stylesheet" type="text/css" href="/home/css/list.css" /> 
    <script src="/home/js/jquery.superslide.js" type="text/javascript"></script> 
@@ -49,15 +51,13 @@
            </div> 
            <div class="cl" style="float: right; width: 260px; margin: 5px 0 0 0; overflow: hidden;"> 
             <div style="width: 260px; text-align: right;" class="focus_num cl">
-             <a>256</a>
+             <a>{{$new->clicks}}</a>
             </div> 
            </div> 
           </div> 
-         </div> 
+         </div>  
         </div> 
-        <div class="blockquote" style="display: none;">
-         <p>随着中国汽车市场的日益发展，居民购车年龄日趋年轻化，80后90后日渐成为购车的主题，他们的需求日益多样化，运动化，所以现在很多品牌定位都在向年轻 化靠拢，例如雷克萨斯、本田、大众、日产等等。他们的换代车型 ...</p>
-        </div> 
+
         <div class="content_middle cl" style="padding: 0 20px;"> 
          <!--[diy=diysummarytop]-->
          <div id="diysummarytop" class="area"></div>
@@ -72,7 +72,7 @@
           <table cellpadding="0" cellspacing="0" class="vwtb"> 
            <tbody>
             <tr> 
-             <td id="article_content"> {!! $new->content !!}<br /><br /><p><a href="data/attachment/portal/201704/01/131328kt6626ki6m62kztz.jpg" target="_blank"><img src="/home/picture/131328kt6626ki6m62kztz.jpg" /></a></p> </td> 
+             <td id="article_content"> {!! $new->content !!}<br /><br /><p><a href="data/attachment/portal/201704/01/131328kt6626ki6m62kztz.jpg" target="_blank"></a></p> </td> 
             </tr> 
            </tbody>
           </table> 
@@ -86,15 +86,6 @@
           <div id="diycontentclickbottom" class="area"></div>
           <!--[/diy]--> 
          </div> 
-         <div id="click_div" class="mbm"> 
-          <table cellpadding="0" cellspacing="0" class="atd"> 
-           <tbody>
-            <tr>
-             <td> <a href="home.php?mod=spacecp&amp;ac=click&amp;op=add&amp;clickid=1&amp;idtype=aid&amp;id=17&amp;hash=f3fb10adf98799def4c26640ab56cd49&amp;handlekey=clickhandle" id="click_aid_17_1" onclick="showWindow(this.id, this.href);doane(event);"> <img src="/home/picture/zan.png" alt="" /><br /> </a> </td> 
-            </tr> 
-           </tbody>
-          </table> 
-         </div> 
          <div class="viewthread_foot cl"> 
           <div class="bdsharebuttonbox cl" style="padding: 0 5px 20px 0;"> 
            <em style="padding: 0; background: none; color: #999999;">分享至 :</em> 
@@ -105,7 +96,8 @@
           </div> 
           <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
           <span class="cutline" style="margin: 9px 10px 0 0;"></span> 
-          <a href="javascript:;" id="a_favorite" class="k_favorite">
+          <a href="javascript:;" id="a_favorite" class="k_favorite" onmouseover="this.title ={{$num}} + ' 人收藏'" title="收藏">
+            <!-- 判断是否已收藏 -->
             @if($flag ==1 )
                <span id="collect">已收藏</span><li style="display: none;">{{ $new->id }}</li>
                @elseif($flag == 2)
@@ -113,7 +105,24 @@
                @elseif($flag == 3)
                <a href="/home/login/login"><span>收藏</span></a>
                @endif
-          </a> 
+          </a>
+          <!-- 判断是否已点赞 -->
+          @if($ifpraise == 1)
+          <span @if($iftrample == 2) onclick="praise(this)" class="praise" @endif onmouseover="this.title = {{$new->praise}} + '人点赞'" style="margin-left: 350px;"><img src="/home/picture/praised.png" style="width: 28px;height: 28px;"></span>
+          @elseif($ifpraise == 2)
+          <span @if($iftrample == 2) onclick="praise(this)" class="praise" @endif onmouseover="this.title = {{$new->praise}} + '人点赞'" style="margin-left: 350px;"><img src="/home/picture/praise.png" style="width: 28px;height: 28px;"></span>
+          @elseif($ifpraise == 3)
+          <a style="margin-left: 350px;" onclick="return confirm('请先登录');" href="/home/login/login"><span onmouseover="this.title = {{$new->praise}} + '人点赞'"><img src="/home/picture/praise.png" style="width: 28px;height: 28px;"></span></a>
+          @endif
+          <!-- 判断是否已点踩 -->
+          @if($iftrample == 1)
+          <span @if($ifpraise == 2) onclick="trample(this)" class="trample" @endif onmouseover="this.title = {{$new->trample}} + '人点踩'"  style="margin-left: 20px;"><img src="/home/picture/trampled.png" style="width: 28px;height: 28px;"></span>
+          @elseif($iftrample == 2)
+          <span @if($ifpraise == 2) onclick="trample(this)" class="trample" @endif onmouseover="this.title = {{$new->trample}} + '人点踩'" style="margin-left: 20px;"><img src="/home/picture/trample.png" style="width: 28px;height: 28px;"></span>
+          @elseif($iftrample == 3)
+          <a style="margin-left: 20px;" onclick="return confirm('请先登录')" href="/home/login/login"><span onmouseover="this.title = {{$new->trample}} + '人点踩'"><img src="/home/picture/trample.png" style="width: 28px;height: 28px;"></span></a>
+          @endif
+          
          </div> 
          <!--[diy=diycontentrelatetop]-->
          <div id="diycontentrelatetop" class="area"></div>
@@ -126,15 +135,6 @@
         <!--[/diy]--> 
        </div> 
       </div> 
-
-       <div class="comment_tit cl"> 
-        <div class="z"> 
-         <a>评论</a> 
-        </div> 
-        <div class="y"> 
-         <a>1条</a> 
-        </div> 
-       </div> 
        <!-- 评论填写框 -->
              <div class="comment_box cl"> 
               <form id="cform" name="cform" action="javascript:;" method="post" autocomplete="off">
@@ -264,12 +264,14 @@
                      </dd> 
                      <dd class="cl" style="padding-top: 18px;">
                       <div class="reply1 y" style="height: 17px; line-height: 17px;">
+                        @if(isset($users))
                         @if($value->users->id == $users->id)
                          <a href="javascript:;"  style="color: #BBBBBB; font-size: 14px;" onclick="deletecomment(this)">
                            删除</a>
                         @else
                        <a href="javascript:;"  style="color: #BBBBBB; font-size: 14px;" onclick="replyshow(this)">
                         <span class="s_reply"></span>回复</a>
+                        @endif
                         @endif
                         <input type="hidden" name="pid" class="pid" value="{{$value->id}}">
                         <input type="hidden" name="new_id" value="{{$new->id}}">
@@ -300,10 +302,12 @@
                              </dd>
                              <dd class="cl reply88" style="padding-top: -100px;">
                                   <div class="reply1 y" style="height: 10px; line-height: 10px;">
+                                  @if(isset($users))
                                     @if($vv->users->id == $users->id)
                                      <a href="javascript:;" class="reply66"  style="color: #BBBBBB; font-size: 10px;" onclick="deletecomment(this)">
                                        删除</a>
                                     @endif
+                                @endif
                                     <input type="hidden" name="pid" class="pid" value="{{$vv->id}}">
                                   </div> 
                                  </dd> 
@@ -443,18 +447,58 @@
                       if(data.type == 'quxiao'){
                             if(data.code == 'success'){
                                   $('#collect').html('收藏');
+                                  $('#a_favorite').attr('onmouseover','this.title =' +data.num + ' 人收藏');
                             }else{
                                 alert('取消收藏失败');
                             }
                       } else if(data.type == 'shoucang'){
                             if(data.code == 'success'){
                                   $('#collect').html('已收藏');
+                                  $('#a_favorite').attr('onmouseover','this.title =' +data.num + ' 人收藏');
                             }else{
                                 alert('收藏失败');
                             }
                       }
                     },'json');
                   });
+
+                  //点赞功能
+                  praise = function(obj){
+                    var id = $('#collect').next().html();
+                    var url = '/home/news/praise/'+id;
+                    $.get(url,{'id':id},function(data){
+                      if(data.code == 'success'){
+                        if(data.type == 'praise'){
+                            $(obj).children(1).attr('src','/home/picture/praised.png');
+                            $('.trample').attr('onclick','');
+                        }else{
+                             $(obj).children(1).attr('src','/home/picture/praise.png');
+                             $('.trample').attr('onclick','trample(this)');
+                        }
+                      }else{
+                        alert('操作失败');
+                      }
+                    },'json');
+                  }
+
+                  //点踩功能
+                  trample = function(obj){
+                    var id = $('#collect').next().html();
+                    var url = '/home/news/trample/'+id;
+                    $.get(url,{'id':id},function(data){
+                      if(data.code == 'success'){
+                        if(data.type == 'trample'){
+                            $(obj).children(1).attr('src','/home/picture/trampled.png');
+                            $('.praise').attr('onclick','');
+                        }else{
+                             $(obj).children(1).attr('src','/home/picture/trample.png');
+                             $('.praise').attr('onclick','praise(this)');
+                        }
+                      }else{
+                        alert('操作失败');
+                      }
+                    },'json');
+                  }
           });
             </script>
       <!--[diy=diycontentcomment]-->

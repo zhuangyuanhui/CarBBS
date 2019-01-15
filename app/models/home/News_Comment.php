@@ -8,7 +8,7 @@ class News_Comment extends Model
 {
     protected $table = "news_comment";
 
-    protected $primaryKey = "id";
+    protected $primaryKey = "id";  
 
     /**
      * 用评论表的评论者id获取评论者用户信息,

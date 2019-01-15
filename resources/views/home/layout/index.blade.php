@@ -178,7 +178,7 @@
        <li id="mn_forum_2"><a href="forum.php" hidefocus="true" title="BBS">论坛<span>BBS</span></a> </li> 
        <li  id="mn_N708e" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a href="/home/articles" hidefocus="true">文章</a> </li> 
        <li id="mn_P5"><a href="/home/rank/index/0" hidefocus="true">排行榜</a> </li> 
-       <li id="mn_N9175"><a href="#" hidefocus="true" target="_blank">关于</a> </li> 
+       <li id="mn_N9175"><a href="/home/index/andme" hidefocus="true" target="_blank">关于</a> </li> 
       </ul>
       <script type="text/javascript">
         $(function(){
@@ -191,15 +191,45 @@
         })
       </script>
      </div> 
-     <!-- 用户信息 --> 
-     <div class="Quater_user lg_box" style="width: 150px; margin-right: 50px;"> 
-      <ul> 
-       <li class="z" style="margin-right: 0;">
-        <a href="" class="log1">登录/</a>
-        <a href="" class="reg1">注册</a>
-        </li> 
-      </ul> 
-     </div> 
+    @if(session('login_users'))
+        <div class="Quater_user " style="width: 150px; margin-right: 50px;"> 
+          <ul>
+            <li></li>
+           <li class="z" style="margin-right: 0;"><a href="/home/personal/index/{{session('login_users')->id}}">
+              <img src="/uploads/{{session('login_users')->getUserInfo->face}}" style="width:28px;height: 28px;margin-top: 22px; border-radius: 20px;margin-left: 40px;">
+            </a>
+            </li>
+          </ul>
+
+            <script type="text/javascript" src="/home/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+          <!-- Split button -->
+          <div class="btn-group" style="width: 150px; margin-left: 100px;margin-top: -27px;opacity: 0.8;z-index: 100;">
+            <button type="button" class="btn btn-default"><a href="/home/personal/index/{{session('login_users')->id}}" >{{session('login_users')->uname}}</a></button>
+            <button type="button" style="height: 32px;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" style="width: 150px;" >
+              <li style="width: 150px;"><a href="/home/personal/index/{{session('login_users')->id}}">&nbsp;&nbsp;主页&nbsp;&nbsp;</a></li>
+              <li style="width: 150px;"><a href="/home/personal/users_articles/{{session('login_users')->id}}">&nbsp;&nbsp;收藏&nbsp;&nbsp;</a></li>
+              <li style="width: 150px;"><a href="/home/login/loginout">&nbsp;&nbsp;退出&nbsp;&nbsp;</a></li>
+            </ul>
+          </div>
+
+
+       </div>
+    @else
+           <!-- 用户信息 --> 
+           <div class="Quater_user lg_box" style="width: 150px; margin-right: 50px;"> 
+            <ul> 
+             <li class="z" style="margin-right: 0;">
+              <a href="/home/login/login" class="log1">登录/</a>
+              <a href="/home/users/create" class="reg1">注册</a>
+              </li> 
+            </ul> 
+           </div>
+    @endif
      <div style="display:none"> 
       <form method="post" autocomplete="off" id="lsform" action="member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes" onsubmit="return lsSubmit();"> 
        <div class="fastlg cl"> 
@@ -226,31 +256,14 @@
         </div> 
        </div> 
       </form> 
-     </div> 
-     <div href="javascript:void(0)" target="_blank" class="search-li" title="搜索">
-      <i class="icon-search "></i>
-      <span>搜索</span>
-     </div> 
+     </div>
+
+
+
+    
      <div style="display: none;" class="quater_search"> 
       <div class="wp cl" style="width: 570px; margin: 0 auto; position: relative; z-index: 1000; background: none;"> 
-       <div id="scbar" class="cl"> 
-        <form id="scbar_form" method="post" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="search.php?searchsubmit=yes" target="_blank"> 
-         <input type="hidden" name="mod" id="scbar_mod" value="search" /> 
-         <input type="hidden" name="formhash" value="d85bbf62" /> 
-         <input type="hidden" name="srchtype" value="title" /> 
-         <input type="hidden" name="srhfid" value="0" /> 
-         <input type="hidden" name="srhlocality" value="portal::index" /> 
-         <table cellspacing="0" cellpadding="0"> 
-          <tbody>
-           <tr> 
-            <td class="scbar_btn_td"><button type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="pn pnc" value="true"><strong class="xi2">搜索</strong></button></td> 
-            <td class="scbar_type_td"><a href="javascript:;" id="scbar_type" class="xg1" onclick="showMenu(this.id)" hidefocus="true">搜索</a></td> 
-            <td class="scbar_txt_td"><input type="text" name="srchtxt" id="scbar_txt" value="请输入搜索内容" autocomplete="off" x-webkit-speech="" speech="" /></td> 
-           </tr> 
-          </tbody>
-         </table> 
-        </form> 
-       </div> 
+       
        <div class="scbar_hot_td" style="float: left; width: 570px; padding: 35px 0;"> 
         <div id="scbar_hot" style="height: auto; padding: 0;"> 
          <div class="hot_1 cl" style="font-size: 16px; margin: 0 0 12px 0; color: #BBBBBB; font-weight: 400;">
@@ -258,7 +271,7 @@
          </div> 
          <div class="hot_2 cl"> 
          </div> 
-         <a href="search.php?mod=forum&amp;srchtxt=%BB%EE%B6%AF&amp;formhash=d85bbf62&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1" style="  display: inline-block;
+         <a href="javascript:;" target="_blank" class="xi2" sc="1" style="  display: inline-block;
 
     color: #4ecdc4;
 
@@ -279,7 +292,7 @@ float: left;
     cursor: pointer;
 
     line-height: 33px;">活动</a> 
-         <a href="search.php?mod=forum&amp;srchtxt=%BD%BB%D3%D1&amp;formhash=d85bbf62&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1" style="  display: inline-block;
+         <a href="javascript:;" target="_blank" class="xi2" sc="1" style="  display: inline-block;
 
     color: #4ecdc4;
 
@@ -300,7 +313,7 @@ float: left;
     cursor: pointer;
 
     line-height: 33px;">交友</a> 
-         <a href="search.php?mod=forum&amp;srchtxt=discuz&amp;formhash=d85bbf62&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1" style="  display: inline-block;
+         <a href="javascript:;" target="_blank" class="xi2" sc="1" style="  display: inline-block;
 
     color: #4ecdc4;
 
@@ -409,6 +422,8 @@ jQuery('.quater_search').slideUp(300);
     <li><a href="member.php?mod=logging&amp;action=login" hidefocus="true">登陆页面</a></li> 
    </ul> 
   </div>
+
+
   <!-- 用户菜单 --> 
   <ul class="sub_menu" id="m_menu" style="display: none;"> 
    <li style="display: none;"><a href="home.php?mod=magic" style="background-image:url(images/magic_b.png) !important">道具</a></li> 
@@ -422,6 +437,8 @@ jQuery('.quater_search').slideUp(300);
    <li></li> 
    <li><a href="member.php?mod=logging&amp;action=logout&amp;formhash=d85bbf62">退出</a></li> 
   </ul> 
+
+
   <ul class="sub_menu" id="l_menu" style="display: none;"> 
    <!-- 第三方登录 --> 
    <li class="user_list app_login"><a href="connect.php?mod=login&amp;op=init&amp;referer=forum.php&amp;statfrom=login"><i class="i_qq"></i>腾讯QQ</a></li> 
@@ -437,13 +454,14 @@ jQuery('.quater_search').slideUp(300);
   <div id="footer" class="footer cl"> 
    <div class="footer_top cl"> 
     <div class="wp main"> 
+
      <div class="part"> 
       <div class="smtitle">
-       购车帮助
+       玩车帮助
       </div> 
       <div class="sm">
-       <a class="" href="#"> <p>购车流程</p> </a>
-       <a class="" href="#"> <p>商务合作</p> </a>
+       <a class="" href="{{$links[0]->links_url}}"> <p>{{$links[0]->links_name}}</p> </a>
+       <a class="" href="{{$links[1]->links_url}}"> <p>{{$links[1]->links_name}}</p> </a>
       </div> 
      </div> 
      <div class="part"> 
@@ -451,8 +469,8 @@ jQuery('.quater_search').slideUp(300);
        联系我们
       </div> 
       <div class="sm">
-       <a class="" href="#"> <p>关注我们</p> </a>
-       <a class="" href="#"> <p>意见反馈</p> </a>
+       <a class="" href="{{$links[2]->links_url}}"> <p>{{$links[2]->links_name}}</p> </a>
+       <a class="" href="{{$links[3]->links_url}}"> <p>{{$links[3]->links_name}}</p> </a>
       </div> 
      </div> 
      <div class="part"> 
@@ -460,8 +478,8 @@ jQuery('.quater_search').slideUp(300);
        关注我们
       </div> 
       <div class="sm">
-       <a class="" href="#"> <p>关于我们</p> </a>
-       <a class="" href="#"> <p>媒体报道</p> </a>
+       <a class="" href="{{$links[4]->links_url}}"> <p>{{$links[4]->links_name}}</p> </a>
+       <a class="" href="{{$links[5]->links_url}}"> <p>{{$links[5]->links_name}}</p> </a>
       </div> 
      </div> 
      <div class="part"> 
@@ -469,10 +487,11 @@ jQuery('.quater_search').slideUp(300);
        加入我们
       </div> 
       <div class="sm">
-       <a class="" href="#"> <p>招聘专页</p> </a>
-       <a class="" href="#"> <p>职位一览</p> </a>
+       <a class="" href="{{$links[6]->links_url}}"> <p>{{$links[6]->links_name}}</p> </a>
+       <a class="" href="{{$links[7]->links_url}}"> <p>{{$links[7]->links_name}}</p> </a>
       </div> 
      </div> 
+
      <div class="scan">
       <img src="/home/picture/w1.png" class="loaded" width="100" /> 
       <p>扫码查看手机版</p> 

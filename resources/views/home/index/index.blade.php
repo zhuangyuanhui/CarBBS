@@ -110,7 +110,7 @@
         });
         $('.next').click(function(){
           i++;
-          if (i == $('.tempWrap li').length) {
+          if (i == 5) {
             i =0 ;
           }
           shows(i);
@@ -158,7 +158,8 @@
     <div class="ui_2_userinfo  clg cl">
       <span><a href="/home/articles/{{$v->id}}/edit">{{$v->getName->uname}}</a></span> <span>发表于</span> <em>{{date('Y-m-d h:i:s',$v->ctime)}}</em> 
     </div>
-{!!$v->content!!}
+    <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{$v->content}}</p>
+      
     <a class="fr ds_inlineB mr15 cdg" target="_blank" href="/home/articles/{{$v->id}}/edit">阅读全文</a> </div>
 </li>
 @endforeach
@@ -268,10 +269,11 @@ perPage: 9
     @else
   <div style="font-size: 16px; float: left;margin-left: 15px;">{{$k+1}}.</div>
   @endif
-    <a href="/home/articles/{{$v->id}}/edit" class="author">{{$v->title}}</a></div>
-    <div class="text"><a href="thread-20-1-1.html">
-      <p><span>{!!$v->content!!}</span></p>
-      </a></div>
+    <a href="/home/articles/{{$v->id}}/edit" class="author" ><p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{$v->title}}</p></a></div>
+    <div style="width: 260px;height: 20px;" class="text"><a style="width: 260px;height: 20px;" href="thread-20-1-1.html">
+      <p style="width: 260px;height: 20px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{!!$v->content!!}</p>
+      </a>
+    </div>
     <div class="foot">
       <p>{{date('Y-m-d h:i:s',$v->ctime)}}<span class="reply"><i style="margin-right: 10px;"><img src="/home/picture/space_share.png" class="loading" width="20" height="20";/></i>{{$v->praise}}</span></p>
     </div>
