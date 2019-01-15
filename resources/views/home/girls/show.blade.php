@@ -125,28 +125,6 @@
           <div id="diycontentclickbottom" class="area"></div>
           <!--[/diy]--> 
          </div> 
-         <div id="click_div" class="mbm"> 
-          <table cellpadding="0" cellspacing="0" class="atd"> 
-           <tbody>
-            <tr>
-             <td> <a href="javascript:;" id="" onclick="praise({{$girl->id}})"> <img src="/home/picture/zan.png" alt="点ge赞吧~"><br/></a></td> 
-            </tr> 
-           </tbody>
-          </table> 
-          <script type="text/javascript">
-          function praise(id){
-	          	 var url = '/home/girls/zan/'+ id;
-	          	 $.get(url,{'id':id},function(data){
-	          	 	if(data.code != 'error'){
-                        // console.log(data.msg);
-                        // 点赞完成后 设置成不可选
-                        $('img').attr('readonly');
-                    }
-	          	 },'json');
-          }
-
-          </script> 
-         </div> 
          <div class="viewthread_foot cl"> 
           <div class="bdsharebuttonbox cl" style="padding: 0 5px 20px 0;"> 
            <em style="padding: 0; background: none; color: #999999;">分享至 :</em> 
@@ -157,15 +135,17 @@
           </div> 
           <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
           <span class="cutline" style="margin: 9px 10px 0 0;"></span> 
-
+          <a href="javascript:;" id="a_favorite" class="k_favorite">
                 @if($flag ==1 )
-                <a href="javascript:;"><span id="collect">已收藏</span><li style="display: none;">{{ $girl->id }}</li></a>
+                <span id="collect">已收藏</span><li style="display: none;">{{ $girl->id }}</li>
                @elseif($flag == 2)
-               <a href="javascript:;"><span id="collect">收藏</span><li style="display: none;">{{ $girl->id }}</li></a>
+               <span id="collect">收藏</span><li style="display: none;">{{ $girl->id }}</li>
                @elseif($flag == 3)
                <a href="/home/login/login"><span>收藏</span></a>
                @endif
-
+          </a>
+           <a style="margin-left: 350px;" href="javascript:;"  onclick="praise({{$girl->id}})"><span onmouseover="this.title = 1 + ' 人点赞'" title="点赞"><img src="/home/picture/praise.png" style="width: 28px;height: 28px;" class="src"></span></a>
+          </a>
          </div> 
           <script type="text/javascript">
                  jQuery('#collect').click(function(){
@@ -186,6 +166,18 @@
                     }
                   },'json');
                  });
+
+                 function praise(id){
+               var url = '/home/girls/zan/'+ id;
+               $.get(url,{'id':id},function(data){
+                if(data.code == 'error'){
+                        // console.log(data.msg);
+                        // 点赞完成后 设置成不可选
+                        $('.src').attr('src','/home/picture/praised.png');
+                        }
+                    },'json');
+                 }
+
                </script>
          <!--[diy=diycontentrelatetop]-->
          <div id="diycontentrelatetop" class="area"></div>

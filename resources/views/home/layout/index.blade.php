@@ -485,10 +485,10 @@ jQuery('.quater_search').slideUp(300);
    </div> 
    <div id="ft" class="wp cl"> 
     <div class="footer-left cl">
-     &copy; 2001-2018 
+     &copy; 2018-2019     
      <a href="#" target="_blank">Comsenz Inc. </a> Powered by 
-     <a href="#" target="_blank">Discuz!</a> / 
-     <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP201500801号-1</a> 
+     <a href="#" target="_blank">CarBBS</a> / 
+     <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备11110010号-1</a> 
     </div> 
    </div> 
    <div id="share"> 

@@ -8,6 +8,7 @@ use App\models\admin\Slides;
 use App\models\admin\Label;
 use App\models\admin\Cates;
 use App\models\admin\Girls;
+use App\models\admin\Advert;
 use App\models\home\Article;
 use App\models\home\Users;
 use App\models\home\UsersInfo;
@@ -47,6 +48,9 @@ class IndexController extends Controller
 
     	// 引入用户
     	$users = Users::all();
+
+        //引入广告位  投放状态  仅限一个
+        $advert = Advert::where('astatus','=','0')->first();
     	
     	return view('home.index.index',[
 	    								'title'=>'首页',
@@ -57,7 +61,8 @@ class IndexController extends Controller
 	    								'users'=>$users,
 	    								'rank_article'=>$rank_article,
 	    								'rank_users'=>$rank_users,
-	    								'rank_girls'=>$rank_girls,
+                                        'rank_girls'=>$rank_girls,
+	    								'advert'=>$advert,
     								]);
     }
 

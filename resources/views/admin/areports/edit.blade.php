@@ -30,7 +30,7 @@
                                   <div class="mws-form-row">
                                        <label class="mws-form-label">被举报人文章标题</label>
                                        <div class="mws-form-item">
-                                            <input type="text" class="small" name="title" value="{{ $edit->articlesuser->title }}" readonly>
+                                            <input type="text" class="small" name="title" value="{{ $edit->articlesuser->title or '文章已删除'}}" readonly>
                                        </div>
                                   </div>
                              </div>
@@ -38,7 +38,7 @@
                                   <div class="mws-form-row">
                                        <label class="mws-form-label">被举报人文章内容</label>
                                        <div class="mws-form-item">
-                                             <textarea name="" id="" cols="80" rows="6" disabled>{{ $edit->articlesuser->content }}</textarea>
+                                             <textarea name="" id="" cols="80" rows="6" disabled>{{ $edit->articlesuser->content or '文章已删除'}}</textarea>
                                        </div>
                                   </div>
                              </div>
@@ -88,7 +88,11 @@
                                    </div>
                               </div>
                               <div class="mws-button-row">
+                                  @if($edit->articlesuser)
                                    <input type="submit" value="修改" class="btn btn-danger">
+                                  @else
+                                  <a href="/admin/areports"><input type="" value="返回" class="btn btn-danger" style="width: 60px"></a>
+                                  @endif
                                    <input type="reset" value="重置" class="btn ">
                               </div>
                          </form>

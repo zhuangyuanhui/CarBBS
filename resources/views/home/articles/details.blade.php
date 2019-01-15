@@ -211,13 +211,6 @@
                   </tr>
                  </tbody>
                 </table> 
-                <div class="attach_nopermission attach_tips"> 
-                 <div> 
-                  <h3><strong>本帖子中包含更多资源</strong></h3> 
-                  <p>您需要 <a href="member.php?mod=logging&amp;action=login" onclick="showWindow('login', this.href);return false;">登录</a> 才可以下载或查看，没有帐号？<a href="member.php?mod=register" title="注册帐号">立即注册</a> </p> 
-                 </div> 
-                 <span class="atips_close" onclick="this.parentNode.style.display='none'">x</span> 
-                </div> 
                </div> 
                <div id="comment_10" class="cm"> 
                </div> 

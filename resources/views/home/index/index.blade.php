@@ -208,15 +208,14 @@ perPage: 9
       <div id="portal_block_258_content" class="dxb_bc">
       <div class="stickright cl" style="height: auto;">
   <div class="newsrecommend cl">
-  <div class="imgbox cl" style="margin-bottom: -10px;"><a href="article-37-1.html"><img src="/home/images/6d2b2ccf44d90c6551f1aa47a310f574.jpg" width="300" height="161">
+  <div class="imgbox cl" style="margin-bottom: -10px;"><a href="{{$advert->aurl}}"><img src="/uploads/{{$advert->apic}}" width="300" height="161">
       
-      <span>2.0L的动力卖1.5L的价格，这款全进口SUV估计不到15万！</span></a>
+      <span>{{$advert->atitle}}</span><span style="right:-7.5px;bottom:2px;width:32px;height:18px;background:url(/home/picture/pc-fggxl-icon.png) 0 -24px"></span></a>
     </div>
     <hr>
       <div class="wrapper" style="margin-top: -8px;height: 197px;background-image:url('/home/images/bg1.jpg');background-repeat: no-repeat;background-size: 100% 100%;">
       @foreach($label as $k=>$v)  
     <a href="/home/index/{{$v->id}}" class="tag">{{$v->lname}}</a>
-
     @endforeach
   </div>
   </div>

@@ -19,8 +19,8 @@
 .mws-stat {
     display: inline-block;
     vertical-align: top;
-    margin: 8px 1%;
-    height: 80px;
+    margin: 30px 2%;
+    height: 82px;
     cursor: pointer;
     text-decoration: none;
     color: #323232;
@@ -64,14 +64,14 @@
 }
 
 .mws-stat .mws-stat-content {
-    margin-left: 49px;
+    margin-left: 50px;
     display: block;
     text-align: left;
-    padding: 8px 20px;
+    padding: 10px 20px;
 }
 
 .mws-stat .mws-stat-content .mws-stat-title {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 18px;
     white-space: nowrap;
     display: block;
@@ -80,7 +80,7 @@
 }
 
 .mws-stat .mws-stat-content .mws-stat-value {
-    font-size: 32px;
+    font-size: 28px;
     line-height: 48px;
     /*font-weight: bold;*/
     display: inline-block;

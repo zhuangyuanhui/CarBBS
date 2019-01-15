@@ -56,7 +56,7 @@ class BasicsController extends Controller
             'desc.required' => '网站描述不能为空',
             'desc.min' => '网站描述最低不得少于10字',
             'logo.required' => '请选择网站Logo上传',
-            'tel.regex'=>'请输入400开头的11位正确号码',
+            'tel.regex'=>'请输入400开头的10位正确号码',
         ]);
 
         //获取添加信息
@@ -141,7 +141,7 @@ class BasicsController extends Controller
             'name.required' => '网站名称不能为空',
             'name.unique' => '网站名称已重复,请重新填写',
             'name.max' => '网站名称长度过大,最大为15',
-            'tel.regex'=>'请输入400开头的11位正确号码',
+            'tel.regex'=>'请输入400开头的10位正确号码',
             'desc.required' => '网站描述不能为空',
             'desc.min' => '网站描述最低不得少于10字',
             'logo.required' => '请选择网站Logo上传',
